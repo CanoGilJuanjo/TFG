@@ -1,13 +1,17 @@
 import ReactDOM from 'react-dom/client';
 import Main from "./Main";
 import React from 'react';
+import { BrowserRouter, Route } from 'react-router-dom';
 
-let doom = document.querySelector('#app');
+let doom = document.querySelector("#app");
 if(doom == null){
-    doom  = document.createElement("div")
+    doom = document.createElement("div");
     doom.id = "app";
-    document.getElementsByTagName("body")[0].appendChild(doom);
+    document.appendChild(doom);
 }
+
 ReactDOM.createRoot(doom).render(
-    <Main />
+    <BrowserRouter basename='/'>
+        <Main />
+    </BrowserRouter>
 );
