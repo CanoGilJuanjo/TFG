@@ -36,24 +36,29 @@ export const BuscadorEventos = () => {
                 .then(respuesta => respuesta.json())
                 .then(respuesta=>{
                     let escribir = document.querySelector("#borrar");
-                    if(escribir!=null){
-                        let distancia = Math.floor(respuesta.routes[0].distance)
-                        if(distancia > 1000)
-                            distancia = distancia/1000
+                    if(respuesta.message ==  null){
+                        if(escribir!=null){
+                            let distancia = Math.floor(respuesta.routes[0].distance)
+                            if(distancia > 1000)
+                                distancia = distancia/1000
 
-                        escribir.innerHTML +=`
-                        <div style={{
-                            backgroundColor:"#ccc",
-                            color:"black",
-                            border: "1px solid black"
-                        }}>
-                            Nombre: ${i.nombre}<br>
-                            Distancia al usuario:${distancia} metros
-                            <hr>
-                        </div>
-                    `}else{
-                        console.log(escribir);
-                        
+                            escribir.innerHTML +=`
+                            <div style={{
+                                backgroundColor:"#ccc",
+                                color:"black",
+                                border: "1px solid black"
+                            }}>
+                                Nombre: ${i.nombre}<br>
+                                Distancia al usuario:${distancia} metros
+                                <hr>
+                            </div>
+                        `}else{
+                            console.log(escribir);
+                            
+                        }
+                    }else{
+                        if(escribir!=null)
+                            escribir.innerHTML = "No se ha podido calcular la distancia"
                     }
                 })
             }
