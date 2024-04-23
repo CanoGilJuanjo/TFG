@@ -10,6 +10,14 @@ if(doom == null){
     document.appendChild(doom);
 }
 
+/*  Comprobacion de geolocalizacion
+    esto solo se pondra en las paginas que usen el mapa
+*/
+if( !navigator.geolocation ){
+    alert("¡¡No tiene activada la geolocalización!!");
+    throw new Error("No esta activada la geolocalización")
+}
+
 ReactDOM.createRoot(doom).render(
     <BrowserRouter basename='/'>
         <Main />

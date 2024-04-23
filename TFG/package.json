@@ -6,6 +6,7 @@
         "build": "vite build"
     },
     "devDependencies": {
+        "@types/mapbox-gl": "^3.1.0",
         "@types/react-beautiful-dnd": "^13.1.8",
         "@types/react-dom": "^18.2.25",
         "axios": "^1.6.4",
@@ -20,6 +21,7 @@
         "@vitejs/plugin-react": "^4.2.1",
         "dotenv": "^16.4.5",
         "framer-motion": "^11.1.7",
+        "mapbox-gl": "^3.3.0",
         "react": "^18.2.0",
         "react-beautiful-dnd": "^13.1.1",
         "react-dom": "^18.2.0",
