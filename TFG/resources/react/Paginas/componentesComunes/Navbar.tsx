@@ -1,4 +1,5 @@
 import React from 'react'
+import {NavLink} from 'react-router-dom';
 import {
     Box,
     Flex,
@@ -23,9 +24,9 @@ interface Props {
     children: React.ReactNode
 }
 
-const Links = ['Actividades', 'Crea tu plan', 'Contacto']
+const Links = ['Eventos', 'Planes', 'Contacto',"Mapa"]
 
-const NavLink = (props: Props) => {
+/* const NavLink = (props: Props) => {
     const { children } = props
 
     return (
@@ -39,11 +40,11 @@ const NavLink = (props: Props) => {
                 bg: useColorModeValue('gray.200', 'gray.700'),
                 blur:"100"
             }}
-            href={'#'}>
+            href={""}>
             {children}
         </Box>
     )
-}
+} */
 
 const Navbar = () => {
     const { colorMode, toggleColorMode } = useColorMode()
@@ -61,10 +62,10 @@ const Navbar = () => {
                         onClick={isOpen ? onClose : onOpen}
                     />
                     <HStack spacing={8} alignItems={'center'}>
-                        <Box>Logo</Box>
+                        <NavLink to={"/"}>Logo</NavLink>
                         <HStack as={'nav'} spacing={4} display={{ base: 'none', md: 'flex' }}>
                             {Links.map((link) => (
-                                <NavLink key={link}>{link}</NavLink>
+                                <NavLink key={link} to={link}>{link}</NavLink>
                             ))}
                         </HStack>
                     </HStack>
@@ -101,7 +102,7 @@ const Navbar = () => {
                     <Box pb={4} display={{ md: 'none' }}>
                         <Stack as={'nav'} spacing={4}>
                             {Links.map((link) => (
-                                <NavLink key={link}>{link}</NavLink>
+                                <NavLink key={link} to={link}>{link}</NavLink>
                             ))}
                         </Stack>
                     </Box>

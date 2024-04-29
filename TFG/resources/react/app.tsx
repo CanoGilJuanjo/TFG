@@ -19,7 +19,7 @@ if( !navigator.geolocation ){
 }
 
 ReactDOM.createRoot(doom).render(
-    <BrowserRouter basename='/'>
+    <BrowserRouter basename=''>
         <Main />
     </BrowserRouter>
 );
