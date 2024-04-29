@@ -1,0 +1,26 @@
+eventos(id,titulo, descripción, fecha inicio, fecha fin, foto, localización, boost(promoción), id_precios)
+precios(id, precio, descripción, tipo de precio, id_evento)
+usuario(id, nombre, apellidos, edad, localización, email, nivel, telefono id_carrito)
+entradas(id, cantidad, precio total, qr, fecha fin, fecha inicio, id_usuario, id_evento)
+plan(id, precio total, fecha inicio, fecha fin, id_entrada, id_evento, id_carrito)
+carrito(id, precio total, id_usuario, id_entrada, id_evento)
+colaboradores(id, nombre empresa, foto logo, tipo(propio o externo), id_evento)
+subscripciones(id, tipo, fecha inicio, fecha fin, id_precio, id_usuario)
+
+Relaciones -->
+- Un usuario tiene un carrito y un carrito solo puede pertenecer a un usuario. 1:1
+- Un usuario puede crear uno o varios planes y a un plan pertenece a un usuario. N:1
+- Un usuario puede comprar una o varias entradas y una entrada solo pertenece a un usuario. N:1
+- Un usuario puede tener una subscripción y una subscripción puede pertencer a uno varios usuarios. 1:N
+- Un evento tiene uno o varios precios y un precio pertenece solo a un evento. N:1
+- Un carrito puede tener uno o varios eventos y un evento puede estar en uno o varios carritos. N:N
+- Un plan tiene uno o varios eventos y un evento puede pertenecer a uno o varios planes. N:N
+- Un evento tiene una o varias entradas y una entrada pertenece a un evento. N:1
+- Un evento puede tener uno o varios colaboradores y un colaborador puede patrocinar a uno o varios eventos. N:N
+- Una entrada tiene un precio y un precio pertence a una entrada. 1:1
+- Una subscripción tiene uno o varios precios y un precio pertenece a una subscripción. N:1
+- Un carrito puede tener uno o varios planes y un plan solo pertenece a un carrito. N:1
+
+
+
+website 2 apk
