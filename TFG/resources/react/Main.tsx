@@ -3,6 +3,7 @@ import React from "react";
 import  Navbar  from "./Paginas/componentesComunes/Navbar";
 import { MapaGeolocalizacion } from './Paginas/componentesComunes/MapaGeolocalizacion';
 import { BuscadorEventos } from './Paginas/componentesComunes/BuscadorEventos';
+import  AdminPanel  from './Paginas/componentesComunes/AdminPanel';
 import { Route, Routes,NavLink } from 'react-router-dom';
 import { CrearCuenta} from "./Paginas/InicioSesion-CrearCuenta/CrearCuenta";
 import {ContrasenaOlvidada} from "./Paginas/InicioSesion-CrearCuenta/ContrasenaOlvidada";
@@ -28,6 +29,7 @@ function Main() {
                             <Route path="/Contraseña-olvidada" element={<ContrasenaOlvidada></ContrasenaOlvidada>}/>
                             <Route path="/IniciarSesion" element={<IniciarSesion></IniciarSesion>}/>
                             <Route path="/CrearCuenta" element={<CrearCuenta></CrearCuenta>}></Route>
+                            <Route path="/Admin" element={<AdminPanel></AdminPanel>}></Route>
                             <Route path="*"></Route>
                         </Routes>
                         
