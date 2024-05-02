@@ -7,7 +7,7 @@ import { Route, Routes,NavLink } from 'react-router-dom';
 import { CrearCuenta} from "./Paginas/InicioSesion-CrearCuenta/CrearCuenta";
 import {ContrasenaOlvidada} from "./Paginas/InicioSesion-CrearCuenta/ContrasenaOlvidada";
 import IniciarSesion from "./Paginas/InicioSesion-CrearCuenta/IniciarSesion";
-import { Index } from "./Paginas/Indice/index";
+import  Index  from "./Paginas/Indice/index";
 
 function Main() {
     return (

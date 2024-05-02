@@ -1,7 +1,26 @@
-import React from 'react'
+import { Box, Text } from '@chakra-ui/react';
 
-export const Index = () => {
+import React from 'react';
+import CarrouselComponent from '../componentesComunes/CarrouselComponent';
+import VideoIndex from '../componentesComunes/VideoIndex';
+import ColaboradoresCarrousel from '../componentesComunes/ColaboradoresCarrousel';
+
+const Index = () => {
   return (
-    <div>index</div>
-  )
-}
+    <>
+      <VideoIndex />
+      <Box top="90%">
+      <Text textAlign={'left'} fontWeight={'bold'} paddingLeft={'10%'} fontSize={'25px'}>Recomendados</Text>
+        <CarrouselComponent />
+        <Text textAlign={'left'} fontWeight={'bold'} paddingLeft={'10%'} fontSize={'25px'}>Novedades</Text>
+        <CarrouselComponent />
+        <Text textAlign={'left'} fontWeight={'bold'} paddingLeft={'10%'} fontSize={'25px'}>Más populares</Text>
+        <CarrouselComponent />
+      </Box>
+
+      <ColaboradoresCarrousel />
+    </>
+  );
+};
+
+export default Index;
