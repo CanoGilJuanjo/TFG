@@ -38,7 +38,7 @@ function Main() {
                     </div>
                 </main>
                
-                <footer style={{ position: "fixed", bottom: 0, width: "100%" }}>
+                <footer style={{ bottom: 0, width: "100%" }}> 
                     <FooterComponent />
                 </footer>
             </ChakraProvider>
