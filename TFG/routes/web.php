@@ -10,6 +10,6 @@ Route::get('/Eventos', function () {
     return view('Eventos');
 });
 
-// Route::get('/Admin', function () {
-//     return view('Admin');
-// });
+Route::get('/Admin', function () {
+     return view('Admin');
+ });

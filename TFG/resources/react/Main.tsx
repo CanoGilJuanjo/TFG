@@ -24,12 +24,12 @@ function Main() {
                     }}>
                         <Routes>
                             <Route path="/" element={<Index/>}></Route>
-                            <Route path="/Eventos" element={<BuscadorEventos/>} />
-                            <Route path="/Mapa" element={<MapaGeolocalizacion/>}/>
+                            <Route path="/Eventos" element={<BuscadorEventos />} />
+                            <Route path="/Mapa" element={<MapaGeolocalizacion />}/>
                             <Route path="/Contraseña-olvidada" element={<ContrasenaOlvidada></ContrasenaOlvidada>}/>
                             <Route path="/IniciarSesion" element={<IniciarSesion></IniciarSesion>}/>
                             <Route path="/CrearCuenta" element={<CrearCuenta></CrearCuenta>}></Route>
-                            <Route path="/Admin" element={<AdminPanel></AdminPanel>}></Route>
+                            <Route path="/Admin" element={<AdminPanel />}></Route>
                             <Route path="*"></Route>
                         </Routes>
                         
