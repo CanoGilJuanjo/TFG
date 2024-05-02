@@ -24,7 +24,7 @@ interface Props {
     children: React.ReactNode
 }
 
-const Links = ['Eventos', 'Planes', 'Contacto', "Mapa"]
+const Links = ['Eventos', 'Planes', 'Contacto', "Mapa", "Admin"]
 
 const Navbar = () => {
     const { colorMode, toggleColorMode } = useColorMode()
