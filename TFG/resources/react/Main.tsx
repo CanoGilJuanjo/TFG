@@ -4,6 +4,8 @@ import  Navbar  from "./Paginas/componentesComunes/Navbar";
 import { MapaGeolocalizacion } from './Paginas/componentesComunes/MapaGeolocalizacion';
 import { BuscadorEventos } from './Paginas/componentesComunes/BuscadorEventos';
 import  AdminPanel  from './Paginas/componentesComunes/AdminPanel';
+import  FooterComponent  from './Paginas/componentesComunes/FooterComponent';
+
 import { Route, Routes,NavLink } from 'react-router-dom';
 import { CrearCuenta} from "./Paginas/InicioSesion-CrearCuenta/CrearCuenta";
 import {ContrasenaOlvidada} from "./Paginas/InicioSesion-CrearCuenta/ContrasenaOlvidada";
@@ -29,14 +31,16 @@ function Main() {
                             <Route path="/Contraseña-olvidada" element={<ContrasenaOlvidada></ContrasenaOlvidada>}/>
                             <Route path="/IniciarSesion" element={<IniciarSesion></IniciarSesion>}/>
                             <Route path="/CrearCuenta" element={<CrearCuenta></CrearCuenta>}></Route>
-                            <Route path="/Admin" element={<AdminPanel />}></Route>
+                            <Route path="/admin" element={<AdminPanel />}></Route>
                             <Route path="*"></Route>
                         </Routes>
                         
                     </div>
                 </main>
                
-                <footer></footer>
+                <footer style={{ position: "fixed", bottom: 0, width: "100%" }}>
+                    <FooterComponent />
+                </footer>
             </ChakraProvider>
         </>
     );
