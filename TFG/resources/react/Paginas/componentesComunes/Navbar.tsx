@@ -69,7 +69,7 @@ const Navbar = () => {
                                 />
                             </MenuButton>
                             <MenuList>
-                                <MenuItem>Perfil</MenuItem>
+                                <NavLink to={"/Perfil"}><MenuItem>Perfil</MenuItem></NavLink>
                                 <MenuItem>Configuración</MenuItem>
                                 <MenuDivider />
                                 <MenuItem>Politicas y condiciones</MenuItem>

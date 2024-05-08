@@ -1,18 +1,13 @@
 import React, { useRef } from 'react'
 import mapboxgl, { Marker } from "mapbox-gl"
 import { getUserLocation } from '../helpers'
-import { ArrowForwardIcon } from '@chakra-ui/icons'
-import { Button } from '@chakra-ui/react'
 
 /* No abuseis del token que tiene un limite maximo de renderizados */
 mapboxgl.accessToken = "pk.eyJ1IjoiamNnMDAzOSIsImEiOiJjbHZheHJ2dmgwMzA1MmltdXF1MHkxazMyIn0.O8_W4lc3PLzEhxqNh_LZbw"
 
-export const MapaGeolocalizacion = () => {
+export const MapaGeolocalizacion = ({coordenadas}) => {
 
     const mapa = useRef<HTMLDivElement>(null);
-
-    
-
     let centro;
     getUserLocation().then(userLocation => {
         centro = userLocation;
@@ -20,10 +15,13 @@ export const MapaGeolocalizacion = () => {
             container:mapa.current!,
             style: "mapbox://styles/mapbox/streets-v11",
             center: userLocation,
+            interactive:true,
             zoom:10,
         });
         new Marker({color:"#FF0000"}).setLngLat(map.getCenter()).addTo(map);
+        new Marker({color:"#4554ff"}).setLngLat(new mapboxgl.LngLat(coordenadas[0], coordenadas[1])).addTo(map);
     });
+
     
     //Con esta api, se puede calcular la distancia a 2 puntos entre otras cosas
     //NECESARIO: latitud y longitud del usuario y de lo que se quiere 
@@ -31,8 +29,10 @@ export const MapaGeolocalizacion = () => {
     //devuelve un JSON donde la distancia esta en routes[0].distance
     return (
     <div ref={mapa} style={{
-        height:"70vh",
-        width:"100vw",
+        width:"90vw",
+        height:"50vh",
+        borderRadius:"10px",
+        marginTop:"3px"
     }}>
         {/* <Button rightIcon={<ArrowForwardIcon />} colorScheme='teal' variant='solid' onClick={()=>{}}  style={{
             position: "fixed",
