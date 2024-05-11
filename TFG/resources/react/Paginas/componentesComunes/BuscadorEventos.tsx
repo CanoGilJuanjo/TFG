@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { getUserLocation } from '../helpers';
 import { Badge, Box, Button, Center, Select, styled } from '@chakra-ui/react';
 import { Search2Icon, StarIcon } from '@chakra-ui/icons';
+import { MapaGeolocalizacion } from './MapaGeolocalizacion';
 
 export const BuscadorEventos = () => {
     // Datos de puntos de interés

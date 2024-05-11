@@ -21,3 +21,6 @@ Route::get('/IniciarSesion', function () {
 Route::get('/Perfil', function () {
     return view('Perfil');
 });
+Route::get('/evento', function () {
+    return view('evento');
+});

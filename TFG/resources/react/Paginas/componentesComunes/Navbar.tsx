@@ -73,6 +73,8 @@ const Navbar = () => {
                                 <MenuItem>Configuración</MenuItem>
                                 <MenuDivider />
                                 <MenuItem>Politicas y condiciones</MenuItem>
+                                <MenuDivider/>
+                                <MenuItem>Cerrar Sesion</MenuItem>
                             </MenuList>
                         </Menu>
                     </Flex>

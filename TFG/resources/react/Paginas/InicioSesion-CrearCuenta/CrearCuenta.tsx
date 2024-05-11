@@ -13,7 +13,7 @@ import {
   Text,
   useColorModeValue,
 } from '@chakra-ui/react'
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import emailjs from '@emailjs/browser';
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons'
 import React from 'react';
@@ -33,11 +33,11 @@ export const CrearCuenta = () => {
   const mailS = (e) => {
     setMail(e.target.value)
   }
-  const useRef()
+  const form = useRef()
   const sendEmail = (e) => {
     e.preventDefault();
     emailjs.sendForm('service_4ya1sj1', 'template_42m8ppc', form.current ,{
-        publicKey: 'YOUR_PUBLIC_KEY',
+        publicKey: 'oCt0CQBlW7L6A3Vh4',
       })
     .then(
       () => {
@@ -70,7 +70,7 @@ export const CrearCuenta = () => {
             bg={useColorModeValue('white', 'gray.700')}
             boxShadow={'lg'}
             p={8}>
-            <Stack spacing={4}>
+            <Stack spacing={4} ref={form}>
               <HStack>
                 <Box>
                   <FormControl id="firstName" isRequired>

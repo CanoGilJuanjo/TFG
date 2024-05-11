@@ -19,7 +19,9 @@ export const MapaGeolocalizacion = ({coordenadas}) => {
             zoom:10,
         });
         new Marker({color:"#FF0000"}).setLngLat(map.getCenter()).addTo(map);
-        new Marker({color:"#4554ff"}).setLngLat(new mapboxgl.LngLat(coordenadas[0], coordenadas[1])).addTo(map);
+        for(let coord of coordenadas){
+            new Marker({color:"#4554ff"}).setLngLat(new mapboxgl.LngLat(coord[0], coord[1])).addTo(map);
+        }
     });
 
     
