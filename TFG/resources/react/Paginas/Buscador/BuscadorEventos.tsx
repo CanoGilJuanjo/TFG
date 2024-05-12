@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { getUserLocation } from '../helpers';
 import { Badge, Box, Button, Center, Select, styled } from '@chakra-ui/react';
 import { Search2Icon, StarIcon } from '@chakra-ui/icons';
-import { MapaGeolocalizacion } from './MapaGeolocalizacion';
+
 
 export const BuscadorEventos = () => {
     // Datos de puntos de interés
@@ -12,31 +12,49 @@ export const BuscadorEventos = () => {
                 nombre: "Rosse",
                 coordenadas: [-4.452987635582184, 36.704772935105616],
                 imagen: "media/evento.png",
-                estrellas: 4
+                estrellas: 4,
+                precio: 15.20,
+                fechaInicio:"28/12/2024"
             },
             {
                 nombre: "Moobi Café Alhaurín",
                 coordenadas: [-4.5622327755283365, 36.663448502749084],
                 imagen: "media/evento.png",
-                estrellas: 3
+                estrellas: 3,
+                precio: 12.99,
+                fechaInicio:"30/07/2024"
             },
             {
                 nombre: "Teatro Cervantes",
                 coordenadas: [-4.41862478656455, 36.72478047215617],
                 imagen: "media/evento.png",
-                estrellas: 4.5
+                estrellas: 4.5,
+                precio: 35,
+                fechaInicio:"12/08/2024"
             },
             {
                 nombre: "Nueva sentencia",
                 coordenadas: [-4, 36.7],
                 imagen: "media/evento.png",
-                estrellas: 2
+                estrellas: 2,
+                precio: 900.90,
+                fechaInicio:"31/02/2055"
             },
             {
                 nombre: "Otra más",
                 coordenadas: [-5.000213, 36.72711344213],
                 imagen: "media/evento.png",
-                estrellas: 1
+                estrellas: 1,
+                precio: 12.90,
+                fechaInicio:"Lun-Vie"
+            },
+            {
+                nombre: "Campillos",
+                coordenadas: [-4.8656989504386035, 37.04881601265877],
+                imagen: "media/evento.png",
+                estrellas: 5,
+                precio: 0,
+                fechaInicio:"Siempre"
             }
         ]
     };
@@ -51,13 +69,18 @@ export const BuscadorEventos = () => {
                             <Badge borderRadius='full' px='2' colorScheme='teal'>
                                 New
                             </Badge>
+                            <Badge display={"flex"} alignContent={"right"} textAlign={"right"} color='gray.400' borderRadius={"5px"} fontSize="small">
+                                {punto.fechaInicio}
+                            </Badge>
                         </Box>
                         <Box mt='1' fontSize={"large"} fontWeight='semibold' as='h4' lineHeight='tight' noOfLines={1}>
                             {punto.nombre}
                         </Box>
                         <Box>
-                            Esta a {distancia / 1000} km
-                            <Box as='span' color='gray.600' fontSize='sm'></Box>
+                            Esta a {Math.round(distancia / 1000)} km
+                        </Box>
+                        <Box as='span' color='green.200' fontSize='sm'>
+                            Precio: {punto.precio?punto.precio+" €":"GRATIS"} 
                         </Box>
                         <Box display='flex' mt='2' alignItems='center'>
                             Valoración:{Array(5)
@@ -109,7 +132,8 @@ export const BuscadorEventos = () => {
         return salida;
     }
 
-    function filtrar(){
+    //Busca la distancia en las cartas y si coincide con la distancia a filtrar la esconde
+    function filtrarDistancia(){
         let distancia:any = document.querySelector("select")?.value;
         if(distancia == null || distancia == "-")
             distancia = 200000;
@@ -129,6 +153,10 @@ export const BuscadorEventos = () => {
         }
     }
 
+    //Busca los precios y los filtra
+    function filtrarPrecio(){
+
+    }
     return (
         <>
             <Center borderWidth={"1px"} borderRadius={"10px"} boxShadow={"0px 0px 1px black"}>
@@ -136,19 +164,22 @@ export const BuscadorEventos = () => {
                         border: "1px solid black",
                         alignItems: "center",
                         textAlign: "center",
-                    }} width={"80vw"} marginRight={"10px"}>
-                    <option value="-" selected>Seleccione la distancia a la que buscar</option>
+                    }} width={"30vw"} marginRight={"10px"} >
+                    <option value="-" selected>Todo</option>
                     <option value='5'>5</option>
                     <option value='10'>10</option>
                     <option value='15'>15</option>
                     <option value="20">20</option>
                 </Select>KM
                 <Box>
-                    <Button id='boton' m="4" onClick={filtrar}>
+                    <Button id='boton' m="4" onClick={filtrarDistancia}>
                         <Search2Icon />
                     </Button>
                 </Box>
             </Center>
+            <aside>
+
+            </aside>
             <div id='lista' style={{ display: 'flex', flexFlow: "row wrap", textAlign: "center", alignContent: "center",alignItems:"center",alignmentBaseline:"central",width:"75%",marginLeft:"25vh" }}>
                 {
                     datos.map(respuesta => {

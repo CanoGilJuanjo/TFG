@@ -1,5 +1,5 @@
-import { EditIcon, EmailIcon, StarIcon } from '@chakra-ui/icons'
-import { Button, Card, CardBody, CardFooter, Center, Heading, Stack, Text, Image } from '@chakra-ui/react'
+import { CheckIcon, CloseIcon, EditIcon, EmailIcon, StarIcon } from '@chakra-ui/icons'
+import { Button, Card, CardBody, CardFooter, Center, Heading, Stack, Text, Image, useEditableControls, ButtonGroup, IconButton, Flex, Editable, EditablePreview, EditableInput, Input } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 
 export const PerfilUsuario = () => {
@@ -55,12 +55,12 @@ export const PerfilUsuario = () => {
     )
   }
 
-  const [historialCompras, setHistorialCompra] = useState([])
   const [nombre, setNombre] = useState("")
   const [apellido, setApellido] = useState("")
   const [ubicacion, setUbicacion] = useState("")
   const [mail, setMail] = useState("")
 
+  //Primera carga de los datos del usuario
   useEffect(() => {
     setNombre(consulta.nombre)
     setApellido(consulta.apellido)
@@ -68,6 +68,24 @@ export const PerfilUsuario = () => {
     setUbicacion(consulta.ubicacion)
   }, [])
 
+  function EditableControls(){
+    const {
+      isEditing,
+      getSubmitButtonProps,
+      getCancelButtonProps,
+      getEditButtonProps
+    } = useEditableControls();
+    return isEditing?(
+        <ButtonGroup justifyContent={"center"}>
+          <IconButton icon={<CheckIcon></CheckIcon>}{...getSubmitButtonProps()}/>
+          <IconButton icon={<CloseIcon></CloseIcon>} {...getCancelButtonProps()}/>
+      </ButtonGroup>
+    ):(
+      <Flex justifyContent={"center"}>
+        <IconButton size={'sm'} icon={<EditIcon></EditIcon>}{...getEditButtonProps()}></IconButton>
+      </Flex>
+    )
+  }
   return (
     <>
       <div style={{ maxWidth: "600px", margin: "20px auto", padding: "20px", border: "1px solid #ccc", borderRadius: "10px", boxShadow: "1px 1px 8px black" }}>
@@ -79,9 +97,15 @@ export const PerfilUsuario = () => {
           display: "flex",
           flexFlow: "column"
         }}>
-          <h2 style={{
+          {/* <h2 style={{
             margin: "0", fontSize: "24px", marginBottom: "10px"
           }}>{nombre} {apellido}</h2>
+          */}
+          <Editable textAlign={"center"} defaultValue={consulta.nombre+" "+consulta.apellido} fontSize={"2x1"} isPreviewFocusable={false}>
+            <EditablePreview></EditablePreview>
+            <Input as={EditableInput}></Input>
+            <EditableControls></EditableControls>
+          </Editable>
           <p id='mail' style={{ margin: "5px 0" }}><EmailIcon></EmailIcon> : {mail}</p>
           <p style={{ margin: "5px 0" }}><StarIcon></StarIcon> : {ubicacion}</p>
         </div>
