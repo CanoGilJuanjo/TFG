@@ -5,6 +5,7 @@ import { MapaGeolocalizacion } from './Paginas/componentesComunes/MapaGeolocaliz
 import { BuscadorEventos } from './Paginas/componentesComunes/BuscadorEventos';
 import { Route, Routes,NavLink } from 'react-router-dom';
 import { CrearCuenta} from "./Paginas/InicioSesion-CrearCuenta/CrearCuenta";
+import  Contactos  from "./Paginas/contactos/Contactos";
 import {ContrasenaOlvidada} from "./Paginas/InicioSesion-CrearCuenta/ContrasenaOlvidada";
 import IniciarSesion from "./Paginas/InicioSesion-CrearCuenta/IniciarSesion";
 import { Index } from "./Paginas/Indice/index";
@@ -24,6 +25,7 @@ function Main() {
                         <Routes>
                             <Route path="/" element={<Index/>}></Route>
                             <Route path="/Eventos" element={<BuscadorEventos/>} />
+                            <Route path="/contactos" element={<Contactos/>} />
                             <Route path="/Mapa" element={<MapaGeolocalizacion/>}/>
                             <Route path="/Contraseña-olvidada" element={<ContrasenaOlvidada></ContrasenaOlvidada>}/>
                             <Route path="/IniciarSesion" element={<IniciarSesion></IniciarSesion>}/>
