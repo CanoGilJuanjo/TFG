@@ -1,7 +1,7 @@
 import ReactDOM from 'react-dom/client';
 import Main from "./Main";
 import React from 'react';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 
 let doom = document.querySelector("#app");
 if(doom == null){

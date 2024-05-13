@@ -8,6 +8,7 @@ import {
     Stack,
     Heading,
     useColorModeValue,
+    Button,
   } from '@chakra-ui/react'
 import React from 'react'
 import { NavLink } from 'react-router-dom';
@@ -45,7 +46,17 @@ import { NavLink } from 'react-router-dom';
                   <Checkbox>Recuerda mi equipo</Checkbox>
                   <NavLink style={{color:"#80DAEB"}} to={"/Contraseña-olvidada"}>Contraseña olvidada?</NavLink>
                 </Stack>
-                <NavLink style={{color:"#80DAEB"}} to={"/CrearSesion"}>Crear cuenta</NavLink>
+                <Button
+                loadingText="Submitting"
+                size="lg"
+                bg={'blue.400'}
+                color={'white'}
+                _hover={{
+                  bg: 'blue.500',
+                }}>
+                  Iniciar sesion
+                </Button>
+                <NavLink style={{color:"#80DAEB"}} to={"/CrearCuenta"}>Crear cuenta</NavLink>
               </Stack>
             </Stack>
           </Box>
