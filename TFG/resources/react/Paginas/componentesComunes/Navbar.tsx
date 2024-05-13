@@ -5,7 +5,6 @@ import {
     Flex,
     Avatar,
     HStack,
-    Text,
     IconButton,
     Button,
     Menu,
@@ -24,7 +23,7 @@ interface Props {
     children: React.ReactNode
 }
 
-const Links = ['Eventos', 'Planes', 'Contacto', "Mapa"]
+const Links = [['Eventos',"eventos"], ['Planes',"planes"], ['Contacto',"contacto"]]
 
 const Navbar = () => {
     const { colorMode, toggleColorMode } = useColorMode()
@@ -45,7 +44,7 @@ const Navbar = () => {
                         <NavLink to={"/"}>Logo</NavLink>
                         <HStack as={'nav'} spacing={4} display={{ base: 'none', md: 'flex' }}>
                             {Links.map((link) => (
-                                <NavLink key={link} to={link}>{link}</NavLink>
+                                <NavLink key={link[1]} to={link[1]}>{link[0]}</NavLink>
                             ))}
                         </HStack>
                     </HStack>
@@ -69,7 +68,7 @@ const Navbar = () => {
                                 />
                             </MenuButton>
                             <MenuList>
-                                <NavLink to={"/Perfil"}><MenuItem>Perfil</MenuItem></NavLink>
+                                <NavLink to={"/perfil"}><MenuItem>Perfil</MenuItem></NavLink>
                                 <MenuItem>Configuración</MenuItem>
                                 <MenuDivider />
                                 <MenuItem>Politicas y condiciones</MenuItem>

@@ -23,12 +23,11 @@ function Main() {
                     }}>
                         <Routes>
                             <Route path="/" element={<Index/>}></Route>
-                            <Route path="/Eventos" element={<BuscadorEventos/>} />
-                            <Route path="/Mapa" element={<div>Mapa work in progres...</div>}/>
-                            <Route path="/Contraseña-olvidada" element={<ContrasenaOlvidada></ContrasenaOlvidada>}/>
-                            <Route path="/IniciarSesion" element={<IniciarSesion></IniciarSesion>}/>
-                            <Route path="/CrearCuenta" element={<CrearCuenta></CrearCuenta>}></Route>
-                            <Route path="/Perfil" element={<PerfilUsuario></PerfilUsuario>}></Route>
+                            <Route path="/eventos" element={<BuscadorEventos/>} />
+                            <Route path="/contraseña-olvidada" element={<ContrasenaOlvidada></ContrasenaOlvidada>}/>
+                            <Route path="/iniciarSesion" element={<IniciarSesion></IniciarSesion>}/>
+                            <Route path="/crearCuenta" element={<CrearCuenta></CrearCuenta>}></Route>
+                            <Route path="/perfil" element={<PerfilUsuario></PerfilUsuario>}></Route>
                             <Route path="*"></Route>
                         </Routes>
                     </div>

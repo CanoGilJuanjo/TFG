@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { getUserLocation } from '../helpers';
-import { Badge, Box, Button, Center, Select, styled } from '@chakra-ui/react';
+import { Badge, Box, Button, Center, Select,useColorModeValue } from '@chakra-ui/react';
 import { Search2Icon, StarIcon } from '@chakra-ui/icons';
 
 
-export const BuscadorEventos = () => {
+export const BuscadorEventos = () => {    
     // Datos de puntos de interés
     const puntosInteres = {
         punto: [
@@ -61,7 +61,7 @@ export const BuscadorEventos = () => {
     // Componente Carta
     const Carta = ({ punto, distancia}) => {
         return (
-            <Box display={"flex"} flexFlow={"row"} borderWidth='1px' width={"30%"} borderRadius='lg' overflow='hidden'>
+            <Box display={"flex"} flexFlow={"row"} borderWidth='1px' width={"30%"} borderRadius='lg' overflow='hidden' bg={useColorModeValue("#EDF2F7","#14151e")}>
                 <Box key={punto.nombre} maxW='100%' margin={"4px"} >
                     <img src={punto.imagen} alt={"IMAGEN:" + punto.nombre} style={{borderRadius:"10px"}}/>
                     <Box p='2'>
@@ -79,7 +79,7 @@ export const BuscadorEventos = () => {
                         <Box>
                             Esta a {Math.round(distancia / 1000)} km
                         </Box>
-                        <Box as='span' color='green.200' fontSize='sm'>
+                        <Box as='span' color='green.500' fontSize='sm'>
                             Precio: {punto.precio?punto.precio+" €":"GRATIS"} 
                         </Box>
                         <Box display='flex' mt='2' alignItems='center'>

@@ -6,21 +6,16 @@ Route::get('/', function () {
     return view('index');
 });
 
-Route::get('/Eventos', function () {
+Route::get('/eventos', function () {
     return view('Eventos');
 });
-Route::get('/Mapa', function () {
-    return view('MapaGeolocalizacion');
-});
-Route::get('/CrearCuenta', function () {
+
+Route::get('/crearcuenta', function () {
     return view('CrearCuenta');
 });
-Route::get('/IniciarSesion', function () {
+Route::get('/iniciarsesion', function () {
     return view('IniciarSesion');
 });
-Route::get('/Perfil', function () {
+Route::get('/perfil', function () {
     return view('Perfil');
-});
-Route::get('/evento', function () {
-    return view('evento');
 });
