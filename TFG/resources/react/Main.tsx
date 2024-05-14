@@ -8,6 +8,7 @@ import {ContrasenaOlvidada} from "./Paginas/InicioSesion-CrearCuenta/ContrasenaO
 import IniciarSesion from "./Paginas/InicioSesion-CrearCuenta/IniciarSesion";
 import { Index } from "./Paginas/Indice/index";
 import { PerfilUsuario } from "./Paginas/PerfilUsuario/PerfilUsuario";
+import FooterComponent from './Paginas/componentesComunes/FooterComponente';
 
 
 function Main() {
@@ -32,7 +33,9 @@ function Main() {
                         </Routes>
                     </div>
                 </main>
-                <footer></footer>
+                <footer>
+                    <FooterComponent></FooterComponent>
+                </footer>
             </ChakraProvider>
         </>
     );

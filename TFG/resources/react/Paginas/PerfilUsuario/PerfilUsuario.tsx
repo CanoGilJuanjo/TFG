@@ -1,5 +1,5 @@
 import { CheckIcon, CloseIcon, EditIcon, EmailIcon, StarIcon } from '@chakra-ui/icons'
-import { Button, Card, CardBody, CardFooter, Center, Heading, Stack, Text, Image, useEditableControls, ButtonGroup, IconButton, Flex, Editable, EditablePreview, EditableInput, Input } from '@chakra-ui/react'
+import { Button, Card, CardBody, CardFooter, Center, Heading, Stack, Text, Image, useEditableControls, ButtonGroup, IconButton, Flex, Editable, EditablePreview, EditableInput, Input, useColorModeValue } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 
 export const PerfilUsuario = () => {
@@ -27,20 +27,24 @@ export const PerfilUsuario = () => {
       }
     ]
   }
-
-  const Carta = ({ historial }) => {
+  const [anchoInner,setAncho] = useState(window.innerWidth);
+  const anchoInnerS = ()=>{
+    setAncho(window.innerWidth);
+  }
+  const Carta = ({ historial,ancho }) => {
     return (
       <Card
         direction={{ base: 'column', sm: 'row' }}
         overflow='hidden'
         variant='outline'
         width={"60vw"}
-        height={"20vh"}
+        height={"fit-content"}
         marginBottom={"5px"}
+        bg={useColorModeValue("#EDF2F7","#14151e")} 
       >
-        <Image width={"50vh"} src={historial.imagen} alt={historial.evento}></Image>
+        <Image maxWidth={ancho>479?"20vw":"100%"} width={ancho>479?"20vw":""} src={historial.imagen} alt={historial.evento}></Image>
 
-        <Stack>
+        <Stack  textAlign={"center"}>
           <CardBody>
             <Heading size='md'>{historial.evento} - {historial.precio}€</Heading>
             <Text py='2'>
@@ -86,6 +90,9 @@ export const PerfilUsuario = () => {
       </Flex>
     )
   }
+
+  //Control para el ancho
+  window.onresize = anchoInnerS;
   return (
     <>
       <div style={{ maxWidth: "600px", margin: "20px auto", padding: "20px", border: "1px solid #ccc", borderRadius: "10px", boxShadow: "1px 1px 8px black" }}>
@@ -97,10 +104,6 @@ export const PerfilUsuario = () => {
           display: "flex",
           flexFlow: "column"
         }}>
-          {/* <h2 style={{
-            margin: "0", fontSize: "24px", marginBottom: "10px"
-          }}>{nombre} {apellido}</h2>
-          */}
           <Editable textAlign={"center"} defaultValue={consulta.nombre+" "+consulta.apellido} fontSize={"2x1"} isPreviewFocusable={false}>
             <EditablePreview></EditablePreview>
             <Input as={EditableInput}></Input>
@@ -110,14 +113,13 @@ export const PerfilUsuario = () => {
           <p style={{ margin: "5px 0" }}><StarIcon></StarIcon> : {ubicacion}</p>
         </div>
       </div>
-
       <Center>
         <h2 style={{ fontSize: "xx-large" }}>Historial de compras</h2>
       </Center>
       <Center>
-        <div style={{ display: "flex", flexFlow: "column wrap" }}>
+        <div style={{ display: "flex",flexFlow: "column wrap" }}>
           {consulta.historial.map(respuesta => {
-            return (<Carta historial={respuesta} />)
+            return (<Carta historial={respuesta} ancho={anchoInner} />)
           })}
         </div>
       </Center>
