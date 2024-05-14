@@ -8,6 +8,7 @@ import {ContrasenaOlvidada} from "./Paginas/InicioSesion-CrearCuenta/ContrasenaO
 import IniciarSesion from "./Paginas/InicioSesion-CrearCuenta/IniciarSesion";
 import { Index } from "./Paginas/Indice/index";
 import { PerfilUsuario } from "./Paginas/PerfilUsuario/PerfilUsuario";
+import { Evento } from "./Paginas/Eventos/Evento";
 import FooterComponent from './Paginas/componentesComunes/FooterComponente';
 
 
@@ -25,9 +26,10 @@ function Main() {
                         <Routes>
                             <Route path="/" element={<Index/>}></Route>
                             <Route path="/eventos" element={<BuscadorEventos/>} />
+                            <Route path="/eventos/:id" element={<Evento/>} />
                             <Route path="/contraseña-olvidada" element={<ContrasenaOlvidada></ContrasenaOlvidada>}/>
-                            <Route path="/iniciarSesion" element={<IniciarSesion></IniciarSesion>}/>
-                            <Route path="/crearCuenta" element={<CrearCuenta></CrearCuenta>}></Route>
+                            <Route path="/iniciarsesion" element={<IniciarSesion></IniciarSesion>}/>
+                            <Route path="/crearcuenta" element={<CrearCuenta></CrearCuenta>}></Route>
                             <Route path="/perfil" element={<PerfilUsuario></PerfilUsuario>}></Route>
                             <Route path="*"></Route>
                         </Routes>
