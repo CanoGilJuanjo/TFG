@@ -4,6 +4,9 @@ import { Badge, Box, Button, Center, useColorMode } from '@chakra-ui/react';
 import { Search2Icon, StarIcon } from '@chakra-ui/icons';
 import Loader from '../componentesComunes/Loader';
 import { useNavigate } from 'react-router-dom';
+import { Badge, Box, Button, Center, Input, Select,Spinner,useColorModeValue } from '@chakra-ui/react';
+import { Search2Icon, StarIcon } from '@chakra-ui/icons';
+import { Form } from 'react-router-dom';
 
 export type Eventos = Evento[]
 
@@ -72,34 +75,12 @@ export const BuscadorEventos = () => {
             </ul>
         </div>
     );
-
-    /* const puntosInteres = {
-        punto: [
-            {
-                nombre: "Rosse",
-                coordenadas: [-4.452987635582184, 36.704772935105616],
-                imagen: "media/evento.png",
-                estrellas: 4
-            },
-            {
-                nombre: "Moobi Café Alhaurín",
-                coordenadas: [-4.5622327755283365, 36.663448502749084],
-                imagen: "media/evento.png",
-                estrellas: 3
-            },
-            {
-                nombre: "Teatro Cervantes",
-                coordenadas: [-4.41862478656455, 36.72478047215617],
-                imagen: "media/evento.png",
-                estrellas: 4.5
-            }
-        ]
-    };
-
+      
     const [distanciaMaxima, setDistanciaMaxima] = React.useState(0);
     const [cartas, setCartas] = useState([]);
 
     useEffect(() => {
+
         const handleClick = () => {
             const dist = parseInt(document.querySelector("input[name='distancia']").value);
             setDistanciaMaxima(dist);
@@ -171,13 +152,188 @@ export const BuscadorEventos = () => {
                 }} /> KM
                 <Box>
                     <Button id='boton' m="4">
+=======
+        try{
+            getUserLocation()
+                .then(userLocation => {                
+                    for (let i = 0; i < puntosInteres.punto.length; i++) {
+                        const salida = `https://api.mapbox.com/directions/v5/mapbox/walking/${userLocation[0]}%2C${userLocation[1]}%3B${puntosInteres.punto[i].coordenadas[0]}%2C${puntosInteres.punto[i].coordenadas[1]}?alternatives=false&continue_straight=true&geometries=geojson&language=en&overview=full&steps=true&access_token=pk.eyJ1IjoiamNnMDAzOSIsImEiOiJjbHZheHJ2dmgwMzA1MmltdXF1MHkxazMyIn0.O8_W4lc3PLzEhxqNh_LZbw`;
+                        fetch(salida)
+                        .then(respuesta => respuesta.json())
+                        .then(respuesta => {
+                            const distancia = Math.round(respuesta.routes[0].distance);
+                            if(!buscarExiste(puntosInteres.punto[i].titulo,datos)){
+                                setDatos([...datos,JSON.stringify({ punto: puntosInteres.punto[i], distancia: distancia})])
+                            }
+                        }) 
+                    }
+                    if(datos.length == puntosInteres.punto.length){
+                        setLoading(false)
+                    }
+                })
+            }catch(error){
+
+            }
+    },[datos])
+
+    //Buscamos si existe el evento en el array, para valorar si incluirlo o no
+    function  buscarExiste(nombre,array){
+        let salida = false;
+        for(let i = 0; i< array.length && !salida ;i++){
+            if(array[i].includes(nombre)){
+                salida = true;
+            }
+        }
+        return salida;
+    }
+
+    //Busca la distancia en las cartas y si coincide con la distancia a filtrar la esconde
+    function filtrarDistancia(){
+        let distancia:any = document.querySelector("select")?.value;
+        if(distancia == null || distancia == "-")
+            distancia = 200000;
+        let escondidas = document.querySelectorAll(".escondido");
+        if(escondidas != null){
+            for(let a of escondidas){
+                a.className = a.className.split(" ")[0]+" "+a.className.split(" ")[1];
+                a.style.display = "";
+            }
+        }
+        let cartaLista = document.querySelectorAll(".carta");
+        
+        for(let i of cartaLista){
+            if(parseInt(i.children[0].children[1].children[2].innerHTML.split(" ")[2])>distancia){
+                i.className = i.className+" escondido";
+                i.style.display = "none";
+            }
+        }
+    }
+
+    //Busca los precios y los filtra
+    const [precioMin,setPrecioMin] = useState(0.0);
+    const [precioMax,setPrecioMax] = useState(0.0);
+    const precioMaxS = (e) =>{
+        setPrecioMax(e.target.value)
+        
+    }
+    const precioMinS= (e)=>{
+        setPrecioMin(parseInt(e.target.value))
+        
+    }
+    function filtrarPrecio(){
+        //en caso de no reconocer el formtato numerico
+        if(isNaN(precioMax)){
+            setPrecioMax(0.0);
+        }
+        if(isNaN(precioMin)){
+            setPrecioMin(0.0);
+        }
+
+        //En caso de que el usuario ponga numero negativos
+        if(precioMax<0 || precioMin<0){
+        
+        }
+        
+        if((precioMax>=0 && precioMin>=0) && (precioMax>=precioMin || (precioMax == 0 && precioMin > 0) || (precioMin == 0 && precioMax>0))){
+            //Obtenemos todas las cartas
+            let cartaLista = document.querySelectorAll(".carta");
+            
+            //Comprobamos los precios menores al minimo
+            if(precioMin>0){
+                for(let i of cartaLista){
+                    if( 
+                        (parseFloat(i.children[0].children[1].children[3].innerHTML.split(" ")[1]) < precioMin && i.classList[i.classList.length-1] != "escondido") ||
+                        (i.children[0].children[1].children[3].innerHTML.split(" ")[1] == "GRATIS" && precioMin>0)
+                    ){   
+                        i.className = i.className+" escondido";
+                        i.style.display = "none";
+                    }
+                }
+            }
+            if(precioMax>0){
+                for(let i of cartaLista){
+                    if(parseFloat(i.children[0].children[1].children[3].innerHTML.split(" ")[1])>precioMax && i.classList[i.classList.length-1] != "escondido"){
+                        i.className = i.className+" escondido";
+                        i.style.display = "none";
+                    }
+                }
+            }
+        }
+    }
+
+    //Buscar nombre
+    const [nombre,setNombre] = useState("");
+    const nombreS = (e)=>{
+        setNombre(e.target.value)
+    }
+    const filtrarNombre = ()=>{
+        if(nombre != ""){
+            let cartaLista = document.querySelectorAll(".carta")
+            for(let carta of cartaLista){
+                if(!carta.children[0].children[1].children[1].innerHTML.toUpperCase().includes(nombre.toUpperCase())){
+                    carta.className += " escondido";
+                    carta.style.display = "none"
+                }
+            }
+        }
+    }
+    //Funcion de filtros
+    function filtro(){
+        filtrarDistancia();
+        filtrarPrecio();
+        filtrarNombre();
+    }
+
+    //Loading
+    const [isLoading,setLoading] = useState(true);
+    return (
+        <>
+            <Center display={"flex"} flexFlow={"row wrap"} borderWidth={"1px"} borderRadius={"10px"} boxShadow={"0px 0px 1px black"}>
+                <form style={{marginRight:"3vw"}}>
+                    <label htmlFor="nombre">Nombre: </label>
+                    <Input type="text" name="nombre" id="" bg={useColorModeValue("gray.600","gray.200")} color={useColorModeValue("white","black")} style={{fontSize:"2vh",width:"11vw",textAlign:"center",marginRight:"1vw"}} onChange={nombreS} />
+                    <label htmlFor="precio">Precios: </label>
+                    Min <Input type='number' name='precioMin' bg={useColorModeValue("gray.600","gray.200")} color={useColorModeValue("white","black")} style={{fontSize:"2vh",width:"11vw",textAlign:"center",marginRight:"1vw"}} onChange={precioMinS}></Input>
+                    Max <Input type='number' name='precioMin' bg={useColorModeValue("gray.600","gray.200")} color={useColorModeValue("white","black")} style={{fontSize:"2vh",width:"11vw",textAlign:"center",marginRight:"1vw"}} onChange={precioMaxS}></Input>
+                </form>
+                <Select style={{
+                        border: "1px solid black",
+                        alignItems: "center",
+                        textAlign: "center",
+                    }} width={"12vw"} fontSize={"2vh"} marginRight={"10px"} >
+                    <option value="-" selected>Todo</option>
+                    <option value='5'>5</option>
+                    <option value='10'>10</option>
+                    <option value='15'>15</option>
+                    <option value="20">20</option>
+                    <option value="25">25</option>
+                    <option value="30">30</option>
+                </Select>KM
+                <Box>
+                    <Button id='boton' m="4" onClick={filtro}>
+
                         <Search2Icon />
                     </Button>
                 </Box> 
             </Center>
+
             <div style={{ display: 'flex', flexFlow: "row wrap", textAlign:"center", alignContent: "center" }}>
                 {cartas} 
             </div>
+
+            {isLoading?
+                <Spinner color={useColorModeValue("black","blue.100")} marginTop={"50px"} marginBottom={"50px"} />
+            :
+                <Center id='lista' style={{ display: 'flex', flexFlow: "row wrap", textAlign: "center",width:"100%"}}>
+                    {
+                        datos.map(respuesta => {
+                            respuesta = JSON.parse(respuesta);
+                            return (<Carta key={respuesta.nombre} punto={respuesta.punto} distancia={respuesta.distancia}/>)
+                        })
+                    }
+                </Center>
+            }
+
         </>
-    );  */
+    );
 };
