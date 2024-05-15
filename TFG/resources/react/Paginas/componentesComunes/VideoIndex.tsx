@@ -25,13 +25,13 @@ const VideoIndex = () => {
           <Text
             position="absolute"
             top="35%"
-            left="10%"
+            left="13%"
             transform="translate(-50%, -50%)"
             color="white"
             fontSize="35px"
             fontWeight="bold"
             >
-            Encuentra tu fiesta
+            ¿Que quieres hacer hoy?
           </Text>
           {/* <ChevronRightIcon position="absolute"
             top="50%"
