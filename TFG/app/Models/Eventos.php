@@ -11,7 +11,7 @@ class Eventos extends Model
 
     protected $table = "eventos";
 
-    protected $fillable = ["id", "titulo", "descripcion", "qr", "fecha_inicio", "fecha_fin", "foto", "localizacion", "boost"];
+    protected $fillable = ["id", "titulo", "descripcion", "qr","precio", "fecha_inicio", "fecha_fin", "foto","localizacion", "latitud","longitud","valoracion", "boost","created_at","updated_at"];
 
     
 }

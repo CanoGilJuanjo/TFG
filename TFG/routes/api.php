@@ -5,6 +5,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SchemaController;
 use App\Http\Controllers\GenericCollectionController;
 
-Route::get('/eventos',[ControllerEvento::class, 'get_all']);
+Route::get('/eventos',[ControllerEvento::class, 'getAll']);
 
 Route::get('/evento/{id}',[ControllerEvento::class, 'show']);

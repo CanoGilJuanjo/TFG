@@ -6,10 +6,10 @@ import { Route, Routes,NavLink } from 'react-router-dom';
 import { CrearCuenta} from "./Paginas/InicioSesion-CrearCuenta/CrearCuenta";
 import {ContrasenaOlvidada} from "./Paginas/InicioSesion-CrearCuenta/ContrasenaOlvidada";
 import IniciarSesion from "./Paginas/InicioSesion-CrearCuenta/IniciarSesion";
-import { Index } from "./Paginas/Indice/index";
 import { PerfilUsuario } from "./Paginas/PerfilUsuario/PerfilUsuario";
 import { Evento } from "./Paginas/Eventos/Evento";
 import FooterComponent from './Paginas/componentesComunes/FooterComponente';
+import Index from './Paginas/Indice/index';
 
 
 function Main() {
