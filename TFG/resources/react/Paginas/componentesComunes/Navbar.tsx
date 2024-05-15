@@ -23,15 +23,17 @@ interface Props {
     children: React.ReactNode
 }
 
+const Links = ['Eventos', 'Planes', 'contactos', "Mapa"]
+
 const Links = [['Eventos',"eventos"], ['Planes',"planes"], ['Contacto',"contacto"]]
 
 const Navbar = () => {
-    const { colorMode, toggleColorMode } = useColorMode()
-    const { isOpen, onOpen, onClose } = useDisclosure()
+    const { colorMode, toggleColorMode } = useColorMode();
+    const { isOpen, onOpen, onClose } = useDisclosure();
 
     return (
         <>
-            <Box bg={useColorModeValue('gray.100', 'gray.900')} px={4}>
+            <Box bg={useColorModeValue('gray.100', 'gray.900')} px={4} top={0} position={'fixed'} width={'100%'} zIndex={3}>
                 <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
                     <IconButton
                         size={'md'}
