@@ -28,13 +28,11 @@ import {
   import { BsGithub, BsDiscord, BsPerson } from 'react-icons/bs';
 import React from 'react';
 import MapaContactos from './MapaContactos';
-import Navbar from '../componentesComunes/Navbar';
   
 export default function Contactos() {
     return (
       <>
-
-        <Container bg="transparent" maxW="full" mt={0} centerContent overflow="hidden" position={'fixed'} zIndex={0}>
+        <Container bg="transparent" maxW="full" mt={0} marginTop={"50px"} centerContent overflow="hidden" position={'fixed'}>
             <Flex>
                 <Box
                     bg={useColorModeValue('#171923', '#171923 ')}

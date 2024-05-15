@@ -26,14 +26,9 @@ function Main() {
                     }}>
                         <Routes>
                             <Route path="/" element={<Index/>}></Route>
-                            <Route path="/Eventos" element={<BuscadorEventos/>} />
                             <Route path="/contactos" element={<Contactos/>} />
-                            <Route path="/Mapa" element={<MapaGeolocalizacion/>}/>
-                            <Route path="/Contraseña-olvidada" element={<ContrasenaOlvidada></ContrasenaOlvidada>}/>
-                            <Route path="/IniciarSesion" element={<IniciarSesion></IniciarSesion>}/>
-                            <Route path="/CrearCuenta" element={<CrearCuenta></CrearCuenta>}></Route>
                             <Route path="/eventos" element={<BuscadorEventos/>} />
-                            <Route path="/eventos/:id" element={<Evento/>} />
+                            <Route path="/evento/:id" element={<Evento/>} />
                             <Route path="/contraseña-olvidada" element={<ContrasenaOlvidada></ContrasenaOlvidada>}/>
                             <Route path="/iniciarsesion" element={<IniciarSesion></IniciarSesion>}/>
                             <Route path="/crearcuenta" element={<CrearCuenta></CrearCuenta>}></Route>

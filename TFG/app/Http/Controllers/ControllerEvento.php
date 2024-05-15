@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 
 class ControllerEvento extends Controller
 {
-    public function getAll()
+    public function get_all()
     {
         $eventos = Eventos::all();
         return response()->json($eventos);

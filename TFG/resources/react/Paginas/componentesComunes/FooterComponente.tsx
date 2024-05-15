@@ -16,7 +16,8 @@ import {
   import { FaInstagram, FaTwitter, FaYoutube } from 'react-icons/fa'
   import { BiMailSend } from 'react-icons/bi'
   import React from 'react'
-  
+  import { NavLink } from 'react-router-dom';
+
   const Logo = (props: any) => {
     return (
       <svg height={32} viewBox="0 0 120 28" xmlns="media/logo.jpg" {...props}>
@@ -75,7 +76,8 @@ import {
     return (
       <Box
         bg={useColorModeValue('gray.50', 'gray.900')}
-        color={useColorModeValue('gray.700', 'gray.200')}>
+        color={useColorModeValue('gray.700', 'gray.200')}
+        zIndex={2}>
         <Container as={Stack} maxW={'6xl'} py={10}>
           <SimpleGrid
             templateColumns={{ sm: '1fr 1fr', md: '2fr 1fr 1fr' }}
@@ -98,21 +100,12 @@ import {
               </Stack>
             </Stack>
             <Stack align={'flex-start'}>
-              <ListHeader>Company</ListHeader>
+              <ListHeader>Compañia</ListHeader>
               <Box as="a" href={'#'}>
-                About us
+                Sobre nosotros
               </Box>
               <Box as="a" href={'#'}>
-                Blog
-              </Box>
-              <Box as="a" href={'#'}>
-                Contact us
-              </Box>
-              <Box as="a" href={'#'}>
-                Pricing
-              </Box>
-              <Box as="a" href={'#'}>
-                Testimonials
+                <NavLink to={"contactos"}>Contactanos</NavLink>
               </Box>
             </Stack>
             <Stack align={'flex-start'}>

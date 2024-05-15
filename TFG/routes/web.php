@@ -1,6 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ControllerEvento;
+use Illuminate\Http\Request;
+use App\Http\Controllers\SchemaController;
+use App\Http\Controllers\GenericCollectionController;
 
 Route::get('/', function () {
     return view('index');
@@ -12,6 +16,7 @@ Route::get('/eventos', function () {
 
 Route::get('/contactos', function () {
     return view('Contactos');
+});
 Route::get('/crearcuenta', function () {
     return view('CrearCuenta');
 });
@@ -21,3 +26,8 @@ Route::get('/iniciarsesion', function () {
 Route::get('/perfil', function () {
     return view('Perfil');
 });
+
+Route::get("/api/lista",[ControllerEvento::class, 'get_all']);
+
+Route::get('/api/evento/{id}',[ControllerEvento::class, 'show']);
+

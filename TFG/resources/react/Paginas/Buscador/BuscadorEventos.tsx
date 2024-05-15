@@ -12,10 +12,14 @@ export interface Evento {
     titulo: string
     descripcion: string
     qr: string
+    precio: number
     fecha_inicio: string
     fecha_fin: string
     foto: string
     localizacion: string
+    latitud: number
+    longitud: number
+    valoracion: number
     boost: string
     created_at: string
     updated_at: string
@@ -23,7 +27,7 @@ export interface Evento {
 
 export const BuscadorEventos = () => {
 
-    const apiURL = "http://localhost:8000/api/eventos"
+    const apiURL = "http://localhost:8000/api/lista"
     const [eventos, setEventos] = useState<Eventos>([]);
 
     //Loading
@@ -34,7 +38,7 @@ export const BuscadorEventos = () => {
     const navigate = useNavigate();
 
     const handleOnClick = (EventId) => {
-        navigate(`/eventos/${EventId}`)    
+        navigate(`/evento/${EventId}`)    
     }
     //Buscamos si existe el evento en el array, para valorar si incluirlo o no
     function  buscarExiste(nombre,array){
@@ -47,34 +51,12 @@ export const BuscadorEventos = () => {
         return salida;
     }
     const [datos, setDatos] = useState<any>([])
+    //Extraer datos de la BBDD
     useEffect(() => {
         fetch(apiURL)
             .then((response) => response.json())
             .then((data) => {
                 setEventos(data);
-            })
-            .then(() => {
-                try{
-                    getUserLocation()
-                        .then(userLocation => {                
-                            for (let i = 0; i < eventos.length; i++) {
-                                const salida = `https://api.mapbox.com/directions/v5/mapbox/walking/${userLocation[0]}%2C${userLocation[1]}%3B${eventos[i].longitud}%2C${eventos[i].latitud}?alternatives=false&continue_straight=true&geometries=geojson&language=en&overview=full&steps=true&access_token=pk.eyJ1IjoiamNnMDAzOSIsImEiOiJjbHZheHJ2dmgwMzA1MmltdXF1MHkxazMyIn0.O8_W4lc3PLzEhxqNh_LZbw`;
-                                fetch(salida)
-                                .then(respuesta => respuesta.json())
-                                .then(respuesta => {
-                                    const distancia = Math.round(respuesta.routes[0].distance);
-                                    if(!buscarExiste(eventos[i].titulo,datos)){
-                                        setDatos([...datos,JSON.stringify({ punto: eventos[i], distancia: distancia})])
-                                    }
-                                }) 
-                            }
-                            if(datos.length == eventos.length){
-                                setLoading(false)
-                            }
-                        })
-                }catch(error){
-                    console.log(error);
-                }
             })
             .catch((error) => {
                 setError(error);
@@ -82,12 +64,41 @@ export const BuscadorEventos = () => {
             });
     }, []);
 
+    useEffect(()=>{
+        try{
+            getUserLocation()
+                .then(userLocation => {                
+                    for (let i = 0; i < eventos.length; i++) {
+                        const salida = `https://api.mapbox.com/directions/v5/mapbox/walking/${userLocation[0]}%2C${userLocation[1]}%3B${eventos[i].longitud}%2C${eventos[i].latitud}?alternatives=false&continue_straight=true&geometries=geojson&language=en&overview=full&steps=true&access_token=pk.eyJ1IjoiamNnMDAzOSIsImEiOiJjbHZheHJ2dmgwMzA1MmltdXF1MHkxazMyIn0.O8_W4lc3PLzEhxqNh_LZbw`;
+                        fetch(salida)
+                        .then(respuesta => respuesta.json())
+                        .then(respuesta => {
+                            let distancia = 0;
+                            if(respuesta.code && respuesta.code == "InvalidInput"){
+                                distancia = 0
+                            }else{
+                                distancia = Math.round(respuesta.routes[0].distance);
+                            }
+                            if(!buscarExiste(eventos[i].titulo,datos)){
+                                setDatos([...datos,JSON.stringify({ punto: eventos[i], distancia: distancia})])   
+                            }
+                            if(datos.length == eventos.length){
+                                setLoading(false)
+                            }
+                        }) 
+                    }
+                })
+        }catch(error){
+            console.log(error);
+        }        
+    },[eventos,datos])
+    
     // Componente Carta
     const Carta = ({ punto, distancia}) => {
         return (
-            <Box className='carta' display={"flex"} flexFlow={"row"} borderWidth='1px' width={"29%"} margin={"1px"} borderRadius='lg' overflow='hidden' bg={useColorModeValue("#EDF2F7","#14151e")}>
+            <Box onClick={()=>{handleOnClick(punto.id)}} className='carta' display={"flex"} flexFlow={"row"} borderWidth='1px' width={"29%"} margin={"1px"} borderRadius='lg' overflow='hidden' bg={useColorModeValue("#EDF2F7","#14151e")}>
                 <Box key={punto.titulo} maxW='100%' margin={"4px"} >
-                    <img src={punto.foto} alt={"IMAGEN:" + punto.titulo} style={{borderRadius:"10px",width:"30vw"}}/>
+                    <img src={punto.foto} alt={"IMAGEN:" + punto.titulo} style={{borderRadius:"10px",width:"30vw",maxHeight:"25vh"}}/>
                     <Box p='2'>
                         <Box display='flex' alignItems='baseline'>
                             <Badge borderRadius='full' px='2' colorScheme='teal'>
@@ -165,11 +176,6 @@ export const BuscadorEventos = () => {
         if(isNaN(precioMin)){
             setPrecioMin(0.0);
         }
-
-        //En caso de que el usuario ponga numero negativos
-        if(precioMax<0 || precioMin<0){
-        
-        }
         
         if((precioMax>=0 && precioMin>=0) && (precioMax>=precioMin || (precioMax == 0 && precioMin > 0) || (precioMin == 0 && precioMax>0))){
             //Obtenemos todas las cartas
@@ -224,7 +230,7 @@ export const BuscadorEventos = () => {
     console.log(eventos)
     return (
         <>
-            <Center display={"flex"} flexFlow={"row wrap"} borderWidth={"1px"} borderRadius={"10px"} boxShadow={"0px 0px 1px black"}>
+            <Center display={"flex"} flexFlow={"row wrap"} marginTop={"10vh"} borderWidth={"1px"} borderRadius={"10px"} boxShadow={"0px 0px 1px black"} zIndex={2}>
                 <form style={{marginRight:"3vw"}}>
                     <label htmlFor="nombre">Nombre: </label>
                     <Input type="text" name="nombre" id="" bg={useColorModeValue("gray.600","gray.200")} color={useColorModeValue("white","black")} style={{fontSize:"2vh",width:"11vw",textAlign:"center",marginRight:"1vw"}} onChange={nombreS} />
