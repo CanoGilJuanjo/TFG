@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ControllerEvento;
+use App\Http\Controllers\ControllerUsuario;
 use Illuminate\Http\Request;
 use App\Http\Controllers\SchemaController;
 use App\Http\Controllers\GenericCollectionController;
@@ -31,3 +32,4 @@ Route::get("/api/lista",[ControllerEvento::class, 'get_all']);
 
 Route::get('/api/evento/{id}',[ControllerEvento::class, 'show']);
 
+Route::get('/api/usuario/{id}',[ControllerUsuario::class, 'find']);

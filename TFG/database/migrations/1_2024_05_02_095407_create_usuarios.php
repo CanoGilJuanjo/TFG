@@ -15,13 +15,12 @@ return new class extends Migration
             $table->id();
             $table->string("nombre");
             $table->string("apellidos");
+            $table->string("contrasena");
             $table->integer("edad");
             $table->string("localizacion");
-            $table->decimal("latitud");
             $table->string("email");
-            $table->string("nivel");
+            $table->integer("nivel");
             $table->string("telefono");
-            $table->decimal("altitud");
             $table->timestamps();
         });
     }

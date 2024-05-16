@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('sessions', function (Blueprint $table) {
             $table->id();
-            $table->string("payload");
+            $table->string("payload", 500);
             $table->integer("last_activity");
-            $table->string("user_id");
-            $table->string("ip_address");
-            $table->string("user_agent");
+            $table->string("user_id", 500);
+            $table->string("ip_address", 500);
+            $table->string("user_agent", 500);
             $table->timestamps();
         });
     }
