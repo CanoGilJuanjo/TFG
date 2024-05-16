@@ -23,7 +23,7 @@ interface Props {
     children: React.ReactNode
 }
 
-const Links = [['Eventos',"eventos"], ['Planes',"planes"], ['Contacto',"contactos"]]
+const Links = [['Eventos',"eventos"], /* ['Planes',"planes"], */ ['Contacto',"contactos"]]
 
 const Navbar = () => {
     const { colorMode, toggleColorMode } = useColorMode();
@@ -73,7 +73,7 @@ const Navbar = () => {
                                 <MenuDivider />
                                 <MenuItem>Politicas y condiciones</MenuItem>
                                 <MenuDivider/>
-                                <MenuItem>Cerrar Sesion</MenuItem>
+                                <NavLink to={"/iniciarsesion"}><MenuItem>Cerrar Sesion</MenuItem></NavLink>
                             </MenuList>
                         </Menu>
                     </Flex>

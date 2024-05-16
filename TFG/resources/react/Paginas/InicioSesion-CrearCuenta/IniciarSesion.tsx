@@ -11,7 +11,7 @@ import {
     Button,
   } from '@chakra-ui/react'
 import React from 'react'
-import { NavLink } from 'react-router-dom';
+import { NavLink, redirect } from 'react-router-dom';
   
   export default function IniciarSesion() {
     return (
@@ -44,7 +44,7 @@ import { NavLink } from 'react-router-dom';
                   align={'start'}
                   justify={'space-between'}>
                   <Checkbox>Recuerda mi equipo</Checkbox>
-                  <NavLink style={{color:"#80DAEB"}} to={"/Contraseña-olvidada"}>Contraseña olvidada?</NavLink>
+                  <NavLink style={{color:"#80DAEB"}} to={"/contraseña-olvidada"}>Contraseña olvidada?</NavLink>
                 </Stack>
                 <Button
                 loadingText="Submitting"
@@ -53,10 +53,11 @@ import { NavLink } from 'react-router-dom';
                 color={'white'}
                 _hover={{
                   bg: 'blue.500',
-                }}>
+                }}
+                onClick={()=>{location.href= "/"}}>
                   Iniciar sesion
                 </Button>
-                <NavLink style={{color:"#80DAEB"}} to={"/CrearCuenta"}>Crear cuenta</NavLink>
+                <NavLink style={{color:"#80DAEB"}} to={"/crearcuenta"}>Crear cuenta</NavLink>
               </Stack>
             </Stack>
           </Box>

@@ -1,167 +1,569 @@
-import { Box, Grid, GridItem, SimpleGrid } from '@chakra-ui/react';
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-
-export type Eventos = Evento[]
+import {
+    Box,
+    Grid,
+    GridItem,
+    Center,
+    Text,
+    Stack,
+    List,
+    ListItem,
+    ListIcon,
+    Button,
+    useColorModeValue,
+    Badge,
+    FormControl,
+    FormLabel,
+    FormHelperText,
+    Input,
+    Spinner,
+} from "@chakra-ui/react";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { CheckIcon, CloseIcon } from "@chakra-ui/icons";
 
 export interface Evento {
-    id: number
-    titulo: string
-    descripcion: string
-    qr: string
-    fecha_inicio: string
-    fecha_fin: string
-    foto: string
-    localizacion: string
-    boost: string
-    created_at: string
-    updated_at: string
+    id: number;
+    titulo: string;
+    descripcion: string;
+    qr: string;
+    fecha_inicio: string;
+    fecha_fin: string;
+    foto: string;
+    precio: number;
+    localizacion: string;
+    boost: string;
+    created_at: string;
+    updated_at: string;
 }
 
-
 export const Evento = () => {
-
-    const {id} = useParams();
+    const { id } = useParams();
 
     const apiURL = `http://localhost:8000/api/evento/${id}`;
 
-    const [eventos, setEventos] = useState<Eventos>([]);
+    const [eventos, setEventos] = useState<Evento>();
+
+    const [loading, setLoading] = useState(true);
+
+    const [error, setError] = useState(null);
 
     useEffect(() => {
         fetch(apiURL)
             .then((response) => response.json())
             .then((data) => {
                 setEventos(data);
+                setLoading(false);
             })
+            .catch((error) => {
+                setError(error);
+                setLoading(false);
+            });
     }, []);
 
+    if (loading) return <Spinner color={useColorModeValue("black","blue.100")} marginTop={"10vh"} marginBottom={"50px"}></Spinner>
+
+    if (error) return <p>Error!</p>;
+
     return (
-        <div>
-            <h1>Eventos</h1>
-            <div style={{width: "500px", height: "500px"}}>
-                {eventos.map((evento) => (
-                    <div key={evento.id}>
-                        <div>
-                            <img src={evento.foto} alt="Imagen del evento" />
-                            <div>
-                                <h1>{evento.titulo}</h1>
-                                <p>{evento.boost}</p>
+        <>
+            <link
+                rel="stylesheet"
+                type="text/css"
+                charSet="UTF-8"
+                href="../../../css/evento.css"
+            />
+            <div style={{marginTop:"10vh"}}>
+                <div>
+                    <div key={eventos?.id}>
+                        <div style={{ width: "100%", height: "500px" }}>
+                            <Grid
+                                templateAreas={`"img title-boost"
+                                                "img information"`}
+                                gridTemplateRows={"1fr 1fr 30px"}
+                                gridTemplateColumns={"1fr 1fr"}
+                                h="600px"
+                                gap="6"
+                                p={"30"}
+                            >
+                                <GridItem
+                                    p={"20px"}
+                                    alignContent={"center"}
+                                    area={"img"}
+                                >
+                                    <img
+                                        src={"../"+eventos?.foto}
+                                        alt="Imagen del evento"
+                                        width={"800vw"}
+                                        style={{borderRadius:"10px"}}
+                                    />
+                                </GridItem>
+                                <GridItem
+                                    pl="2"
+                                    area={"title-boost"}
+                                    alignContent={"center"}
+                                >
+                                    <Text fontSize={"40px"} fontWeight="bold">
+                                        {eventos?.titulo}
+                                    </Text>
+                                    <Text
+                                        fontSize={"30px"}
+                                        textAlign={"left"}
+                                        pl={"60"}
+                                    >
+                                        {eventos?.boost}
+                                    </Text>
+                                </GridItem>
+                                <GridItem pl="2" area={"information"}>
+                                    <Text
+                                        fontSize={"40px"}
+                                        textAlign={"center"}
+                                        fontWeight={"500"}
+                                        pb={"10px"}
+                                    >
+                                        Descripción del evento
+                                    </Text>
+                                    <Stack
+                                        direction={"row"}
+                                        pb={"10px"}
+                                        justifyContent={"center"}
+                                    >
+                                        <Text fontSize={"large"}>Inicio:</Text>
+                                        <Badge
+                                            color="gray.400"
+                                            borderRadius={"5px"}
+                                            fontSize="large"
+                                        >
+                                            {eventos?.fecha_inicio}
+                                        </Badge>
+                                        <Text fontSize={"large"}>- Fin:</Text>
+                                        <Badge
+                                            color="gray.400"
+                                            borderRadius={"5px"}
+                                            fontSize="large"
+                                        >
+                                            {eventos?.fecha_fin}
+                                        </Badge>
+                                    </Stack>
+                                    <Text fontSize={"20px"}>
+                                        {eventos?.descripcion}
+                                    </Text>
+                                </GridItem>
+                            </Grid>
+                        </div>
+                        <div className="precios-evento">
+                            <div className="cards">
+                                <Grid
+                                    templateAreas={`"precio1 precio2 precio3 precio4"`}
+                                    gridTemplateRows={"1fr 1fr 1fr 1fr"}
+                                    h="300px"
+                                    gap="6"
+                                    p={"30"}
+                                    pb={"100px"}
+                                >
+                                    <GridItem area={"precio1"}>
+                                        <Center py={6} pt={"120px"}>
+                                            <Box
+                                                maxW={"330px"}
+                                                w={"full"}
+                                                bg={useColorModeValue(
+                                                    "white",
+                                                    "gray.800"
+                                                )}
+                                                boxShadow={"2xl"}
+                                                rounded={"md"}
+                                                overflow={"hidden"}
+                                            >
+                                                <Stack
+                                                    textAlign={"center"}
+                                                    p={6}
+                                                    color={useColorModeValue(
+                                                        "gray.800",
+                                                        "white"
+                                                    )}
+                                                    align={"center"}
+                                                >
+                                                    <Stack
+                                                        direction={"row"}
+                                                        align={"center"}
+                                                        justify={"center"}
+                                                    >
+                                                        <Text
+                                                            fontSize={"6xl"}
+                                                            fontWeight={800}
+                                                        >
+                                                            10.90
+                                                        </Text>
+                                                        <Text fontSize={"3xl"}>
+                                                            €
+                                                        </Text>
+                                                    </Stack>
+                                                </Stack>
+
+                                                <Box
+                                                    bg={useColorModeValue(
+                                                        "gray.50",
+                                                        "gray.900"
+                                                    )}
+                                                    px={6}
+                                                    py={10}
+                                                >
+                                                    <List spacing={3}>
+                                                        <ListItem>
+                                                            <ListIcon
+                                                                as={CheckIcon}
+                                                                color="green.400"
+                                                            />
+                                                            2 copas
+                                                        </ListItem>
+                                                        <ListItem>
+                                                            <ListIcon
+                                                                as={CloseIcon}
+                                                                color="red.400"
+                                                            />
+                                                            Pulsera para entrar y salir
+                                                        </ListItem>
+                                                        <ListItem>
+                                                            <ListIcon
+                                                                as={CloseIcon}
+                                                                color="red.400"
+                                                            />
+                                                            Acceso a zona vip
+                                                        </ListItem>
+                                                    </List>
+
+                                                    <Button
+                                                        mt={10}
+                                                        w={"full"}
+                                                        bg={"green.400"}
+                                                        color={"white"}
+                                                        rounded={"xl"}
+                                                        boxShadow={
+                                                            "0 5px 20px 0px rgb(72 187 120 / 43%)"
+                                                        }
+                                                        _hover={{
+                                                            bg: "green.500",
+                                                        }}
+                                                        _focus={{
+                                                            bg: "green.500",
+                                                        }}
+                                                    >
+                                                        Comprar
+                                                    </Button>
+                                                </Box>
+                                            </Box>
+                                        </Center>
+                                    </GridItem>
+                                    <GridItem area={"precio2"}>
+                                        <Center py={6} pt={"120px"}>
+                                            <Box
+                                                maxW={"330px"}
+                                                w={"full"}
+                                                bg={useColorModeValue(
+                                                    "white",
+                                                    "gray.800"
+                                                )}
+                                                boxShadow={"2xl"}
+                                                rounded={"md"}
+                                                overflow={"hidden"}
+                                            >
+                                                <Stack
+                                                    textAlign={"center"}
+                                                    p={6}
+                                                    color={useColorModeValue(
+                                                        "gray.800",
+                                                        "white"
+                                                    )}
+                                                    align={"center"}
+                                                >
+                                                    <Stack
+                                                        direction={"row"}
+                                                        align={"center"}
+                                                        justify={"center"}
+                                                    >
+                                                        <Text
+                                                            fontSize={"6xl"}
+                                                            fontWeight={800}
+                                                        >
+                                                            20.99
+                                                        </Text>
+                                                        <Text fontSize={"3xl"}>
+                                                            €
+                                                        </Text>
+                                                    </Stack>
+                                                </Stack>
+
+                                                <Box
+                                                    bg={useColorModeValue(
+                                                        "gray.50",
+                                                        "gray.900"
+                                                    )}
+                                                    px={6}
+                                                    py={10}
+                                                >
+                                                    <List spacing={3}>
+                                                        <ListItem>
+                                                            <ListIcon
+                                                                as={CheckIcon}
+                                                                color="green.400"
+                                                            />
+                                                            2 copas
+                                                        </ListItem>
+                                                        <ListItem>
+                                                            <ListIcon
+                                                                as={CheckIcon}
+                                                                color="green.400"
+                                                            />
+                                                            Pulsera para entrar y salir
+                                                        </ListItem>
+                                                        <ListItem>
+                                                            <ListIcon
+                                                                as={CloseIcon}
+                                                                color="red.400"
+                                                            />
+                                                            Acceso a zona vip
+                                                        </ListItem>
+                                                    </List>
+
+                                                    <Button
+                                                        mt={10}
+                                                        w={"full"}
+                                                        bg={"green.400"}
+                                                        color={"white"}
+                                                        rounded={"xl"}
+                                                        boxShadow={
+                                                            "0 5px 20px 0px rgb(72 187 120 / 43%)"
+                                                        }
+                                                        _hover={{
+                                                            bg: "green.500",
+                                                        }}
+                                                        _focus={{
+                                                            bg: "green.500",
+                                                        }}
+                                                    >
+                                                        Comprar
+                                                    </Button>
+                                                </Box>
+                                            </Box>
+                                        </Center>
+                                    </GridItem>
+                                    <GridItem area={"precio3"}>
+                                        <Center py={6} pt={"120px"}>
+                                            <Box
+                                                maxW={"330px"}
+                                                w={"full"}
+                                                bg={useColorModeValue(
+                                                    "white",
+                                                    "gray.800"
+                                                )}
+                                                boxShadow={"2xl"}
+                                                rounded={"md"}
+                                                overflow={"hidden"}
+                                            >
+                                                <Stack
+                                                    textAlign={"center"}
+                                                    p={6}
+                                                    color={useColorModeValue(
+                                                        "gray.800",
+                                                        "white"
+                                                    )}
+                                                    align={"center"}
+                                                >
+                                                    <Stack
+                                                        direction={"row"}
+                                                        align={"center"}
+                                                        justify={"center"}
+                                                    >
+                                                        <Text
+                                                            fontSize={"6xl"}
+                                                            fontWeight={800}
+                                                        >
+                                                            50.99
+                                                        </Text>
+                                                        <Text fontSize={"3xl"}>
+                                                            €
+                                                        </Text>
+                                                    </Stack>
+                                                </Stack>
+
+                                                <Box
+                                                    bg={useColorModeValue(
+                                                        "gray.50",
+                                                        "gray.900"
+                                                    )}
+                                                    px={6}
+                                                    py={10}
+                                                >
+                                                    <List spacing={3}>
+                                                        <ListItem>
+                                                            <ListIcon
+                                                                as={CheckIcon}
+                                                                color="green.400"
+                                                            />
+                                                            2 copas
+                                                        </ListItem>
+                                                        <ListItem>
+                                                            <ListIcon
+                                                                as={CheckIcon}
+                                                                color="green.400"
+                                                            />
+                                                            Pulsera para entrar y salir
+                                                        </ListItem>
+                                                        <ListItem>
+                                                            <ListIcon
+                                                                as={CheckIcon}
+                                                                color="green.400"
+                                                            />
+                                                            Acceso a zona vip
+                                                        </ListItem>
+                                                    </List>
+
+                                                    <Button
+                                                        mt={10}
+                                                        w={"full"}
+                                                        bg={"green.400"}
+                                                        color={"white"}
+                                                        rounded={"xl"}
+                                                        boxShadow={
+                                                            "0 5px 20px 0px rgb(72 187 120 / 43%)"
+                                                        }
+                                                        _hover={{
+                                                            bg: "green.500",
+                                                        }}
+                                                        _focus={{
+                                                            bg: "green.500",
+                                                        }}
+                                                    >
+                                                        Comprar
+                                                    </Button>
+                                                </Box>
+                                            </Box>
+                                        </Center>
+                                    </GridItem>
+                                    <GridItem area={"precio4"}>
+                                        <Center py={6} pt={"120px"}>
+                                            <Box
+                                                maxW={"330px"}
+                                                w={"full"}
+                                                bg={useColorModeValue(
+                                                    "white",
+                                                    "gray.800"
+                                                )}
+                                                boxShadow={"2xl"}
+                                                rounded={"md"}
+                                                overflow={"hidden"}
+                                            >
+                                                <Stack
+                                                    textAlign={"center"}
+                                                    p={6}
+                                                    color={useColorModeValue(
+                                                        "gray.800",
+                                                        "white"
+                                                    )}
+                                                    align={"center"}
+                                                >
+                                                    <Stack
+                                                        direction={"row"}
+                                                        align={"center"}
+                                                        justify={"center"}
+                                                    >
+                                                        <Text
+                                                            fontSize={"6xl"}
+                                                            fontWeight={800}
+                                                        >
+                                                            125.85
+                                                        </Text>
+                                                        <Text fontSize={"3xl"}>
+                                                            €
+                                                        </Text>
+                                                    </Stack>
+                                                </Stack>
+
+                                                <Box
+                                                    bg={useColorModeValue(
+                                                        "gray.50",
+                                                        "gray.900"
+                                                    )}
+                                                    px={6}
+                                                    py={10}
+                                                >
+                                                    <List spacing={3}>
+                                                        <ListItem>
+                                                            <ListIcon
+                                                                as={CheckIcon}
+                                                                color="green.400"
+                                                            />
+                                                            2 copas
+                                                        </ListItem>
+                                                        <ListItem>
+                                                            <ListIcon
+                                                                as={CheckIcon}
+                                                                color="green.400"
+                                                            />
+                                                            Pulsera para entrar y salir
+                                                        </ListItem>
+                                                        <ListItem>
+                                                            <ListIcon
+                                                                as={CheckIcon}
+                                                                color="green.400"
+                                                            />
+                                                            Acceso a zona vip + meeting con artistas
+                                                        </ListItem>
+                                                    </List>
+
+                                                    <Button
+                                                        mt={10}
+                                                        w={"full"}
+                                                        bg={"green.400"}
+                                                        color={"white"}
+                                                        rounded={"xl"}
+                                                        boxShadow={
+                                                            "0 5px 20px 0px rgb(72 187 120 / 43%)"
+                                                        }
+                                                        _hover={{
+                                                            bg: "green.500",
+                                                        }}
+                                                        _focus={{
+                                                            bg: "green.500",
+                                                        }}
+                                                    >
+                                                        Comprar
+                                                    </Button>
+                                                </Box>
+                                            </Box>
+                                        </Center>
+                                    </GridItem>
+                                </Grid>
                             </div>
                         </div>
-                        
-                        <p>{evento.descripcion}</p>
-                        <p>{evento.titulo}</p>
-                        <p>{evento.fecha_fin}</p>
-                        <p>{evento.localizacion}</p>
-                        <p>{evento.qr}</p>
                     </div>
-                ))}
+                    <div id="contenedor-formulario">
+                        <Stack pt={"400px"} alignItems={"center"} pb={"40px"}>
+                            <FormControl isRequired width={"500px"}>
+                                <FormLabel>Nombre</FormLabel>
+                                <Input placeholder="Nombre" />
+                            </FormControl>
+                            <FormControl isRequired width={"500px"}>
+                                <FormLabel>Apellidos</FormLabel>
+                                <Input placeholder="Apellido" />
+                            </FormControl>
+                            <FormControl isRequired width={"500px"}>
+                                <FormLabel>Email</FormLabel>
+                                <Input type="email" />
+                                <FormHelperText>
+                                    No se compartira tu información con nadie
+                                </FormHelperText>
+                            </FormControl>
+                            <FormControl isRequired width={"500px"}>
+                                <FormLabel>Teléfono</FormLabel>
+                                <Input
+                                    placeholder="(+34) ___-___-___"
+                                    border={0}
+                                />
+                            </FormControl>
+                        </Stack>
+                    </div>
+                </div>
             </div>
-        </div>
+        </>
     );
-}
-
-<>
-    <div>
-        <h1>Titulo</h1>
-    </div>
-</>
-
-    {/* <main class="contenido">
-        <h2 class="title_Mod">Información del evento<hr></h2>
-        <div id="info-evento">
-            <form action="" id="formulario">
-                <label class="form-label">Nombre del evento</label><br>
-                <input type="text" name="nombre" class="caja">
-                <br>
-                <label class="form-label">Descripción del evento</label><br>
-                <textarea name="email" class="caja" cols="30" rows="5"></textarea>
-                <br>
-                <label class="form-label">Localización</label><br>
-                <input type="text" name="localizacion" class="caja"><br><br>
-
-                <label class="form-label">Precios</label>
-                <select name="precios">
-                    <option value="1">1</option>
-                    <option value="1">2</option>
-                    <option value="1">3</option>
-                    <option value="1">4</option>
-                </select><br><br>
-                <input type="file"><br><br>
-                <input type="submit" value="Enviar" class="btn btn-primary">
-            </form> 
-        </div>
-
-
-        <h1>Seleccione una plantilla</h1>
-        <div id="plantillas">
-            <img src="img/opcion2.png" alt="opcion1">
-            <img src="img/opcion2.png" alt="opcion2">
-        </div>
-        <div id="opciones">
-            <div>
-                <input type="radio" name="opciones" id="opcion1">
-                <label for="">Opción 1</label>
-            </div>
-            <div>
-                <input type="radio" name="opciones" id="opcion2"> 
-                <label for="">Opción 2</label>
-            </div>
-        </div>
-
-        <h1>Modificaciones de plantilla</h1>
-        <div id="bloques">
-            <h2>Bloques de presentación</h2>
-            <div id="bloque-presentacion">
-                <div id="bloque-presentacion-opcion1">
-                    <img src="img/Bloque-presentacion-opcion-1.png" alt="Bloque de presentación opción 1">
-                </div>
-                <div id="bloque-presentacion-opcion2">
-                    <img src="img/Bloque-presentacion-opcion-2.png" alt="Bloque de presentación opción 2">
-                </div>
-            </div>
-            
-            <h2>Bloques de compras</h2>
-            <div id="bloque-compra">
-                <div id="bloque-compra-opcion1">
-                    <img src="img/Bloque-compras-opcion-1.png" alt="Bloque de compra opción 1">
-                </div>
-                <div id="bloque-compra-opcion2">
-                    <img src="img/Bloque-compras-opcion-2.png" alt="Bloque de compra opción 2">
-                </div>
-            </div>
-
-            <h2>Bloques de restricciones y normas</h2>
-            <div id="bloque-restricciones-normas">
-                <div id="bloque-restricciones-normas-opcion1">
-                    <img src="img/Bloque-restricciones-normas-opcion-1.png" alt="Bloque de restricciones y normas opción 1">
-                </div>
-                <div id="bloque-restricciones-normas-opcion2">
-                    <img src="img/Bloque-restricciones-normas-opcion-2.png" alt="Bloque de restricciones y normas opción 2">
-                </div>
-            </div>
-        </div>
-
-        <h1>Previsualización</h1>
-        <div id="previsualizacion">
-            <img src="" alt="Previsualización no disponible">
-        </div>
-
-        <h1>Suba su propia página</h1>
-        <div id="pagina-propia">
-            <input type="file" id="miPagina">
-        </div>
-
-        <div class="footer">
-            <p>Tech Xperience Creators&copy;</p>
-            <ul>
-                <a href=""><li>Redes(iconos)</li></a>
-                <a href=""><li>Políticas de privacidad</li></a>
-                <a href=""><li>Acerca de</li></a>
-                <a href=""><li>Colaboraciones</li></a>
-                <a href=""><li>Contacto</li></a>
-                <a href=""><li>Donde estamos</li></a>
-            </ul>
-        </div>
-    </main> */}
-
+};

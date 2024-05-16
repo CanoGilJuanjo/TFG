@@ -18,6 +18,7 @@ Route::get('/eventos', function () {
 Route::get('/contactos', function () {
     return view('Contactos');
 });
+
 Route::get('/crearcuenta', function () {
     return view('CrearCuenta');
 });
@@ -33,3 +34,5 @@ Route::get("/api/lista",[ControllerEvento::class, 'get_all']);
 Route::get('/api/evento/{id}',[ControllerEvento::class, 'show']);
 
 Route::get('/api/usuario/{id}',[ControllerUsuario::class, 'find']);
+
+Route::get('/evento/{id}',function(){return view("evento");});
