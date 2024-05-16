@@ -17,6 +17,7 @@ Route::get('/eventos', function () {
 Route::get('/contactos', function () {
     return view('Contactos');
 });
+
 Route::get('/crearcuenta', function () {
     return view('CrearCuenta');
 });
