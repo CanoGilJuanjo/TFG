@@ -11,7 +11,7 @@ import {
     Button,
   } from '@chakra-ui/react'
 import React from 'react'
-import { NavLink } from 'react-router-dom';
+import { NavLink, redirect } from 'react-router-dom';
   
   export default function IniciarSesion() {
     return (
@@ -53,7 +53,8 @@ import { NavLink } from 'react-router-dom';
                 color={'white'}
                 _hover={{
                   bg: 'blue.500',
-                }}>
+                }}
+                onClick={()=>{location.href= "/"}}>
                   Iniciar sesion
                 </Button>
                 <NavLink style={{color:"#80DAEB"}} to={"/crearcuenta"}>Crear cuenta</NavLink>
