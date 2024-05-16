@@ -17,29 +17,34 @@ function Main() {
     return (
         <>
             <ChakraProvider>
-                <header>
-                    <Navbar></Navbar>
-                </header>
-                <main>
-                    <div style={{ 
-                        textAlign: "center"
-                    }}>
-                        <Routes>
-                            <Route path="/" element={<Index/>}></Route>
-                            <Route path="/contactos" element={<Contactos/>} />
-                            <Route path="/eventos" element={<BuscadorEventos/>} />
-                            <Route path="/evento/:id" element={<Evento/>} />
-                            <Route path="/contraseña-olvidada" element={<ContrasenaOlvidada></ContrasenaOlvidada>}/>
-                            <Route path="/iniciarsesion" element={<IniciarSesion></IniciarSesion>}/>
-                            <Route path="/crearcuenta" element={<CrearCuenta></CrearCuenta>}></Route>
-                            <Route path="/perfil" element={<PerfilUsuario></PerfilUsuario>}></Route>
-                            <Route path="*"></Route>
-                        </Routes>
-                    </div>
-                </main>
-                <footer>
-                    <FooterComponent></FooterComponent>
-                </footer>
+            <Routes>
+                <Route path="/contraseña-olvidada" element={<ContrasenaOlvidada></ContrasenaOlvidada>}/>
+                <Route path="/iniciarsesion" element={<IniciarSesion></IniciarSesion>}/>
+                <Route path="/crearcuenta" element={<CrearCuenta></CrearCuenta>}></Route>
+                <Route path="*"element={
+                    <>
+                        <header>
+                            <Navbar></Navbar>
+                        </header>
+                        <main>
+                            <div style={{ 
+                                textAlign: "center"
+                            }}>
+                                <Routes>
+                                    <Route path="/" element={<Index/>}></Route>
+                                    <Route path="/contactos" element={<Contactos/>} />
+                                    <Route path="/eventos" element={<BuscadorEventos/>} />
+                                    <Route path="/evento/:id" element={<Evento/>} />
+                                    <Route path="/perfil" element={<PerfilUsuario></PerfilUsuario>}></Route>
+                                </Routes>
+                            </div>
+                        </main>
+                        <footer>
+                            <FooterComponent></FooterComponent>
+                        </footer>
+                    </>}>
+                </Route>
+            </Routes>
             </ChakraProvider>
         </>
     );

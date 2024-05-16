@@ -23,6 +23,7 @@ export const CrearCuenta = () => {
   const [showPassword, setShowPassword] = useState(false)
   const [nombre, setNombre] = useState("")
   const [apellido, setApellido] = useState("")
+  const [edad, setEdad] = useState(0)
   const [mail, setMail] = useState("")
   const apellidoS = (e) => {
     setApellido(e.target.value)
@@ -32,6 +33,9 @@ export const CrearCuenta = () => {
   }
   const mailS = (e) => {
     setMail(e.target.value)
+  }
+  const edadS = (e) => {
+    setEdad(e.target.value)
   }
   const form = useRef()
   const sendEmail = (e) => {
@@ -49,6 +53,9 @@ export const CrearCuenta = () => {
     );
   }
     const comprobacionSend = async () => {
+      if(edad<18){
+        document.querySelector("input[name=''edad]").placeholder = "No valido"
+      }
       if (nombre != "" && mail != "") {
         //Enviamos el mail
       }
@@ -84,6 +91,12 @@ export const CrearCuenta = () => {
                     <Input type="text" name='apellido' onChange={apellidoS} />
                   </FormControl>
                 </Box>
+                <Box>
+                  <FormControl id="edad" isRequired>
+                    <FormLabel>Edad</FormLabel>
+                    <Input type="number" name='edad' onChange={edadS} />
+                  </FormControl>
+                </Box>
               </HStack>
               <FormControl id="email" isRequired>
                 <FormLabel>Correo Electronico</FormLabel>
@@ -117,7 +130,7 @@ export const CrearCuenta = () => {
               </Stack>
               <Stack pt={6}>
                 <Text align={'center'}>
-                  Ya registrado? <NavLink style={{ color: "#80DAEB" }} to={"/IniciarSesion"}>Inicio de sesion</NavLink>
+                  Ya registrado? <NavLink style={{ color: "#80DAEB" }} to={"/iniciarsesion"}>Inicio de sesion</NavLink>
                 </Text>
               </Stack>
             </Stack>
