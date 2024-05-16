@@ -69,7 +69,7 @@ export const BuscadorEventos = () => {
             getUserLocation()
                 .then(userLocation => {                
                     for (let i = 0; i < eventos.length; i++) {
-                        const salida = `https://api.mapbox.com/directions/v5/mapbox/walking/${userLocation[0]}%2C${userLocation[1]}%3B${eventos[i].longitud}%2C${eventos[i].latitud}?alternatives=false&continue_straight=true&geometries=geojson&language=en&overview=full&steps=true&access_token=pk.eyJ1IjoiamNnMDAzOSIsImEiOiJjbHZheHJ2dmgwMzA1MmltdXF1MHkxazMyIn0.O8_W4lc3PLzEhxqNh_LZbw`;
+                        const salida = `https://api.mapbox.com/directions/v5/mapbox/walking/${userLocation[0]}%2C${userLocation[1]}%3B${eventos[i].latitud}%2C${eventos[i].longitud}?alternatives=false&continue_straight=true&geometries=geojson&language=en&overview=full&steps=true&access_token=pk.eyJ1IjoiamNnMDAzOSIsImEiOiJjbHZheHJ2dmgwMzA1MmltdXF1MHkxazMyIn0.O8_W4lc3PLzEhxqNh_LZbw`;
                         fetch(salida)
                         .then(respuesta => respuesta.json())
                         .then(respuesta => {
@@ -96,7 +96,7 @@ export const BuscadorEventos = () => {
     // Componente Carta
     const Carta = ({ punto, distancia}) => {
         return (
-            <Box onClick={()=>{handleOnClick(punto.id)}} className='carta' display={"flex"} flexFlow={"row"} borderWidth='1px' width={"29%"} margin={"1px"} borderRadius='lg' overflow='hidden' bg={useColorModeValue("#EDF2F7","#14151e")}>
+            <Box onClick={()=>{handleOnClick(punto.id)}} className='carta' display={"flex"} flexFlow={"row"} borderWidth='1px' width={"29%"} margin={"5px"} borderRadius='lg' overflow='hidden' bg={useColorModeValue("#EDF2F7","#14151e")} _hover={{cursor:"pointer"}}>
                 <Box key={punto.titulo} maxW='100%' margin={"4px"} >
                     <img src={punto.foto} alt={"IMAGEN:" + punto.titulo} style={{borderRadius:"10px",width:"30vw",maxHeight:"25vh"}}/>
                     <Box p='2'>
@@ -104,7 +104,7 @@ export const BuscadorEventos = () => {
                             <Badge borderRadius='full' px='2' colorScheme='teal'>
                                 New
                             </Badge>
-                            <Badge display={"flex"} alignContent={"right"} textAlign={"right"} color='gray.400' borderRadius={"5px"} fontSize="small">
+                            <Badge display={"flex"} alignContent={"right"} textAlign={"right"} color='gray.400' borderRadius={"5px"} fontSize="small" marginLeft={"1vw"}>
                                 {punto.fecha_inicio}
                             </Badge>
                         </Box>
@@ -227,7 +227,6 @@ export const BuscadorEventos = () => {
     }
 
     if (error) return <p>Error!</p>;
-    console.log(eventos)
     return (
         <>
             <Center display={"flex"} flexFlow={"row wrap"} marginTop={"10vh"} borderWidth={"1px"} borderRadius={"10px"} boxShadow={"0px 0px 1px black"} zIndex={2}>
@@ -242,7 +241,8 @@ export const BuscadorEventos = () => {
                         border: "1px solid black",
                         alignItems: "center",
                         textAlign: "center",
-                    }} width={"12vw"} fontSize={"2vh"} marginRight={"10px"} defaultValue={"Todo"} >
+                    }} width={"12vw"} fontSize={"2vh"} marginRight={"10px"}>
+                    <option value={"-"}>Todo</option>
                     <option value='5'>5</option>
                     <option value='10'>10</option>
                     <option value='15'>15</option>

@@ -30,4 +30,4 @@ Route::get('/perfil', function () {
 Route::get("/api/lista",[ControllerEvento::class, 'get_all']);
 
 Route::get('/api/evento/{id}',[ControllerEvento::class, 'show']);
-
+Route::get('/evento/{id}',function(){return view("evento");});

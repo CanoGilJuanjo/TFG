@@ -84,7 +84,7 @@ import {
             spacing={8}>
             <Stack spacing={6}>
               <Box display={"flex"}>
-                <img src='media/logo.jpg' style={{width:"fit-content",height:"5vh",borderRadius:"100%",color:useColorModeValue('gray.700', 'white')}}  />
+                <img src='../media/logo.jpg' style={{width:"fit-content",height:"5vh",borderRadius:"100%",color:useColorModeValue('gray.700', 'white')}}  />
                 <Text fontSize={'sm'}>© 2024 Tech Experience Creators. All rights reserved</Text>
               </Box>
               <Stack direction={'row'} spacing={6}>

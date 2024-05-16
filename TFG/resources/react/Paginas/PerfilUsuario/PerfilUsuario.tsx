@@ -95,7 +95,7 @@ export const PerfilUsuario = () => {
   window.onresize = anchoInnerS;
   return (
     <>
-      <div style={{ maxWidth: "600px", margin: "20px auto", padding: "20px", border: "1px solid #ccc", borderRadius: "10px", boxShadow: "1px 1px 8px black" }}>
+      <div style={{ maxWidth: "600px", margin: "20px auto", padding: "20px", border: "1px solid #ccc", borderRadius: "10px", boxShadow: "1px 1px 8px black" ,marginTop:"10vh"}}>
         <img style={{
           width: "150px", height: "150px", borderRadius: "50%", margin: "0 auto 20px", display: "block"
         }} src="media/user.png" alt="Foto de perfil" />

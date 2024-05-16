@@ -44,9 +44,9 @@ export default function Contactos() {
                         <Wrap spacing={{ base: 20, sm: 3, md: 5, lg: 20 }}>
                             <WrapItem>
                                 <Box>
-                                    <Heading>Contact</Heading>
+                                    <Heading>Contacto</Heading>
                                     <Text mt={{ sm: 3, md: 3, lg: 5 }} color="gray.500">
-                                        Fill up the form below to contact
+                                        Rellena los campos
                                     </Text>
                                     <Box py={{ base: 5, sm: 5, md: 8, lg: 10 }}>
                                         <VStack pl={0} spacing={3} alignItems="flex-start">
@@ -78,7 +78,7 @@ export default function Contactos() {
                                                 color="#DCE2FF"
                                                 _hover={{ border: '2px solid #000000' }}
                                                 leftIcon={<MdLocationOn color="#FFF" size="20px" />}>
-                                                Karnavati, India
+                                                Málaga, España
                                             </Button>
                                         </VStack>
                                     </Box>
@@ -119,7 +119,7 @@ export default function Contactos() {
                                     <Box m={8} color={useColorModeValue('#000', '#FFF ')}>
                                         <VStack spacing={5}>
                                             <FormControl id="name">
-                                                <FormLabel>Your Name</FormLabel>
+                                                <FormLabel>Nombre</FormLabel>
                                                 <InputGroup borderColor="#E0E1E7">
                                                     <InputLeftElement
                                                         pointerEvents="none"
@@ -128,7 +128,7 @@ export default function Contactos() {
                                                 </InputGroup>
                                             </FormControl>
                                             <FormControl id="name">
-                                                <FormLabel>Mail</FormLabel>
+                                                <FormLabel>Correo</FormLabel>
                                                 <InputGroup borderColor="#E0E1E7">
                                                     <InputLeftElement
                                                         pointerEvents="none"
@@ -137,7 +137,7 @@ export default function Contactos() {
                                                 </InputGroup>
                                             </FormControl>
                                             <FormControl id="name">
-                                                <FormLabel>Message</FormLabel>
+                                                <FormLabel>Mensaje</FormLabel>
                                                 <Textarea
                                                     borderColor="gray.300"
                                                     _hover={{
@@ -151,7 +151,7 @@ export default function Contactos() {
                                                     bg={useColorModeValue('#1A202C', '#EDF2F7')}
                                                     color={useColorModeValue('#FFF', '#000')}
                                                     _hover={{}}>
-                                                    Send Message
+                                                    Enviar
                                                 </Button>
                                             </FormControl>
                                         </VStack>
