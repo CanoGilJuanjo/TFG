@@ -207,7 +207,7 @@ export const Evento = () => {
                                                     px={6}
                                                     py={10}
                                                 >
-                                                    <List spacing={3}>
+                                                    <List spacing={3} height={"13vh"}>
                                                         <ListItem>
                                                             <ListIcon
                                                                 as={CheckIcon}
@@ -300,7 +300,7 @@ export const Evento = () => {
                                                     px={6}
                                                     py={10}
                                                 >
-                                                    <List spacing={3}>
+                                                    <List spacing={3} height={"13vh"}>
                                                         <ListItem>
                                                             <ListIcon
                                                                 as={CheckIcon}
@@ -393,7 +393,7 @@ export const Evento = () => {
                                                     px={6}
                                                     py={10}
                                                 >
-                                                    <List spacing={3}>
+                                                    <List spacing={3} height={"13vh"}>
                                                         <ListItem>
                                                             <ListIcon
                                                                 as={CheckIcon}
@@ -486,7 +486,7 @@ export const Evento = () => {
                                                     px={6}
                                                     py={10}
                                                 >
-                                                    <List spacing={3}>
+                                                    <List spacing={3} height={"13vh"}>
                                                         <ListItem>
                                                             <ListIcon
                                                                 as={CheckIcon}
@@ -506,7 +506,14 @@ export const Evento = () => {
                                                                 as={CheckIcon}
                                                                 color="green.400"
                                                             />
-                                                            Acceso a zona vip + meeting con artistas
+                                                            Acceso a zona vip
+                                                        </ListItem>
+                                                        <ListItem>
+                                                            <ListIcon
+                                                                as={CheckIcon}
+                                                                color="green.400"
+                                                            />
+                                                            Meeting con artistas
                                                         </ListItem>
                                                     </List>
 

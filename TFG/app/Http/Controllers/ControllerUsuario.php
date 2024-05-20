@@ -8,20 +8,9 @@ use Illuminate\Http\Request;
 
 class ControllerUsuario extends Controller
 {
-    public function store(Request $request)
+    public function index()
     {
-        $usuario = new Usuario;
-        $usuario -> nombre = $request -> input("nombre");
-        $usuario -> apellidos = $request -> input("apellidos");
-        $usuario -> contrasena = $request -> input("contrasena");
-        $usuario -> edad = $request -> input("edad");
-        $usuario -> email = $request -> input("email");
-        $usuario -> localizacion = "España";
-        $usuario -> nivel = 0;
-        $usuario -> telefono = $request -> input("telefono");
-        $usuario -> save();
-
-        return redirect("/");
+        return view("index");
     }
 
     public function find(string $id)

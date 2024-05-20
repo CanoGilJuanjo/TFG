@@ -29,10 +29,16 @@ Route::get('/perfil', function () {
     return view('Perfil');
 });
 
+Route::get('/evento/{id}',function() {
+    return view("evento");
+});
+
 Route::get("/api/lista",[ControllerEvento::class, 'get_all']);
 
 Route::get('/api/evento/{id}',[ControllerEvento::class, 'show']);
 
 Route::get('/api/usuario/{id}',[ControllerUsuario::class, 'find']);
 
-Route::get('/evento/{id}',function(){return view("evento");});
+Route::get("/temp", function () {
+    return view("temp");   
+});
