@@ -1,5 +1,5 @@
-import React from 'react'
-import {NavLink} from 'react-router-dom';
+import React, { useEffect, useState } from 'react'
+import {NavLink, redirect} from 'react-router-dom';
 import {
     Box,
     Flex,
@@ -23,12 +23,17 @@ interface Props {
     children: React.ReactNode
 }
 
-const Links = [['Eventos',"eventos"], /* ['Planes',"planes"], */ ['Contacto',"contactos"]]
+
+
+const Links = [['Eventos',"eventos"], ['Planes',"planes"], ['Contacto',"contactos"]]
 
 const Navbar = () => {
     const { colorMode, toggleColorMode } = useColorMode();
     const { isOpen, onOpen, onClose } = useDisclosure();
-
+    const [usuario,setUsuario] = useState(false);
+    useEffect(()=>{
+        setUsuario((localStorage.getItem("datosUsr"))?true:false);
+    })
     return (
         <>
             <Box bg={useColorModeValue('gray.100', 'gray.900')} px={4} top={0} position={'fixed'} width={'100%'} zIndex={2}>
@@ -53,28 +58,43 @@ const Navbar = () => {
                             {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
                         </Button>
                         <Menu>
-                            <MenuButton
-                                as={Button}
-                                rounded={'full'}
-                                variant={'link'}
-                                cursor={'pointer'}
-                                border={"2px solid black"}
-                                minW={0}>
-                                <Avatar
-                                    size={'sm'}
-                                    src={
-                                        "media/user.png"
-                                    }
-                                />
-                            </MenuButton>
-                            <MenuList>
-                                <NavLink to={"/perfil"}><MenuItem>Perfil</MenuItem></NavLink>
-                                <MenuItem>Configuración</MenuItem>
-                                <MenuDivider />
-                                <MenuItem>Politicas y condiciones</MenuItem>
-                                <MenuDivider/>
-                                <NavLink to={"/iniciarsesion"}><MenuItem>Cerrar Sesion</MenuItem></NavLink>
-                            </MenuList>
+                            {(!usuario)?
+                                <>
+                                    <Button as={Button}     
+                                        cursor={'pointer'}
+                                        minW={0} 
+                                        margin={"5px"}>
+                                        <NavLink to={"/crearcuenta"}>Registro</NavLink>
+                                    </Button>
+                                    <Button as={Button}     
+                                        cursor={'pointer'}
+                                        minW={0}>
+                                        <NavLink to={"/iniciarsesion"}>Iniciar Sesion</NavLink>
+                                    </Button>
+                                </>   
+                            :
+                                <>
+                                    <MenuButton
+                                        as={Button}
+                                        rounded={'full'}
+                                        variant={'link'}
+                                        cursor={'pointer'}
+                                        border={"2px solid black"}
+                                        minW={0}>
+                                        <Avatar
+                                            size={'sm'}
+                                            src={
+                                                "media/user.png"
+                                            }
+                                        />
+                                    </MenuButton>
+                                    <MenuList>
+                                        <NavLink to={"/perfil"}><MenuItem>Perfil</MenuItem></NavLink>
+                                        <MenuDivider/>
+                                        <NavLink to={"/iniciarsesion"}><MenuItem>Cerrar Sesion</MenuItem></NavLink>
+                                    </MenuList>
+                                </>
+                            }
                         </Menu>
                     </Flex>
                 </Flex>

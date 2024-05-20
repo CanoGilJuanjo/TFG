@@ -73,9 +73,9 @@ export const BuscadorEventos = () => {
                         fetch(salida)
                         .then(respuesta => respuesta.json())
                         .then(respuesta => {
-                            let distancia = 0;
+                            let distancia:any = 0;
                             if(respuesta.code && respuesta.code == "InvalidInput"){
-                                distancia = 0
+                                distancia = false;
                             }else{
                                 distancia = Math.round(respuesta.routes[0].distance);
                             }
@@ -120,7 +120,7 @@ export const BuscadorEventos = () => {
                             {punto.titulo}
                         </Box>
                         <Box>
-                            Esta a {(Math.round(distancia / 1000))==0? distancia / 1000:Math.round(distancia / 1000)} km
+                            Esta a {(distancia)?(Math.round(distancia / 1000))==0? distancia / 1000:Math.round(distancia / 1000):"-"} km
                         </Box>
                         <Box as='span' color='green.500' fontSize='sm'>
                             Precio: {punto.precio?punto.precio+" €":"GRATIS"} 
