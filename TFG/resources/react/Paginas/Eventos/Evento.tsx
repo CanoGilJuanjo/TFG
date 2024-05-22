@@ -60,7 +60,14 @@ export const Evento = () => {
             });
     }, []);
 
-    if (loading) return <Spinner color={useColorModeValue("black","blue.100")} marginTop={"10vh"} marginBottom={"50px"}></Spinner>
+    if (loading)
+        return (
+            <Spinner
+                color={useColorModeValue("black", "blue.100")}
+                marginTop={"10vh"}
+                marginBottom={"50px"}
+            ></Spinner>
+        );
 
     if (error) return <p>Error!</p>;
 
@@ -72,7 +79,7 @@ export const Evento = () => {
                 charSet="UTF-8"
                 href="../../../css/evento.css"
             />
-            <div style={{marginTop:"10vh"}}>
+            <div style={{ marginTop: "10vh" }}>
                 <div>
                     <div key={eventos?.id}>
                         <div style={{ width: "100%", height: "500px" }}>
@@ -91,10 +98,10 @@ export const Evento = () => {
                                     area={"img"}
                                 >
                                     <img
-                                        src={"../"+eventos?.foto}
+                                        src={"../" + eventos?.foto}
                                         alt="Imagen del evento"
                                         width={"800vw"}
-                                        style={{borderRadius:"10px"}}
+                                        style={{ borderRadius: "10px" }}
                                     />
                                 </GridItem>
                                 <GridItem
@@ -220,7 +227,8 @@ export const Evento = () => {
                                                                 as={CloseIcon}
                                                                 color="red.400"
                                                             />
-                                                            Pulsera para entrar y salir
+                                                            Pulsera para entrar
+                                                            y salir
                                                         </ListItem>
                                                         <ListItem>
                                                             <ListIcon
@@ -230,7 +238,7 @@ export const Evento = () => {
                                                             Acceso a zona vip
                                                         </ListItem>
                                                     </List>
-
+                                                    {/* Boton de compra */}
                                                     <Button
                                                         mt={10}
                                                         w={"full"}
@@ -313,7 +321,8 @@ export const Evento = () => {
                                                                 as={CheckIcon}
                                                                 color="green.400"
                                                             />
-                                                            Pulsera para entrar y salir
+                                                            Pulsera para entrar
+                                                            y salir
                                                         </ListItem>
                                                         <ListItem>
                                                             <ListIcon
@@ -406,7 +415,8 @@ export const Evento = () => {
                                                                 as={CheckIcon}
                                                                 color="green.400"
                                                             />
-                                                            Pulsera para entrar y salir
+                                                            Pulsera para entrar
+                                                            y salir
                                                         </ListItem>
                                                         <ListItem>
                                                             <ListIcon
@@ -499,14 +509,16 @@ export const Evento = () => {
                                                                 as={CheckIcon}
                                                                 color="green.400"
                                                             />
-                                                            Pulsera para entrar y salir
+                                                            Pulsera para entrar
+                                                            y salir
                                                         </ListItem>
                                                         <ListItem>
                                                             <ListIcon
                                                                 as={CheckIcon}
                                                                 color="green.400"
                                                             />
-                                                            Acceso a zona vip + meeting con artistas
+                                                            Acceso a zona vip +
+                                                            meeting con artistas
                                                         </ListItem>
                                                     </List>
 
