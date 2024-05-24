@@ -60,17 +60,21 @@ const Navbar = () => {
                         <Menu>
                             {(!usuario)?
                                 <>
-                                    <Button as={Button}     
-                                        cursor={'pointer'}
-                                        minW={0} 
-                                        margin={"5px"}>
-                                        <NavLink to={"/crearcuenta"}>Registro</NavLink>
-                                    </Button>
-                                    <Button as={Button}     
-                                        cursor={'pointer'}
-                                        minW={0}>
-                                        <NavLink to={"/iniciarsesion"}>Iniciar Sesion</NavLink>
-                                    </Button>
+                                    <NavLink to={"/crearcuenta"}>
+                                        <Button    
+                                            cursor={'pointer'}
+                                            minW={0} 
+                                            margin={"5px"}>
+                                            Registro
+                                        </Button>
+                                    </NavLink>
+                                    <NavLink to={"/iniciarsesion"}>
+                                        <Button     
+                                            cursor={'pointer'}
+                                            minW={0}>
+                                            Iniciar Sesion
+                                        </Button>
+                                    </NavLink>
                                 </>   
                             :
                                 <>
