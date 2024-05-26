@@ -17,7 +17,7 @@ import { useRef, useState } from 'react'
 import emailjs from '@emailjs/browser';
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons'
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { Form, NavLink } from 'react-router-dom';
 
 export const CrearCuenta = () => {
   const [showPassword, setShowPassword] = useState(false)
@@ -40,44 +40,45 @@ export const CrearCuenta = () => {
   const form = useRef()
   const sendEmail = (e) => {
     e.preventDefault();
-    emailjs.sendForm('service_4ya1sj1', 'template_42m8ppc', form.current ,{
-        publicKey: 'oCt0CQBlW7L6A3Vh4',
-      })
-    .then(
-      () => {
-        console.log('SUCCESS!');
-      },
-      (error) => {
-        console.log('FAILED...', error.text);
-      },
-    );
+    emailjs.sendForm('service_4ya1sj1', 'template_42m8ppc', form.current, {
+      publicKey: 'oCt0CQBlW7L6A3Vh4',
+    })
+      .then(
+        () => {
+          console.log('SUCCESS!');
+        },
+        (error) => {
+          console.log('FAILED...', error.text);
+        },
+      );
   }
-    const comprobacionSend = async () => {
-      if(edad<18){
-        document.querySelector("input[name=''edad]").placeholder = "No valido"
-      }
-      if (nombre != "" && mail != "") {
-        //Enviamos el mail
-      }
+  const comprobacionSend = async () => {
+    if (edad < 18) {
+      document.querySelector("input[name=''edad]").placeholder = "No valido"
     }
-    return (
-      <Flex
-        minH={'100vh'}
-        align={'center'}
-        justify={'center'}
-        bg={useColorModeValue('gray.50', 'gray.800')}>
-        <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
-          <Stack align={'center'}>
-            <Heading fontSize={'4xl'} textAlign={'center'}>
-              Crear cuenta
-            </Heading>
-          </Stack>
-          <Box
-            rounded={'lg'}
-            bg={useColorModeValue('white', 'gray.700')}
-            boxShadow={'lg'}
-            p={8}>
-            <Stack spacing={4} ref={form}>
+    if (nombre != "" && mail != "") {
+      //Enviamos el mail
+    }
+  }
+  return (
+    <Flex
+      minH={'100vh'}
+      align={'center'}
+      justify={'center'}
+      bg={useColorModeValue('gray.50', 'gray.800')}>
+      <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
+        <Stack align={'center'}>
+          <Heading fontSize={'4xl'} textAlign={'center'}>
+            Crear cuenta
+          </Heading>
+        </Stack>
+        <Box
+          rounded={'lg'}
+          bg={useColorModeValue('white', 'gray.700')}
+          boxShadow={'lg'}
+          p={8}>
+          <Stack spacing={4} ref={form}>
+            <form method='post' action='/'>
               <HStack>
                 <Box>
                   <FormControl id="firstName" isRequired>
@@ -133,9 +134,10 @@ export const CrearCuenta = () => {
                   Ya registrado? <NavLink style={{ color: "#80DAEB" }} to={"/iniciarsesion"}>Inicio de sesion</NavLink>
                 </Text>
               </Stack>
-            </Stack>
-          </Box>
-        </Stack>
-      </Flex>
-    )
-  }
+            </form>
+          </Stack>
+        </Box>
+      </Stack>
+    </Flex>
+  )
+}

@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('sessions', function (Blueprint $table) {
-            $table->id();
-            $table->string("payload", 500);
+            $table->string("id",500);
+            $table->string("payload", 800);
             $table->integer("last_activity");
             $table->string("user_id", 500);
             $table->string("ip_address", 500);

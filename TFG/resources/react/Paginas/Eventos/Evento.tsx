@@ -98,7 +98,9 @@ export const Evento = () => {
                                     area={"img"}
                                 >
                                     <img
+
                                         src={"../" + eventos?.foto}
+
                                         alt="Imagen del evento"
                                         width={"800vw"}
                                         style={{ borderRadius: "10px" }}

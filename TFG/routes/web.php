@@ -30,6 +30,9 @@ Route::get('/iniciarsesion', function () {
 Route::get('/perfil', function () {
     return view('Perfil');
 });
+Route::get("/planes",function(){
+    return view("Planes");
+});
 
 Route::get("/api/lista", [ControllerEvento::class, 'get_all']);
 

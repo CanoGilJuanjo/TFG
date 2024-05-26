@@ -44,7 +44,7 @@ export const BuscadorEventos = () => {
     function  buscarExiste(nombre,array){
         let salida = false;
         for(let i = 0; i< array.length && !salida ;i++){
-            if(array[i].includes(nombre)){
+            if(JSON.parse(array[i]).punto.titulo === (nombre)/*  && array[i].titulo === nombre */){
                 salida = true;
             }
         }
@@ -73,9 +73,9 @@ export const BuscadorEventos = () => {
                         fetch(salida)
                         .then(respuesta => respuesta.json())
                         .then(respuesta => {
-                            let distancia = 0;
+                            let distancia:any = 0;
                             if(respuesta.code && respuesta.code == "InvalidInput"){
-                                distancia = 0
+                                distancia = false;
                             }else{
                                 distancia = Math.round(respuesta.routes[0].distance);
                             }
@@ -93,12 +93,20 @@ export const BuscadorEventos = () => {
         }        
     },[eventos,datos])
     
+    //Calculo ancho
+    const [anchoInner,setAncho] = useState(window.innerWidth);
+    const anchoInnerS = ()=>{
+        setAncho(window.innerWidth);
+    }
+    //Control para el ancho
+    window.onresize = anchoInnerS;
+
     // Componente Carta
     const Carta = ({ punto, distancia}) => {
         return (
-            <Box onClick={()=>{handleOnClick(punto.id)}} className='carta' display={"flex"} flexFlow={"row"} borderWidth='1px' width={"29%"} margin={"5px"} borderRadius='lg' overflow='hidden' bg={useColorModeValue("#EDF2F7","#14151e")} _hover={{cursor:"pointer"}}>
+            <Box onClick={()=>{handleOnClick(punto.id)}} className='carta' display={"flex"} flexFlow={"row"} borderWidth='1px' minWidth={"100px"} width={`${anchoInner<850?"50%":"29%"}`} margin={"5px"} borderRadius='lg' overflow='hidden' bg={useColorModeValue("#EDF2F7","#14151e")} _hover={{cursor:"pointer",boxShadow:`1px 1px 5px ${useColorModeValue("black","white")}` }}>
                 <Box key={punto.titulo} maxW='100%' margin={"4px"} >
-                    <img src={punto.foto} alt={"IMAGEN:" + punto.titulo} style={{borderRadius:"10px",width:"30vw",maxHeight:"25vh"}}/>
+                    <img src={punto.foto} alt={"IMAGEN:" + punto.titulo} style={{width:`${anchoInner<850?'50vw':'30vw'}`,borderRadius:"10px",maxHeight:"40vh",height:"40vh"}} height={"40vh"} loading='lazy'/>
                     <Box p='2'>
                         <Box display='flex' alignItems='baseline'>
                             <Badge borderRadius='full' px='2' colorScheme='teal'>
@@ -112,7 +120,7 @@ export const BuscadorEventos = () => {
                             {punto.titulo}
                         </Box>
                         <Box>
-                            Esta a {(Math.round(distancia / 1000))==0? distancia / 1000:Math.round(distancia / 1000)} km
+                            Esta a {(distancia)?(Math.round(distancia / 1000))==0? distancia / 1000:Math.round(distancia / 1000):"-"} km
                         </Box>
                         <Box as='span' color='green.500' fontSize='sm'>
                             Precio: {punto.precio?punto.precio+" €":"GRATIS"} 
@@ -134,8 +142,6 @@ export const BuscadorEventos = () => {
     };
 
     //Filtro de distancia
-    const [distanciaMaxima, setDistanciaMaxima] = React.useState(0);
-    const [cartas, setCartas] = useState([]);
     //Busca la distancia en las cartas y si coincide con la distancia a filtrar la esconde
     function filtrarDistancia(){
         let distancia:any = document.querySelector("select")?.value;
@@ -185,7 +191,7 @@ export const BuscadorEventos = () => {
             if(precioMin>0){
                 for(let i of cartaLista){
                     if( 
-                        (parseFloat(i.children[0].children[1].children[3].innerHTML.split(" ")[1]) < precioMin && i.classList[i.classList.length-1] != "escondido") ||
+                        (parseFloat(i.children[0].children[1].children[3].innerHTML.split(" ")[1]) < precioMin && i.classList[i.classList.length-1] !== "escondido") ||
                         (i.children[0].children[1].children[3].innerHTML.split(" ")[1] == "GRATIS" && precioMin>0)
                     ){   
                         i.className = i.className+" escondido";
@@ -195,7 +201,7 @@ export const BuscadorEventos = () => {
             }
             if(precioMax>0){
                 for(let i of cartaLista){
-                    if(parseFloat(i.children[0].children[1].children[3].innerHTML.split(" ")[1])>precioMax && i.classList[i.classList.length-1] != "escondido"){
+                    if(parseFloat(i.children[0].children[1].children[3].innerHTML.split(" ")[1])>precioMax && i.classList[i.classList.length-1] !== "escondido"){
                         i.className = i.className+" escondido";
                         i.style.display = "none";
                     }
@@ -212,7 +218,7 @@ export const BuscadorEventos = () => {
         if(nombre != ""){
             let cartaLista = document.querySelectorAll(".carta")
             for(let carta of cartaLista){
-                if(!carta.children[0].children[1].children[1].innerHTML.toUpperCase().includes(nombre.toUpperCase())){
+                if(carta.className[carta.className.length-1] !== "escondido" && !carta.children[0].children[1].children[1].innerHTML.toUpperCase().includes(nombre.toUpperCase())){
                     carta.className += " escondido";
                     carta.style.display = "none"
                 }
@@ -259,7 +265,7 @@ export const BuscadorEventos = () => {
             {isLoading?
                 <Spinner color={useColorModeValue("black","blue.100")} marginTop={"50px"} marginBottom={"50px"} />
             :
-                <Center id='lista' style={{ display: 'flex', flexFlow: "row wrap", textAlign: "center",width:"100%"}}>
+                <Center id='lista' display={"flex"} flexFlow={anchoInner<850?"column wrap":"row wrap"} style={{textAlign: "center",width:"100%"}}>
                     {
                         datos.map(respuesta => {
                             respuesta = JSON.parse(respuesta);

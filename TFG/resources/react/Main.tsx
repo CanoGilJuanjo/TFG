@@ -10,8 +10,9 @@ import { ContrasenaOlvidada } from "./Paginas/InicioSesion-CrearCuenta/Contrasen
 import IniciarSesion from "./Paginas/InicioSesion-CrearCuenta/IniciarSesion";
 import { PerfilUsuario } from "./Paginas/PerfilUsuario/PerfilUsuario";
 import { Evento } from "./Paginas/Eventos/Evento";
-import FooterComponent from "./Paginas/componentesComunes/FooterComponente";
-import Index from "./Paginas/Indice/index";
+
+import { CreadorPlanes } from "./Paginas/Planes/CreadorPlanes";
+
 
 function Main() {
     return (
