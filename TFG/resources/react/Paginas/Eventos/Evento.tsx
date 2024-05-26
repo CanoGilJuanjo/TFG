@@ -103,7 +103,7 @@ export const Evento = () => {
 
                                         alt="Imagen del evento"
                                         width={"800vw"}
-                                        style={{ borderRadius: "10px" }}
+                                        style={{borderRadius:"10px",maxHeight:"70vh",maxWidth:"40vw"}}
                                     />
                                 </GridItem>
                                 <GridItem

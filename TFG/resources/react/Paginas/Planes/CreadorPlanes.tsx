@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react';
 import {  Pagination, Scrollbar, Autoplay } from 'swiper/modules';
-import { Button, Divider, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, useDisclosure, Text, Input } from '@chakra-ui/react'
+import { Button, Divider, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, useDisclosure, Text, Input, Heading } from '@chakra-ui/react'
 import { DeleteIcon, InfoIcon, Search2Icon } from '@chakra-ui/icons'
 import DatePicker from "react-datepicker"
 import "react-datepicker/dist/react-datepicker.css"
@@ -120,10 +120,10 @@ export const CreadorPlanes = () => {
   if (error) return (<div>Error inesperado</div>)
   return (
     <div style={{ marginTop: "12vh" }}>
-      <h1 style={{ fontSize: "200%" }}>Eventos disponibles <InfoIcon style={{ fontSize: "50%"}} _hover={{ cursor: "pointer" }}  onClick={() => {
+      <Heading style={{ fontSize: "200%" }}>Eventos disponibles <InfoIcon style={{ fontSize: "50%"}} _hover={{ cursor: "pointer" }}  onClick={() => {
           setOverlay(<OverlayOne />)
           onOpen()
-        }}></InfoIcon></h1>
+        }}></InfoIcon></Heading>
       <Modal isCentered isOpen={isOpen} onClose={onClose}>
         {overlay}
         <ModalContent>
@@ -134,7 +134,6 @@ export const CreadorPlanes = () => {
               En esta pagina puede crear un plan personalizado para realizar a medida.<br/>Para añadir un evento al plan que este realizando, puede darle click al evento y se añadira automaticamente a su plan.<br/>
               <img src='../media/evento.png' style={{borderRadius:"20px"}} loading='lazy'></img>
               Una vez el evento haya sido añadido aparecera información referente a este evento. Tiene que tener en cuenta la fecha en la que comienza cada evento para organizar su plan de la mejor manera posible.
-              
             </Text>
           </ModalBody>
           <ModalFooter>
@@ -171,7 +170,7 @@ export const CreadorPlanes = () => {
         {(planes.length>0)?
           planes.map(evento=>{
             return(
-              <div style={{display:"flex",justifyContent:"center",marginBottom:"3vh"}}>
+              <div style={{display:"flex",justifyContent:"center",marginBottom:"3vh",width:"auto"}}>
                 <div style={{alignContent: "center",justifyContent:"space-between",justifyItems: "center",width:"70vw",justifySelf:"center",display:"grid", /* border:`1px solid ${useColorModeValue("black","white")}`, */borderRadius:"20px",gridTemplateAreas:(anchoInner<850)?`"foto foto foto" "contenido contenido contenido"`:`"foto contenido contenido""foto contenido contenido"`}}>
                   <img src={evento.foto} alt="" style={{margin:"5px",width: `${anchoInner < 850 ? '50vw' : '30vw'}`,border:`1px solid ${useColorModeValue("black","white")}`,maxHeight: "40vh", height: "40vh",borderRadius:"20px", gridArea:"foto"}} />
                   <div style={{gridArea:"contenido",width:"100%"}}>
@@ -189,8 +188,6 @@ export const CreadorPlanes = () => {
                       :
                       ""
                       }
-                      <p>Descripcion: {evento.descripcion}</p>
-                      <br />
                       <Button justifySelf={"left"} className='eliminar' onClick={()=>{borrarPlan(evento.titulo)}}><DeleteIcon></DeleteIcon></Button>
                     </form>
                   </div> 
