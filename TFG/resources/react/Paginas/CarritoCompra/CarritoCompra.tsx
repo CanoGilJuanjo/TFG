@@ -43,59 +43,64 @@ export interface Evento {
 }
 
 export default function CarritoCompra() {
-    const id_usuario = localStorage.getItem('idUsr');
-
-    const apiEntrada = `http://localhost:8000/api/eventoentrada/${id_usuario}`;
-
-    const [entrada, setEntrada] = useState<Entradas>();
-
-    useEffect(() => {
-        fetch(apiEntrada)
-            .then((response) => response.json())
-            .then((data) => {
-                setEntrada(data);
-                setLoading(false);
-            })
-            .catch((error) => {
-                setError(error);
-                setLoading(false);
-            });
-    }, []);
-
-    const apiEvento = `http://localhost:8000/api/evento/${entrada?.id_evento}`;
-
-    const [eventos, setEventos] = useState<Evento>();
-
-    useEffect(() => {
-        fetch(apiEvento)
-            .then((response) => response.json())
-            .then((data) => {
-                setEventos(data);
-                setLoading(false);
-            })
-            .catch((error) => {
-                setError(error);
-                setLoading(false);
-            });
-    }, []);
-
     const [entradas, setEntradas] = useState<Entradas[]>([]);
 
     const [loading, setLoading] = useState(true);
 
-      
+    const id_usuario = localStorage.getItem('idUsr');
 
     const [error, setError] = useState(null);
 
     const apiEntradas = `http://localhost:8000/api/entradas/${id_usuario}`;
 
-    const ContenidoCarrito = ({ precio_total, fecha_inicio, fecha_fin, cantidad }) => {
+    const [resultado, setResultado] = useState<number[]>();
+
+    const [arrayEventos, setArrayEventos] = useState<any[]>([]);
+
+    useEffect(() => {
+        fetch(apiEntradas)
+            .then((response) => response.json())
+            .then((data) => {
+                setEntradas(data);
+                for(let entrada of data){
+                    if(resultado?.length == 0) {
+                        console.log(entrada.id_evento);
+                        setResultado(entrada.id_evento);
+                    } else if(!resultado?.includes(entrada.id_evento)){
+                        
+                        setResultado([...resultado, entrada.id_evento]);
+                    }
+                }
+                
+                
+
+                resultado?.map((id_evento) => {
+                    fetch(`http://localhost:8000/api/evento/${id_evento}`)
+                        .then((response) => response.json())
+                        .then((data) => {
+                            setArrayEventos([...arrayEventos, data]);
+                            console.log(arrayEventos);
+                            
+                        })
+                        .catch((error) => {
+                            setError(error);
+                        });
+                })
+                setLoading(false);
+            })
+            .catch((error) => {
+                setError(error);
+                setLoading(false);
+            });
+    }, []);
+
+    const ContenidoCarrito = ({ precio_total, fecha_inicio, fecha_fin, cantidad, id_evento }) => {
         const fecha = fecha_inicio === fecha_fin ? fecha_inicio : `${fecha_inicio} - ${fecha_fin}`;
         return (
             <>
                 <Tr>
-                    <Td>{eventos?.foto}</Td>
-                    <Td>{eventos?.titulo}</Td>
+                    <Td>{arrayEventos[arrayEventos.indexOf(id_evento)].foto}</Td>
+                    <Td>{arrayEventos[arrayEventos.indexOf(id_evento)].titulo}</Td>
                     <Td>{fecha}</Td>
                     <Td>{precio_total}</Td>
                     <Td>{cantidad * precio_total}</Td>
@@ -104,11 +109,15 @@ export default function CarritoCompra() {
         );
     };
 
+    const apiEntrada = `http://localhost:8000/api/evento/${id_usuario}`;
+
+    const [eventos, setEventos] = useState<Evento>();
+
     useEffect(() => {
-        fetch(apiEntradas)
+        fetch(apiEntrada)
             .then((response) => response.json())
             .then((data) => {
-                setEntradas(data);
+                setEventos(data);
                 setLoading(false);
             })
             .catch((error) => {
@@ -138,6 +147,7 @@ export default function CarritoCompra() {
                                             fecha_fin={data.fecha_fin} 
                                             precio_total={data.precio_total}
                                             cantidad={data.cantidad}
+                                            id_evento={data.id_evento}
                                         ></ContenidoCarrito>
                                     );     
                         })}
