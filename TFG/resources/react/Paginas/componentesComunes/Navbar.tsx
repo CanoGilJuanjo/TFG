@@ -52,6 +52,11 @@ const Navbar = () => {
                         <Button onClick={toggleColorMode} m="4">
                             {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
                         </Button>
+                        <Button m="3" ml={"-2"}>
+                            <NavLink to={"/carritoCompra"}>
+                                <img src="../../../../../media/carro-de-la-compra.png" alt="" width={"24px"} />
+                            </NavLink>
+                        </Button>
                         <Menu>
                             <MenuButton
                                 as={Button}

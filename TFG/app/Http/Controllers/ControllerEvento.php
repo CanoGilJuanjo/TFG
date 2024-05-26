@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Eventos;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ControllerEvento extends Controller
 {

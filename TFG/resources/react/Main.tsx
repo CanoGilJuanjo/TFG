@@ -11,6 +11,7 @@ import { PerfilUsuario } from "./Paginas/PerfilUsuario/PerfilUsuario";
 import { Evento } from "./Paginas/Eventos/Evento";
 import FooterComponent from './Paginas/componentesComunes/FooterComponente';
 import Index from './Paginas/Indice/index';
+import CarritoCompra from "./Paginas/CarritoCompra/CarritoCompra";
 
 
 function Main() {
@@ -36,6 +37,7 @@ function Main() {
                                     <Route path="/eventos" element={<BuscadorEventos/>} />
                                     <Route path="/evento/:id" element={<Evento/>} />
                                     <Route path="/perfil" element={<PerfilUsuario></PerfilUsuario>}></Route>
+                                    <Route path="/carritoCompra" element={<CarritoCompra></CarritoCompra>}></Route>
                                 </Routes>
                             </div>
                         </main>

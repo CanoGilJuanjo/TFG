@@ -26,6 +26,7 @@ export const CrearCuenta = () => {
     const [edad, setEdad] = useState(0);
     const [mail, setMail] = useState("");
     const [telefono, setTelefono] = useState("");
+    const [error, setError] = useState("");
 
     const apellidoS = (e) => {
         setApellido(e.target.value);
@@ -55,9 +56,10 @@ export const CrearCuenta = () => {
       },
       (error) => {
         console.log('FAILED...', error.text);
+        setError("Error, el email ya existe.");
       },
-    );
-  } */
+    ); 
+  }*/
     /* const comprobacionSend = async () => {
       if(edad<18){
         document.querySelector("input[name=''edad]").placeholder = "No valido";
@@ -121,6 +123,7 @@ export const CrearCuenta = () => {
                         <FormControl id="email" isRequired>
                             <FormLabel>Correo Electronico</FormLabel>
                             <Input type="email" name="mail" onChange={mailS} />
+                            {error && (<Text>Error, el email ya existe.{/* {error} */}</Text>)}
                         </FormControl>
                         <FormControl id="password" isRequired>
                             <FormLabel>Contraseña</FormLabel>

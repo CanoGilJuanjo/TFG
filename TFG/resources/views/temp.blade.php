@@ -40,11 +40,44 @@
         
         $conexion -> query($sql);
 
-        session_start();
-        $_SESSION["mail"] = $mail;
+        $sql = "SELECT id FROM usuarios WHERE email = '$mail'";
+
+        $result = $conexion->query($sql);
+
+        if ($result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+            $id_usuario = $row['id'];
+        }
+
+        $sql = "INSERT INTO carrito(id, precio_total, id_usuario)
+            Values(null, 0, '$id_usuario')";
+        
+        $conexion -> query($sql);
+
+        $sql = "SELECT id FROM carrito WHERE id_usuario = '$id_usuario'";
+        
+        $result = $conexion -> query($sql);
+        
+
+        if ($row = $result->fetch_assoc()) { ?>
+            <script>
+                localStorage.setItem("idCarrito", <?php echo $row['id'] ?>);
+            </script>
+        <?php
+        }
+
+        $sql = "SELECT id, email, contrasena FROM usuarios WHERE email = '$mail' AND contrasena = '$contrasena'";
+
+        $result = $conexion->query($sql);
+        if ($row = $result->fetch_assoc()) { ?>
+            <script>
+                localStorage.setItem("idUsr", "<?php echo $row["id"]; ?>");
+                localStorage.setItem("emailUsr", "<?php echo $mail; ?>");
+                localStorage.setItem("contrasenaUsr", "<?php echo $contrasena; ?>");
+                location.href = "/";
+            </script>
+        <?php
+        }
         ?>
-        <script>
-            location.href = "/";
-        </script>
     </body>
 </html>
