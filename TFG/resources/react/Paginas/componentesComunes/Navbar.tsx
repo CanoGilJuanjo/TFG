@@ -30,10 +30,7 @@ const Links = [['Eventos',"eventos"], ['Planes',"planes"], ['Contacto',"contacto
 const Navbar = () => {
     const { colorMode, toggleColorMode } = useColorMode();
     const { isOpen, onOpen, onClose } = useDisclosure();
-    const [usuario,setUsuario] = useState(false);
-    useEffect(()=>{
-        setUsuario((localStorage.getItem("datosUsr"))?true:false);
-    })
+    const usuario = (localStorage.getItem("idUsr") == null || localStorage.getItem("idUsr") == "")? null: localStorage.getItem("idUsr");
     return (
         <>
             <Box bg={useColorModeValue('gray.100', 'gray.900')} px={4} top={0} position={'fixed'} width={'100%'} zIndex={2}>

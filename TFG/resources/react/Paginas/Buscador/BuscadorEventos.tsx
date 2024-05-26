@@ -29,7 +29,7 @@ export const BuscadorEventos = () => {
 
     const apiURL = "http://localhost:8000/api/lista"
     const [eventos, setEventos] = useState<Eventos>([]);
-
+    const [maxViews,setMaxvies] = useState(5);
     //Loading
     const [isLoading,setLoading] = useState(true);
 
@@ -79,10 +79,10 @@ export const BuscadorEventos = () => {
                             }else{
                                 distancia = Math.round(respuesta.routes[0].distance);
                             }
-                            if(!buscarExiste(eventos[i].titulo,datos)){
+                            if(!buscarExiste(eventos[i].titulo,datos) && datos.length <= maxViews){
                                 setDatos([...datos,JSON.stringify({ punto: eventos[i], distancia: distancia})])   
                             }
-                            if(datos.length == eventos.length){
+                            if(datos.length == maxViews){
                                 setLoading(false)
                             }
                         }) 
@@ -91,7 +91,7 @@ export const BuscadorEventos = () => {
         }catch(error){
             console.log(error);
         }        
-    },[eventos,datos])
+    },[eventos,datos,maxViews])
     
     //Calculo ancho
     const [anchoInner,setAncho] = useState(window.innerWidth);
@@ -265,14 +265,24 @@ export const BuscadorEventos = () => {
             {isLoading?
                 <Spinner color={useColorModeValue("black","blue.100")} marginTop={"50px"} marginBottom={"50px"} />
             :
-                <Center id='lista' display={"flex"} flexFlow={anchoInner<850?"column wrap":"row wrap"} style={{textAlign: "center",width:"100%"}}>
-                    {
-                        datos.map(respuesta => {
-                            respuesta = JSON.parse(respuesta);
-                            return (<Carta key={respuesta.nombre} punto={respuesta.punto} distancia={respuesta.distancia}/>)
-                        })
-                    }
-                </Center>
+                <>
+                    <Center id='lista' display={"flex"} flexFlow={anchoInner<850?"column wrap":"row wrap"} style={{textAlign: "center",width:"100%"}}>
+                        {
+                            datos.map(respuesta => {
+                                respuesta = JSON.parse(respuesta);
+                                return (<Carta key={respuesta.nombre} punto={respuesta.punto} distancia={respuesta.distancia}/>)
+                            })
+                        }
+                    </Center>
+                    <p id='mas' style={{color:"lightblue",cursor:"pointer",margin:"5vh"}} onClick={()=>{(maxViews+5 <= eventos.length)?
+                                                                                                        (()=>{
+                                                                                                            setMaxvies(maxViews+5) 
+                                                                                                            setLoading(true)
+                                                                                                        })()
+                                                                                                        : 
+                                                                                                        document.querySelector("#mas").innerHTML = "No existen más eventos" 
+                                                                                                        }}>Cargar más...</p>
+                </>
             }
 
         </>
