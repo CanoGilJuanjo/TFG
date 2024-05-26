@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Mail\NombreDelMailable;
+use App\Mail\ContactMail;
 use Illuminate\Support\Facades\Mail;
+
 
 class ContactController extends Controller
 {
@@ -51,15 +52,11 @@ class ContactController extends Controller
     public function contactMail(Request $request)
     {
         /* REQUEST: MAIL, NAME, MENSAJE */
-        
-        $details = [
-            'name' => $request -> name ,
-            'mail' => $request -> mail,
-            'mensaje' => $request -> mensaje
 
-        ];
-        Mail::to('jkp0001@alu.medac.es')->send(new Contactmail($details));
-        
+
+        $name = $request->name;
+        $email = $request->email;
+        $mensaje = $request->mensaje;
+        Mail::to('techxperiencecreators@gmail.com')->send(new Contactmail($name, $email, $mensaje));
     }
-
 }
