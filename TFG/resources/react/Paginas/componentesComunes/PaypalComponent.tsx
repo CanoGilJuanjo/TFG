@@ -1,79 +1,104 @@
+import { useState, useEffect } from "react";
+import {
+	PayPalScriptProvider,
+	BraintreePayPalButtons,
+	usePayPalScriptReducer
+} from "@paypal/react-paypal-js";
 import React from "react";
-import { PayPalButtons, PayPalScriptProvider } from "@paypal/react-paypal-js";
-import { Box } from "@chakra-ui/react";
 
-interface PaypalButtonInterface {
-    totalValue: string;
-    invoice: string;
-}
+// This values are the props in the UI
+const style = {"label":"paypal","layout":"vertical"};
+const amount = "2";
 
-const PaypalComponent: React.FC<PaypalButtonInterface> = (props) => {
-    return (
-        <PayPalScriptProvider
-            options={{ "clientId": "AVZx7n8gCe07qzKYJiMnCTIf7RVr-qgyvE5NefjZtSxmksFg-T3z1NfwJ5NuOIVYm21cek--DMA7WozN", currency: "EUR" }}
-        >
-            <Box bg={"transparent"} id="paypal-button-container">
-                <PayPalButtons
-                    style={{
-                        color: "blue",
-                        shape: "pill",
-                        label: "pay",
-                        height: 40,
-                    }}
-                    createOrder={(data, actions) => {
-                        return fetch(
-                            "/demo/checkout/api/paypal/order/create/",
-                            {
-                                method: "post",
-                            }
-                        )
-                            .then((res) => res.json())
-                            .then((orderData) => orderData.id);
-                    }}
-                    onApprove={(data, actions) => {
-                        return fetch(
-                            `/demo/checkout/api/paypal/order/${data.orderID}/capture/`,
-                            {
-                                method: "post",
-                            }
-                        )
-                            .then((res) => res.json())
-                            .then((orderData) => {
-                                const errorDetail =
-                                    Array.isArray(orderData.details) &&
-                                    orderData.details[0];
-                                if (
-                                    errorDetail &&
-                                    errorDetail.issue === "INSTRUMENT_DECLINED"
-                                ) {
-                                    return actions.restart();
-                                }
-                                if (errorDetail) {
-                                    let msg =
-                                        "Sorry, your transaction could not be processed.";
-                                    if (errorDetail.description)
-                                        msg += `\n\n${errorDetail.description}`;
-                                    if (orderData.debug_id)
-                                        msg += ` (${orderData.debug_id})`;
-                                    return alert(msg);
-                                }
-                                console.log(
-                                    "Capture result",
-                                    orderData,
-                                    JSON.stringify(orderData, null, 2)
-                                );
-                                const transaction =
-                                    orderData.purchase_units[0].payments
-                                        .captures[0];
-                                alert(
-                                    `Transaction ${transaction.status}: ${transaction.id}\n\nSee console for all available details`
-                                );
-                            });
-                    }}
-                />
-            </Box>
-        </PayPalScriptProvider>
-    );
+const ButtonWrapper = ({ currency }) => {
+    const [{ options, isPending }, dispatch] = usePayPalScriptReducer();
+
+    useEffect(() => {
+        dispatch({
+            type: "resetOptions",
+            value: {
+                ...options,
+                currency: currency,
+            },
+        });
+    }, [currency]);
+
+	return (<BraintreePayPalButtons
+		disabled={false}
+		fundingSource="paypal" // Available values are: ["paypal", "card", "credit", "paylater", "venmo"]
+		forceReRender={[style, amount]}
+		createOrder={function (data, actions) {
+			return actions.braintree
+				.createPayment({
+					flow: "checkout",
+					amount: amount, // Here change the amount if needed
+					currency: "USD", // Here change the currency if needed
+					intent: "capture",
+					enableShippingAddress: true,
+					shippingAddressEditable: false,
+					shippingAddressOverride: {
+						recipientName: "Scruff McGruff",
+						line1: "1234 Main St.",
+						line2: "Unit 1",
+						city: "Chicago",
+						countryCode: "US",
+						postalCode: "60652",
+						state: "IL",
+						phone: "123.456.7890",
+					},
+				})
+				.then((orderId) => {
+					// Your code here after create the order
+					return orderId;
+				});
+		}}
+		onApprove={function (data, actions) {
+			return actions.braintree
+				.tokenizePayment(data)
+				.then((payload) => {
+					// Your code here after capture the order
+					console.log(JSON.stringify(payload));
+				});
+			}
+		}
+	/>);
 };
 
-export default PaypalComponent;
+export default function App() {
+	const [clientToken, setClientToken] = useState(null);
+
+	useEffect(() => {
+		(async () => {
+			const response = await (
+				await fetch(
+					"https://react-paypal-js-storybook.fly.dev/api/braintree/generate-client-token",
+					{ method: "POST" }
+				)
+			).json();
+			setClientToken(response?.client_token || response?.clientToken);
+		})();
+	}, []);
+
+	return (
+		<>
+			{clientToken ? (
+				<div style={{ maxWidth: "750px", minHeight: "200px" }}>
+					<PayPalScriptProvider
+						options={{
+							clientId: "test",
+							components: "buttons",
+							// dataUserIdToken: "your-tokenization-key-here",
+							dataClientToken: clientToken,
+							intent: "capture",
+							vault: false,
+						}}
+						>
+						<ButtonWrapper currency={"USD"} />
+					</PayPalScriptProvider>
+				</div>
+			) : (
+				<h1>Loading token...</h1>
+			)}
+		</>
+	);
+}

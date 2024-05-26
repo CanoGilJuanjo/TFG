@@ -16,12 +16,6 @@ import Index from "./Paginas/Indice/index";
 function Main() {
     return (
         <>
-            <PayPalScriptProvider
-                options={{
-                    clientId:
-                        "AVZx7n8gCe07qzKYJiMnCTIf7RVr-qgyvE5NefjZtSxmksFg-T3z1NfwJ5NuOIVYm21cek--DMA7WozN",
-                }}
-            >
                 <ChakraProvider>
                     <Routes>
                         <Route
@@ -85,7 +79,6 @@ function Main() {
                         ></Route>
                     </Routes>
                 </ChakraProvider>
-            </PayPalScriptProvider>
         </>
     );
 }

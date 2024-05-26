@@ -10,7 +10,6 @@ const Index = () => {
     return (
         <>
             <VideoIndex />
-            <PaypalComponent totalValue={"23"} invoice={"Entrada Normal"} />
             <Box top="90%">
                 <Text
                     textAlign={"left"}

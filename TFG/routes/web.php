@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ContactController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ControllerEvento;
 use App\Http\Controllers\ControllerUsuario;
@@ -19,6 +20,7 @@ Route::get('/contactos', function () {
     return view('Contactos');
 });
 
+
 Route::get('/crearcuenta', function () {
     return view('CrearCuenta');
 });
@@ -29,10 +31,14 @@ Route::get('/perfil', function () {
     return view('Perfil');
 });
 
-Route::get("/api/lista",[ControllerEvento::class, 'get_all']);
+Route::get("/api/lista", [ControllerEvento::class, 'get_all']);
 
-Route::get('/api/evento/{id}',[ControllerEvento::class, 'show']);
+Route::post("/contactos/mail", [ContactController::class, 'contactMail']);
 
-Route::get('/api/usuario/{id}',[ControllerUsuario::class, 'find']);
+Route::get('/api/evento/{id}', [ControllerEvento::class, 'show']);
 
-Route::get('/evento/{id}',function(){return view("evento");});
+Route::get('/api/usuario/{id}', [ControllerUsuario::class, 'find']);
+
+Route::get('/evento/{id}', function () {
+    return view("evento");
+});
