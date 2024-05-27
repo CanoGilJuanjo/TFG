@@ -1,14 +1,36 @@
 import { Box, Text } from "@chakra-ui/react";
 
-import React from "react";
-import CarrouselComponent from "../componentesComunes/CarrouselComponent";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import VideoIndex from "../componentesComunes/VideoIndex";
 import CarrouselCardsComponent from "../componentesComunes/CarrouselCardsComponenet";
+import SwiperComponent from "../componentesComunes/SwiperComponent";
+
+const recomendados = [
+    "Rosse",
+    "K2",
+    "Jaleo",
+    "Reggaeton Beach Festival",
+    "Puro Latino",
+    "SuperStar",
+];
+
+const novedades = [
+    "Pijama",
+    "Bamba Club",
+    "Burbujas",
+    "Puerto Diablos",
+    "Heaven's Gate",
+    "Coltán Fuengirola",
+];
+
+const masPopulares = [];
 
 const Index = () => {
     return (
         <>
             <VideoIndex />
+
             <Box top="90%">
                 <Text
                     textAlign={"left"}
@@ -18,7 +40,9 @@ const Index = () => {
                 >
                     Recomendados
                 </Text>
-                <CarrouselComponent></CarrouselComponent>
+                <SwiperComponent
+                    eventosMostrar={recomendados}
+                ></SwiperComponent>
                 <Text
                     textAlign={"left"}
                     fontWeight={"bold"}
@@ -37,19 +61,6 @@ const Index = () => {
                     Más populares
                 </Text>
                 {/* <CarrouselComponent /> */}
-            </Box>
-
-            <Box paddingTop={'50px'}>
-                <CarrouselCardsComponent
-                    src={
-                        "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
-                    }
-                    texto={
-                        "LoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLorem"
-                    }
-                    puntuacion={" 5/10"}
-                    place={"La Rosse"}
-                />
             </Box>
         </>
     );

@@ -122,14 +122,57 @@ export default function CarrouselComponent({}) {
                                 ></CarrouselCardsComponent>
                             </Box>
                             <Box height="80px">
-                            <CarrouselCardsComponent
-                            src={
-                                "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
-                            }
-                            texto={"dawdawd"}
-                            puntuacion={"1/10"}
-                            place={"Verde"}
-                        ></CarrouselCardsComponent>
+                                <CarrouselCardsComponent
+                                    src={
+                                        "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
+                                    }
+                                    texto={"dawdawd"}
+                                    puntuacion={"1/10"}
+                                    place={"Verde"}
+                                ></CarrouselCardsComponent>
+                            </Box>
+                        </SimpleGrid>
+                    </Container>
+                </Box>
+            </Slider>
+            <Slider ref={(slider) => setSlider(slider)}>
+                <Box height={"100%"} width={"100%"} position="relative">
+                    {/* This is the block you need to change, to customize the caption */}
+                    <Container
+                        size="container.lg"
+                        height="600px"
+                        position="relative"
+                    >
+                        <SimpleGrid minChildWidth="120px" spacing="40px">
+                            <Box height="80px">
+                                <CarrouselCardsComponent
+                                    src={
+                                        "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
+                                    }
+                                    texto={"texto"}
+                                    puntuacion={"5/10"}
+                                    place={"Rosse"}
+                                ></CarrouselCardsComponent>
+                            </Box>
+                            <Box height="80px">
+                                <CarrouselCardsComponent
+                                    src={
+                                        "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
+                                    }
+                                    texto={"eeeeee"}
+                                    puntuacion={"9/10"}
+                                    place={"Amarillo"}
+                                ></CarrouselCardsComponent>
+                            </Box>
+                            <Box height="80px">
+                                <CarrouselCardsComponent
+                                    src={
+                                        "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
+                                    }
+                                    texto={"eeeeee"}
+                                    puntuacion={"1/10"}
+                                    place={"Verde"}
+                                ></CarrouselCardsComponent>
                             </Box>
                         </SimpleGrid>
                     </Container>
