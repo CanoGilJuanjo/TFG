@@ -16,9 +16,7 @@ return new class extends Migration
             $table->decimal("precio_total");
             $table->date("fecha_inicio");
             $table->date("fecha_fin");
-            $table->unsignedBigInteger("id_entrada");
             $table->unsignedBigInteger("id_carrito");
-            $table->foreign("id_entrada")->references("id")->on("entradas");
             $table->foreign("id_carrito")->references("id")->on("carrito");
             $table->timestamps();
         });

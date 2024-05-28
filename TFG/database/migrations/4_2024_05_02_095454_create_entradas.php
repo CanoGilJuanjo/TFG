@@ -23,6 +23,8 @@ return new class extends Migration
             $table->unsignedBigInteger("id_carrito");
             $table->foreign("id_usuario")->references("id")->on("usuarios");
             $table->foreign("id_evento")->references("id")->on("eventos");
+            $table->unsignedBigInteger("id_plan");
+            $table->foreign("id_plan")->references("id")->on("plan");
             $table->foreign("id_carrito")->references("id")->on("carrito");
             $table->timestamps();
         });

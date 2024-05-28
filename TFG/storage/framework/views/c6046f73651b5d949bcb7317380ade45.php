@@ -16,9 +16,6 @@
         <?php echo app('Illuminate\Foundation\Vite')('resources/react/app.tsx'); ?>
     </head>
     <body>
-        <script>
-            (localStorage.getItem("idUsr") == null || localStorage.getItem("idUsr") == "")? location.href = "/iniciarsesion": "";
-        </script>
         <div id="app" data-projects=""></div>
     </body>
-</html><?php /**PATH C:\Users\pollo\Desktop\Trabajo\TFG\resources\views/Perfil.blade.php ENDPATH**/ ?>
+</html><?php /**PATH C:\Users\pollo\Desktop\Trabajo\TFG\resources\views/Planes.blade.php ENDPATH**/ ?>
