@@ -1,16 +1,16 @@
 import { ChakraProvider } from "@chakra-ui/react";
+import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 import React from "react";
-import  Navbar  from "./Paginas/componentesComunes/Navbar";
-import { BuscadorEventos } from './Paginas/Buscador/BuscadorEventos';
-import { Route, Routes,NavLink } from 'react-router-dom';
-import { CrearCuenta} from "./Paginas/InicioSesion-CrearCuenta/CrearCuenta";
-import  Contactos  from "./Paginas/contactos/Contactos";
-import {ContrasenaOlvidada} from "./Paginas/InicioSesion-CrearCuenta/ContrasenaOlvidada";
+import Navbar from "./Paginas/componentesComunes/Navbar";
+import { BuscadorEventos } from "./Paginas/Buscador/BuscadorEventos";
+import { Route, Routes, NavLink } from "react-router-dom";
+import { CrearCuenta } from "./Paginas/InicioSesion-CrearCuenta/CrearCuenta";
+import Contactos from "./Paginas/contactos/Contactos";
+import { ContrasenaOlvidada } from "./Paginas/InicioSesion-CrearCuenta/ContrasenaOlvidada";
 import IniciarSesion from "./Paginas/InicioSesion-CrearCuenta/IniciarSesion";
 import { PerfilUsuario } from "./Paginas/PerfilUsuario/PerfilUsuario";
 import { Evento } from "./Paginas/Eventos/Evento";
-import FooterComponent from './Paginas/componentesComunes/FooterComponente';
-import Index from './Paginas/Indice/index';
+
 import { CreadorPlanes } from "./Paginas/Planes/CreadorPlanes";
 import CarritoCompra from "./Paginas/CarritoCompra/CarritoCompra";
 

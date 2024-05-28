@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ContactController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ControllerEvento;
 use App\Http\Controllers\ControllerEntrada;
@@ -21,6 +22,7 @@ Route::get('/contactos', function () {
     return view('Contactos');
 });
 
+
 Route::get('/crearcuenta', function () {
     return view('CrearCuenta');
 });
@@ -34,11 +36,11 @@ Route::get("/planes",function(){
     return view("Planes");
 });
 
-Route::get("/api/lista",[ControllerEvento::class, 'get_all']);
+Route::get("/api/lista", [ControllerEvento::class, 'get_all']);
 
-Route::get('/api/evento/{id}',[ControllerEvento::class, 'show']);
+Route::post("/contactos/mail", [ContactController::class, 'contactMail']);
 
-Route::get('/api/usuario/{id}',[ControllerUsuario::class, 'find']);
+Route::get('/api/evento/{id}', [ControllerEvento::class, 'show']);
 
 Route::get('/evento/{id}',function(){return view("evento");});
 
@@ -63,3 +65,4 @@ Route::get('/api/entradas',[ControllerEntrada::class, 'get_all']);
 Route::get('/api/entradas/{id_usuario}',[ControllerEntrada::class, 'show']);
 
 Route::get('/api/precios',[ControllerPrecio::class, 'get_all']);
+

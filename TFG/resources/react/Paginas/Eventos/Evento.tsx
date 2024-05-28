@@ -221,7 +221,7 @@ export const Evento = () => {
                 charSet="UTF-8"
                 href="../../../css/evento.css"
             />
-            <div style={{marginTop:"10vh"}}>
+            <div style={{ marginTop: "10vh" }}>
                 <div>
                     <div key={eventos?.id}>
                         <div style={{ width: "100%", height: "500px" }}>
@@ -240,7 +240,9 @@ export const Evento = () => {
                                     area={"img"}
                                 >
                                     <img
-                                        src={eventos?.foto}
+
+                                        src={"../" + eventos?.foto}
+
                                         alt="Imagen del evento"
                                         width={"800vw"}
                                         style={{borderRadius:"10px",maxHeight:"70vh",maxWidth:"40vw"}}

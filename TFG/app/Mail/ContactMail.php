@@ -8,19 +8,24 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Mail\Message;
 
 class ContactMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $details;
+    public $name;
+    public $email;
+    public $mensaje;
 
     /**
      * Create a new message instance.
      */
-    public function __construct()
+    public function __construct($name, $email, $mensaje)
     {
-        $this->details = $details;
+        $this->name = $name;
+        $this->email = $email;
+        $this->mensaje = $mensaje;
     }
 
     /**
