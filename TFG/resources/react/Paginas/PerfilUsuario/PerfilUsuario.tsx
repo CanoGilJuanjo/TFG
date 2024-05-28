@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react'
 
 export const PerfilUsuario = () => {
   //Estos datos tienen que ser traidos de la BBDD
+  const idUsuario = (localStorage.getItem("idUsr") == "" || localStorage.getItem("idUsr") == null)? "" : localStorage.getItem("idUsr");
   const consulta =
   {
     nombre: "Pedro",

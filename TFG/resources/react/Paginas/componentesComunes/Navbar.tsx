@@ -30,7 +30,7 @@ const Links = [['Eventos',"eventos"], ['Planes',"planes"], ['Contacto',"contacto
 const Navbar = () => {
     const { colorMode, toggleColorMode } = useColorMode();
     const { isOpen, onOpen, onClose } = useDisclosure();
-    const usuario = (localStorage.getItem("idUsr") == null || localStorage.getItem("idUsr") == "")? null: localStorage.getItem("idUsr");
+    const usuario = (localStorage.getItem("idUsr") == null || localStorage.getItem("idUsr") == "")? false: localStorage.getItem("idUsr");
     return (
         <>
             <Box bg={useColorModeValue('gray.100', 'gray.900')} px={4} top={0} position={'fixed'} width={'100%'} zIndex={2}>
@@ -75,6 +75,12 @@ const Navbar = () => {
                                 </>   
                             :
                                 <>
+                                    <NavLink to={"/carritoCompra"}>
+                                        <Button m="3" ml={"-2"}>
+                                            
+                                                <p style={{width: "24px"}}>🛒</p>
+                                        </Button>
+                                    </NavLink>
                                     <MenuButton
                                         as={Button}
                                         rounded={'full'}
@@ -90,9 +96,9 @@ const Navbar = () => {
                                         />
                                     </MenuButton>
                                     <MenuList>
-                                        <NavLink to={"/perfil"}><MenuItem>Perfil</MenuItem></NavLink>
+                                        <NavLink to={"/perfil"}><MenuItem id='perfil'>Perfil</MenuItem></NavLink>
                                         <MenuDivider/>
-                                        <NavLink to={"/iniciarsesion"}><MenuItem>Cerrar Sesion</MenuItem></NavLink>
+                                        <NavLink to={"/"} onClick={()=>{localStorage.clear();}}><MenuItem>Cerrar Sesion</MenuItem></NavLink>
                                     </MenuList>
                                 </>
                             }

@@ -25,41 +25,24 @@ export const CrearCuenta = () => {
   const [apellido, setApellido] = useState("")
   const [edad, setEdad] = useState(0)
   const [mail, setMail] = useState("")
+  const [telefono, setTelefono] = useState("");
+  const [error, setError] = useState("");
   const apellidoS = (e) => {
     setApellido(e.target.value)
   }
   const nombreS = (e) => {
     setNombre(e.target.value)
   }
+  const showPasswordS = (e) => {
+    setShowPassword(e.target.value);
+  };
   const mailS = (e) => {
     setMail(e.target.value)
   }
   const edadS = (e) => {
     setEdad(e.target.value)
   }
-  const form = useRef()
-  const sendEmail = (e) => {
-    e.preventDefault();
-    emailjs.sendForm('service_4ya1sj1', 'template_42m8ppc', form.current, {
-      publicKey: 'oCt0CQBlW7L6A3Vh4',
-    })
-      .then(
-        () => {
-          console.log('SUCCESS!');
-        },
-        (error) => {
-          console.log('FAILED...', error.text);
-        },
-      );
-  }
-  const comprobacionSend = async () => {
-    if (edad < 18) {
-      document.querySelector("input[name=''edad]").placeholder = "No valido"
-    }
-    if (nombre != "" && mail != "") {
-      //Enviamos el mail
-    }
-  }
+  
   return (
     <Flex
       minH={'100vh'}
@@ -77,8 +60,8 @@ export const CrearCuenta = () => {
           bg={useColorModeValue('white', 'gray.700')}
           boxShadow={'lg'}
           p={8}>
-          <Stack spacing={4} ref={form}>
-            <form method='post' action='/'>
+          <Stack spacing={4}>
+            <form action="/temp" method="get">
               <HStack>
                 <Box>
                   <FormControl id="firstName" isRequired>
@@ -106,7 +89,11 @@ export const CrearCuenta = () => {
               <FormControl id="password" isRequired>
                 <FormLabel>Contraseña</FormLabel>
                 <InputGroup>
-                  <Input type={showPassword ? 'text' : 'password'} />
+                  <Input
+                    type={showPassword ? "text" : "password"}
+                    onChange={showPasswordS}
+                    name="contrasena"
+                  />
                   <InputRightElement h={'full'}>
                     <Button
                       variant={'ghost'}
@@ -117,17 +104,17 @@ export const CrearCuenta = () => {
                 </InputGroup>
               </FormControl>
               <Stack spacing={10} pt={2}>
-                <Button
-                  loadingText="Submitting"
+                <Input
+                  type='submit'
                   size="lg"
                   bg={'blue.400'}
                   color={'white'}
                   _hover={{
                     bg: 'blue.500',
                   }}
-                  onClick={comprobacionSend}>
-                  Crear cuenta
-                </Button>
+                  value={"Crear cuenta"}
+                  >
+                </Input>
               </Stack>
               <Stack pt={6}>
                 <Text align={'center'}>

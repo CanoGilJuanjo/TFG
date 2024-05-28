@@ -2,7 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ControllerEvento;
+use App\Http\Controllers\ControllerEntrada;
 use App\Http\Controllers\ControllerUsuario;
+use App\Http\Controllers\ControllerPrecio;
 use Illuminate\Http\Request;
 use App\Http\Controllers\SchemaController;
 use App\Http\Controllers\GenericCollectionController;
@@ -39,3 +41,25 @@ Route::get('/api/evento/{id}',[ControllerEvento::class, 'show']);
 Route::get('/api/usuario/{id}',[ControllerUsuario::class, 'find']);
 
 Route::get('/evento/{id}',function(){return view("evento");});
+
+Route::get("/temp", function () {
+    return view("temp");   
+});
+
+Route::get("/temp2", function () {
+    return view("temp2");   
+});
+
+Route::get("/temp3", function () {
+    return view("temp3");   
+});
+
+Route::get("/carritoCompra", function () {
+    return view("carrito");   
+});
+
+Route::get('/api/entradas',[ControllerEntrada::class, 'get_all']);
+
+Route::get('/api/entradas/{id_usuario}',[ControllerEntrada::class, 'show']);
+
+Route::get('/api/precios',[ControllerPrecio::class, 'get_all']);

@@ -29,7 +29,7 @@ export const BuscadorEventos = () => {
 
     const apiURL = "http://localhost:8000/api/lista"
     const [eventos, setEventos] = useState<Eventos>([]);
-    const [maxViews,setMaxvies] = useState(5);
+    const [maxViews,setMaxvies] = useState(6);
     //Loading
     const [isLoading,setLoading] = useState(true);
 
@@ -79,7 +79,7 @@ export const BuscadorEventos = () => {
                             }else{
                                 distancia = Math.round(respuesta.routes[0].distance);
                             }
-                            if(!buscarExiste(eventos[i].titulo,datos) && datos.length <= maxViews){
+                            if(!buscarExiste(eventos[i].titulo,datos) && datos.length < maxViews){
                                 setDatos([...datos,JSON.stringify({ punto: eventos[i], distancia: distancia})])   
                             }
                             if(datos.length == maxViews){
@@ -274,13 +274,19 @@ export const BuscadorEventos = () => {
                             })
                         }
                     </Center>
-                    <p id='mas' style={{color:"lightblue",cursor:"pointer",margin:"5vh"}} onClick={()=>{(maxViews+5 <= eventos.length)?
+                    <p id='mas' style={{color:"lightblue",cursor:"pointer",margin:"5vh"}} onClick={()=>{(maxViews+6 <= eventos.length)?
                                                                                                         (()=>{
                                                                                                             setMaxvies(maxViews+5) 
                                                                                                             setLoading(true)
                                                                                                         })()
                                                                                                         : 
-                                                                                                        document.querySelector("#mas").innerHTML = "No existen más eventos" 
+                                                                                                        (maxViews == eventos.length)?
+                                                                                                            document.querySelector("#mas").innerHTML = "No existen más eventos" 
+                                                                                                        :
+                                                                                                            (()=>{
+                                                                                                                setMaxvies(eventos.length)
+                                                                                                                setLoading(true)
+                                                                                                            })()
                                                                                                         }}>Cargar más...</p>
                 </>
             }
