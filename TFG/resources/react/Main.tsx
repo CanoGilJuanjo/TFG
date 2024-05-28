@@ -13,6 +13,8 @@ import { Evento } from "./Paginas/Eventos/Evento";
 
 import { CreadorPlanes } from "./Paginas/Planes/CreadorPlanes";
 import CarritoCompra from "./Paginas/CarritoCompra/CarritoCompra";
+import FooterComponent from './Paginas/componentesComunes/FooterComponente';
+import Index from "./Paginas/Indice";
 
 
 function Main() {

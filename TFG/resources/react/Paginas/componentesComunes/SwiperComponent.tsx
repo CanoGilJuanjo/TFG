@@ -3,8 +3,8 @@ import { Swiper, SwiperSlide } from "swiper/react";
 // Import Swiper styles
 import "swiper/css";
 import React, { useEffect, useState } from "react";
-import CarrouselCardsComponent from "./CarrouselCardsComponenet";
 import { Pagination, Scrollbar, Autoplay } from "swiper/modules";
+import CarrouselCardsComponent from "./CarrouselCardsComponenet";
 
 export interface Evento {
     id: number;
