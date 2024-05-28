@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { getUserLocation } from '../helpers';
-import { Badge, Box, Button, Center, Input, Select, Spinner, useColorMode, useColorModeValue } from '@chakra-ui/react';
+import { Badge, Box, Button, Center, Input, Select, Spinner, useColorMode, useColorModeValue,Text } from '@chakra-ui/react';
 import { Search2Icon, StarIcon } from '@chakra-ui/icons';
 import { useNavigate } from 'react-router-dom';
 
@@ -274,7 +274,7 @@ export const BuscadorEventos = () => {
                             })
                         }
                     </Center>
-                    <p id='mas' style={{color:"lightblue",cursor:"pointer",margin:"5vh"}} onClick={()=>{(maxViews+6 <= eventos.length)?
+                    <Text id='mas' _hover={{color:"white"}} style={{color:useColorModeValue("darkblue","lightblue"),cursor:"pointer",margin:"5vh"}} onClick={()=>{(maxViews+6 <= eventos.length)?
                                                                                                         (()=>{
                                                                                                             setMaxvies(maxViews+5) 
                                                                                                             setLoading(true)
@@ -287,7 +287,7 @@ export const BuscadorEventos = () => {
                                                                                                                 setMaxvies(eventos.length)
                                                                                                                 setLoading(true)
                                                                                                             })()
-                                                                                                        }}>Cargar más...</p>
+                                                                                                        }}>Cargar más...</Text>
                 </>
             }
 

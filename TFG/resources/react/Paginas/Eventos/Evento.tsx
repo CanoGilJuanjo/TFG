@@ -241,7 +241,7 @@ export const Evento = () => {
                                 >
                                     <img
 
-                                        src={"../" + eventos?.foto}
+                                        src={eventos?.foto}
 
                                         alt="Imagen del evento"
                                         width={"800vw"}

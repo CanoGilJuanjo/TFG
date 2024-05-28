@@ -56,7 +56,7 @@ Route::get("/temp3", function () {
     return view("temp3");   
 });
 
-Route::get("/carritoCompra", function () {
+Route::get("/carritocompra", function () {
     return view("carrito");   
 });
 

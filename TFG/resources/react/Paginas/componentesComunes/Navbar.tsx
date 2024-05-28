@@ -23,8 +23,6 @@ interface Props {
     children: React.ReactNode
 }
 
-
-
 const Links = [['Eventos',"eventos"], ['Planes',"planes"], ['Contacto',"contactos"]]
 
 const Navbar = () => {
@@ -75,7 +73,7 @@ const Navbar = () => {
                                 </>   
                             :
                                 <>
-                                    <NavLink to={"/carritoCompra"}>
+                                    <NavLink to={"/carritocompra"}>
                                         <Button m="3" ml={"-2"}>
                                             
                                                 <p style={{width: "24px"}}>🛒</p>
@@ -98,7 +96,7 @@ const Navbar = () => {
                                     <MenuList>
                                         <NavLink to={"/perfil"}><MenuItem id='perfil'>Perfil</MenuItem></NavLink>
                                         <MenuDivider/>
-                                        <NavLink to={"/"} onClick={()=>{localStorage.clear();}}><MenuItem>Cerrar Sesion</MenuItem></NavLink>
+                                        <NavLink to={"/"} onClick={()=>{localStorage.clear();usuario = false}}><MenuItem>Cerrar Sesion</MenuItem></NavLink>
                                     </MenuList>
                                 </>
                             }
