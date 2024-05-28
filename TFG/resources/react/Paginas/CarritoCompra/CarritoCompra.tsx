@@ -53,13 +53,11 @@ export default function CarritoCompra() {
     const [precioTotal,setPrecioTotal] = useState(0)
     const apiEntradas = `http://localhost:8000/api/entradas/${idUsuario}`
     const [ids,setIds] = useState<number[]>([])
-    const [vez,setVez] = useState<any>(0)
     useEffect(()=>{
         fetch(apiEntradas)
         .then(respuesta => respuesta.json())
         .then((respuesta)=>{  
             respuesta.map((eventoR)=>{
-                console.log(eventoR);
                 if(!ids.includes(eventoR.id_evento)){
                     setIds([...ids,eventoR.id_evento])
                     const apiEvento = `http://localhost:8000/api/evento/${eventoR.id_evento}`;
@@ -68,24 +66,15 @@ export default function CarritoCompra() {
                     .then((resquest)=>{
                         setEvento([...evento,resquest])
                     }) 
-                } 
-            })
+                }
+            }) 
             return respuesta;
         }).then((respuesta)=>{
             setEntradas(respuesta)
             setLoading(false)
         })
         .catch(error=>setError(error))
-        if(vez<2){
-            setVez(vez+1);
-        }
-    },[])
-
-    useEffect(()=>{
-        entradas.map((entrada)=>{
-            setPrecioTotal(precioTotal+entrada.precio_total)
-        })
-    },[entradas])
+    },[evento])
 
     const ContenidoCarrito = ({ precio_total, fecha_inicio, fecha_fin, cantidad, foto,titulo }) => {
         const fecha = fecha_inicio === fecha_fin ? fecha_inicio : `${fecha_inicio} - ${fecha_fin}`;
@@ -121,10 +110,8 @@ export default function CarritoCompra() {
                     </Thead>
                     <Tbody>
                         {entradas.map((data) => {
-                            console.log("Entrada"+data.id_evento);
                             return(
                                 evento.map((evento)=>{
-                                    console.log("evento"+evento.id);
                                     if(evento.id == data.id_evento){   
                                         return (
                                             <ContenidoCarrito 
