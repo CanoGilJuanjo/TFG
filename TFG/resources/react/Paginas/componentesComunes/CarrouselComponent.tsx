@@ -71,7 +71,7 @@ export default () => {
                     }}
                 >
                     {" "}
-                    <Image src="../../media/GoldKobra.jpg" alt="Gold Kobra" />
+                    <Image src="../../media/logoGoldKobra.png" alt="Gold Kobra" />
                 </SwiperSlide>
             </Swiper>
         </Box>
