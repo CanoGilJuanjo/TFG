@@ -86,7 +86,8 @@ export const BuscadorEventos = () => {
                             }
                         }) 
                     }
-                })
+                }).catch(error=>console.log(error));
+                
         }catch(error){
             console.log(error);
         }        
@@ -275,7 +276,7 @@ export const BuscadorEventos = () => {
                     </Center>
                     <Text id='mas' _hover={{color:"white"}} style={{color:useColorModeValue("darkblue","lightblue"),cursor:"pointer",margin:"5vh"}} onClick={()=>{(maxViews+6 <= eventos.length)?
                                                                                                         (()=>{
-                                                                                                            setMaxvies(maxViews+5) 
+                                                                                                            setMaxvies(maxViews+6) 
                                                                                                             setLoading(true)
                                                                                                         })()
                                                                                                         : 

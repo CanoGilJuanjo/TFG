@@ -24,9 +24,10 @@ class ControllerUsuario extends Controller
         return redirect("/");
     }
 
+    
     public function find(string $id)
     {
         $usuarios = Usuario::find($id);
-        return $usuarios;
+        return response()->json($usuarios);
     }
 }
