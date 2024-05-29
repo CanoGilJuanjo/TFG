@@ -48,6 +48,10 @@ Route::get("/temp", function () {
     return view("temp");   
 });
 
+Route::get("/suscripciones", function () {
+    return view("subscripciones");   
+});
+
 Route::get("/temp2", function () {
     return view("temp2");   
 });

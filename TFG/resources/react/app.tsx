@@ -20,14 +20,16 @@ if (!navigator.geolocation) {
 }
 
 ReactDOM.createRoot(doom).render(
-    <BrowserRouter basename="">
-        <PayPalScriptProvider
-            options={{
-                clientId:
-                    "AVZx7n8gCe07qzKYJiMnCTIf7RVr-qgyvE5NefjZtSxmksFg-T3z1NfwJ5NuOIVYm21cek--DMA7WozN",
-            }}
-        >
-            <Main />
-        </PayPalScriptProvider>
-    </BrowserRouter>
+    <>
+        <BrowserRouter basename="">
+            <PayPalScriptProvider
+                options={{
+                    clientId:
+                        "AVZx7n8gCe07qzKYJiMnCTIf7RVr-qgyvE5NefjZtSxmksFg-T3z1NfwJ5NuOIVYm21cek--DMA7WozN",
+                }}
+            >
+                <Main />
+            </PayPalScriptProvider>
+        </BrowserRouter>
+    </>
 );
