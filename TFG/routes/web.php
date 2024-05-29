@@ -5,6 +5,7 @@ use App\Http\Controllers\ControllerEvento;
 use App\Http\Controllers\ControllerEntrada;
 use App\Http\Controllers\ControllerUsuario;
 use App\Http\Controllers\ControllerPrecio;
+use App\Http\Controllers\ControllerSubscripciones;
 use Illuminate\Http\Request;
 use App\Http\Controllers\SchemaController;
 use App\Http\Controllers\GenericCollectionController;
@@ -62,3 +63,5 @@ Route::get('/api/entradas',[ControllerEntrada::class, 'get_all']);
 Route::get('/api/entradas/{id_usuario}',[ControllerEntrada::class, 'show']);
 
 Route::get('/api/precios',[ControllerPrecio::class, 'get_all']);
+
+Route::get('/api/subscripciones',[ControllerSubscripciones::class, 'insert']);
