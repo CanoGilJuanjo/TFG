@@ -48,7 +48,7 @@ export default function Contactos() {
     const handleSubmit = async () => {
         console.log(formData);
         await axios
-            .post("http://localhost/contactos/mail",formData)
+            .post("http://127.0.0.1:8000/contactos/mail",formData)
             .then((res) => console.log(res));
     };
 

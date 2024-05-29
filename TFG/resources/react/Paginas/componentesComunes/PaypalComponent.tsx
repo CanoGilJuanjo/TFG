@@ -82,7 +82,7 @@ export default function App() {
 	return (
 		<>
 			{clientToken ? (
-				<div style={{ maxWidth: "750px", minHeight: "200px" }}>
+				<div style={{ maxWidth: "750px", height:"fit-content", marginTop:"3px"}}>
 					<PayPalScriptProvider
 						options={{
 							clientId: "test",
@@ -92,6 +92,7 @@ export default function App() {
 							intent: "capture",
 							vault: false,
 						}}
+						
 						>
 						<ButtonWrapper currency={"USD"} />
 					</PayPalScriptProvider>

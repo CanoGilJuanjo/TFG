@@ -20,6 +20,7 @@ import {
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { CheckIcon, CloseIcon } from "@chakra-ui/icons";
+import App from "../componentesComunes/PaypalComponent";
 
 export interface Evento {
     id: number;
@@ -87,11 +88,11 @@ export const Evento = () => {
             });
     }, []);
 
-    const Carta = ({ precio, fecha_inicio, fecha_fin }) => {
+    const Carta = ({ precio, fecha_inicio, fecha_fin,descripcion }) => {
         return (
             <form action="/temp3" method="GET" onSubmit={(e) => { if(idUsuario == null) e.preventDefault() }}>
                 <GridItem>
-                    <Center py={6} pt={"120px"}>
+                    <Center py={6} pt={"120px"} minH={"50vh"}>
                         <Box
                             maxW={"330px"}
                             w={"full"}
@@ -123,29 +124,9 @@ export const Evento = () => {
                                 px={6}
                                 py={10}
                             >
-                                <List spacing={3} height={"13vh"}>
-                                    <ListItem>
-                                        <ListIcon
-                                            as={CheckIcon}
-                                            color="green.400"
-                                        />
-                                        2 copas
-                                    </ListItem>
-                                    <ListItem>
-                                        <ListIcon
-                                            as={CloseIcon}
-                                            color="red.400"
-                                        />
-                                        Pulsera para entrar y salir
-                                    </ListItem>
-                                    <ListItem>
-                                        <ListIcon
-                                            as={CloseIcon}
-                                            color="red.400"
-                                        />
-                                        Acceso a zona vip
-                                    </ListItem>
-                                </List>
+                                <Text>
+                                    {descripcion}
+                                </Text>
 
                                 <Input
                                     type="hidden"
@@ -199,13 +180,24 @@ export const Evento = () => {
                                 >
                                     Añadir al carrito
                                 </Button>
+                                {
+                                    (idUsuario)? <App></App>: <p>Inicia sesion para comprar entradas</p>
+                                }
                             </Box>
                         </Box>
                     </Center>
                 </GridItem>
             </form>
+            
         );
     };
+    //Calculo ancho
+    const [anchoInner,setAncho] = useState(window.innerWidth);
+    const anchoInnerS = ()=>{
+        setAncho(window.innerWidth);
+    }
+    //Control para el ancho
+    window.onresize = anchoInnerS;
 
 
 
@@ -223,11 +215,10 @@ export const Evento = () => {
             />
             <div style={{ marginTop: "10vh" }}>
                 <div>
-                    <div key={eventos?.id}>
+                    <div key={eventos?.id} style={{display:"flex",flexFlow:"column wrap"}}>
                         <div style={{ width: "100%", height: "500px" }}>
                             <Grid
-                                templateAreas={`"img title-boost"
-                                                "img information"`}
+                                templateAreas={(anchoInner<850)?`"img title-boost" "information information"`:`"img title-boost""img information"`}
                                 gridTemplateRows={"1fr 1fr 30px"}
                                 gridTemplateColumns={"1fr 1fr"}
                                 h="600px"
@@ -258,13 +249,12 @@ export const Evento = () => {
                                     </Text>
                                     <Text
                                         fontSize={"30px"}
-                                        textAlign={"left"}
                                         pl={"60"}
                                     >
                                         {eventos?.boost}
                                     </Text>
                                 </GridItem>
-                                <GridItem pl="2" area={"information"}>
+                                <GridItem pl="2" area={"information"} mb={"15vh"}>
                                     <Text
                                         fontSize={"40px"}
                                         textAlign={"center"}
@@ -295,7 +285,7 @@ export const Evento = () => {
                                             {eventos?.fecha_fin}
                                         </Badge>
                                     </Stack>
-                                    <Text fontSize={"20px"}>
+                                    <Text fontSize={"large"}>
                                         {eventos?.descripcion}
                                     </Text>
                                 </GridItem>
@@ -310,17 +300,20 @@ export const Evento = () => {
                                     h="300px"
                                     gap="6"
                                     p={"30"}
-                                    mb={"35vh"}
+                                    mb={(anchoInner<850)?"110vh":"35vh"}
                                     justifyContent={"center"}
                                 >
                                     {precios.map((data) => {
                                         if (data.id_evento == eventos?.id) {
                                             return (
-                                                <Carta
+                                                <>
+                                                    <Carta
                                                     precio={data.precio}
                                                     fecha_inicio={eventos.fecha_inicio}
                                                     fecha_fin={eventos.fecha_fin}
-                                                ></Carta>
+                                                    descripcion={data.descripcion}
+                                                    ></Carta>
+                                                </>
                                             );
                                         }
                                     })}

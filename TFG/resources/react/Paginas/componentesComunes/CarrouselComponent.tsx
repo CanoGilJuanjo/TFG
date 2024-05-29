@@ -1,5 +1,5 @@
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Image, Box } from "@chakra-ui/react";
+import { Image, Box, useColorModeValue } from "@chakra-ui/react";
 import { Pagination, Scrollbar, Autoplay } from "swiper/modules";
 
 import "swiper/css";
@@ -14,7 +14,7 @@ export default () => {
             height={"20%"}
             fontWeight={'bold'}
         >
-          Colaboradores
+            Colaboradores
             <Swiper
                 style={{
                     marginTop: "20px",
@@ -38,12 +38,14 @@ export default () => {
                 >
                     {" "}
                     <Image
+                        background={useColorModeValue("white", "white")}
                         style={{
                             justifyContent: "center",
                             display: "flex",
                             verticalAlign: "middle",
                             width:"10vw",
-                            height:"100%"
+                            height:"100%",
+                            borderRadius: "5px"
                         }}
                         src="../../media/OleoRonda.png"
                         alt="Oleo Ronda"
@@ -68,13 +70,13 @@ export default () => {
                         display: "flex",
                         verticalAlign: "middle",
                         height:"100%",
-                        width:"20vw"
+                        width:"20vw",
+                        borderRadius: "5px"
                     }}
                 >
                     {" "}
                     <Image src="../../media/GoldKobra.jpg" alt="Gold Kobra" />
                 </SwiperSlide>
-                
             </Swiper>
         </Box>
     );

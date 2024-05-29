@@ -1,24 +1,19 @@
-import {
-    Text,
-    Card,
-    Image,
-    CardBody,
-    CardFooter,
-    Stack,
-    Heading,
-    Divider,
-    Button,
-    ButtonGroup,
-} from "@chakra-ui/react";
+import { Text, Card, Image, CardBody, Stack, Heading } from "@chakra-ui/react";
 
-import { StarIcon, AddIcon, WarningIcon } from "@chakra-ui/icons";
+import { StarIcon } from "@chakra-ui/icons";
 
 import React from "react";
 
-const CarrouselCardsComponent = ({ src, texto, puntuacion, place }) => {
+const CarrouselCardsComponent = ({
+    src,
+    texto,
+    puntuacion,
+    place,
+    onClick,
+}) => {
     return (
         <>
-            <Card maxW="sm" pb={"5px"}>
+            <Card onClick={onClick} maxW="sm" pb={"5px"}>
                 <CardBody>
                     <Image
                         src={src} //"https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
