@@ -17,12 +17,12 @@ export const PerfilUsuario = () => {
   const idUsuario = (localStorage.getItem("idUsr") == "" || localStorage.getItem("idUsr") == null)? "" : localStorage.getItem("idUsr");
   const [datosUser,setUser] = useState<Usuario>()
   useEffect(()=>{
-      fetch(`/api/usuario/${idUsuario}`)
+      fetch(`http://localhost:8000/api/usuario/${idUsuario}`)
       .then(respuesta=>respuesta.json())
       .then((respuesta)=>{
         setUser(respuesta)
       })
-  })
+  },[])
   const [anchoInner,setAncho] = useState(window.innerWidth);
   const anchoInnerS = ()=>{
     setAncho(window.innerWidth);
@@ -61,7 +61,7 @@ export const PerfilUsuario = () => {
   const [mail, setMail] = useState("")
 
   //Primera carga de los datos del usuario
- /*  useEffect(() => {
+  /* useEffect(() => {
     setNombre(consulta.nombre)
     setApellido(consulta.apellido)
     setMail(consulta.mail)
@@ -90,7 +90,7 @@ export const PerfilUsuario = () => {
   //Control para el ancho
   window.onresize = anchoInnerS;
 
-  if(datosUser)
+  
   return (
     <>
       <div style={{ maxWidth: "600px", margin: "20px auto", padding: "20px", border: "1px solid #ccc", borderRadius: "10px", boxShadow: "1px 1px 8px black" ,marginTop:"10vh"}}>
@@ -102,13 +102,9 @@ export const PerfilUsuario = () => {
           display: "flex",
           flexFlow: "column"
         }}>
-          <Editable textAlign={"center"} defaultValue={datosUser.nombre+" "+datosUser.apellidos} fontSize={"2x1"} isPreviewFocusable={false}>
-            <EditablePreview></EditablePreview>
-            <Input as={EditableInput}></Input>
-            <EditableControls></EditableControls>
-          </Editable>
-          <p id='mail' style={{ margin: "5px 0" }}><EmailIcon></EmailIcon> : {datosUser.email}</p>
-          <p style={{ margin: "5px 0" }}><StarIcon></StarIcon> : {datosUser.localizacion}</p>
+          <Text textAlign={"center"} fontSize={"2x1"}>{datosUser?.nombre+" "+datosUser?.apellidos}</Text>
+          <p id='mail' style={{ margin: "5px 0" }}><EmailIcon></EmailIcon> : {datosUser?.email}</p>
+          <p style={{ margin: "5px 0" }}><StarIcon></StarIcon> : {datosUser?.localizacion}</p>
         </div>
       </div>
       <Center>

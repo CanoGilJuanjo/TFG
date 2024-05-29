@@ -27,7 +27,7 @@ export interface Evento {
 
 export const BuscadorEventos = () => {
 
-    const apiURL = "http://localhost:8000/api/lista"
+    const apiURL = "http://127.0.0.1:8000/api/lista"
     const [eventos, setEventos] = useState<Eventos>([]);
     const [maxViews,setMaxvies] = useState(6);
     //Loading

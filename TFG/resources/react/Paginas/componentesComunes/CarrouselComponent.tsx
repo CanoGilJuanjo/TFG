@@ -11,7 +11,7 @@ export default () => {
             paddingBottom={"50px"}
             paddingTop={"50px"}
             width={"100%"}
-            height={"10%"}
+            height={"20%"}
             fontWeight={'bold'}
         >
           Colaboradores
@@ -42,6 +42,8 @@ export default () => {
                             justifyContent: "center",
                             display: "flex",
                             verticalAlign: "middle",
+                            width:"10vw",
+                            height:"100%"
                         }}
                         src="../../media/OleoRonda.png"
                         alt="Oleo Ronda"
@@ -65,6 +67,8 @@ export default () => {
                         justifyContent: "center",
                         display: "flex",
                         verticalAlign: "middle",
+                        height:"100%",
+                        width:"20vw"
                     }}
                 >
                     {" "}
