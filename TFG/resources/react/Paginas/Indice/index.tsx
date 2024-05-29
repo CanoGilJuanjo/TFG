@@ -48,7 +48,8 @@ const Index = () => {
                     textAlign={"left"}
                     fontWeight={"bold"}
                     paddingLeft={"10%"}
-                    fontSize={"25px"}
+                    fontSize={"30px"}
+                    paddingBottom={"20px"}
                 >
                     Recomendados
                 </Text>
@@ -57,7 +58,8 @@ const Index = () => {
                     textAlign={"left"}
                     fontWeight={"bold"}
                     paddingLeft={"10%"}
-                    fontSize={"25px"}
+                    fontSize={"30px"}
+                    paddingBottom={"20px"}
                 >
                     Novedades
                 </Text>
@@ -66,7 +68,8 @@ const Index = () => {
                     textAlign={"left"}
                     fontWeight={"bold"}
                     paddingLeft={"10%"}
-                    fontSize={"25px"}
+                    fontSize={"30px"}
+                    paddingBottom={"20px"}
                 >
                     Más populares
                 </Text>

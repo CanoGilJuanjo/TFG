@@ -35,7 +35,6 @@ export const BuscadorEventos = () => {
 
     const [error, setError] = useState(null);
 
-    const navigate = useNavigate();
 
     const handleOnClick = (EventId) => {
         navigate(`/evento/${EventId}`)    

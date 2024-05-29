@@ -5,6 +5,8 @@ import "swiper/css";
 import React, { useEffect, useState } from "react";
 import { Pagination, Scrollbar, Autoplay } from "swiper/modules";
 import CarrouselCardsComponent from "./CarrouselCardsComponenet";
+import { Box, Divider } from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
 
 export interface Evento {
     id: number;
@@ -25,9 +27,16 @@ export interface Evento {
 }
 const SwiperComponent = ({ eventosMostrar }) => {
     const apiURL = `http://localhost:8000/api/lista`;
+
     const [eventos, setEventos] = useState<Evento[]>();
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+
+    const navigate = useNavigate();
+
+    const handleOnClick = (EventId) => {
+        navigate(`/evento/${EventId}`);
+    };
 
     useEffect(() => {
         fetch(apiURL)
@@ -41,6 +50,7 @@ const SwiperComponent = ({ eventosMostrar }) => {
                 setLoading(false);
             });
     }, []);
+
     return (
         <>
             <Swiper
@@ -63,6 +73,7 @@ const SwiperComponent = ({ eventosMostrar }) => {
                                 }}
                             >
                                 <CarrouselCardsComponent
+                                onClick={() => handleOnClick(evento.id)}
                                     src={evento.foto}
                                     texto={"No te lo puedes perder"}
                                     puntuacion={evento.valoracion + "/5"}
@@ -71,43 +82,9 @@ const SwiperComponent = ({ eventosMostrar }) => {
                             </SwiperSlide>
                         );
                 })}
-                {/* <SwiperSlide
-                    style={{ justifyContent: "center", display: "flex" }}
-                >
-                    <CarrouselCardsComponent
-                        src={
-                            "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
-                        }
-                        texto={"texto"}
-                        puntuacion={"10/10"}
-                        place={"Rosse"}
-                    ></CarrouselCardsComponent>
-                </SwiperSlide>
-                <SwiperSlide
-                    style={{ justifyContent: "center", display: "flex" }}
-                >
-                    <CarrouselCardsComponent
-                        src={
-                            "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
-                        }
-                        texto={"texto"}
-                        puntuacion={"3/10"}
-                        place={"Rosse"}
-                    ></CarrouselCardsComponent>
-                </SwiperSlide>
-                <SwiperSlide
-                    style={{ justifyContent: "center", display: "flex" }}
-                >
-                    <CarrouselCardsComponent
-                        src={
-                            "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
-                        }
-                        texto={"texto"}
-                        puntuacion={"9/10"}
-                        place={"Rosse"}
-                    ></CarrouselCardsComponent>
-                </SwiperSlide> */}
-                ...
+                <Box position="relative" padding="10">
+                    <Divider />
+                </Box>
             </Swiper>
         </>
     );
