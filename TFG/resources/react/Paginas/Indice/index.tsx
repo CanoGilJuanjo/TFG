@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import VideoIndex from "../componentesComunes/VideoIndex";
 import CarrouselCardsComponent from "../componentesComunes/CarrouselCardsComponenet";
 import SwiperComponent from "../componentesComunes/SwiperComponent";
+import CarrouselComponent from "../componentesComunes/CarrouselComponent";
 
 const recomendados = [
     "Rosse",
@@ -15,7 +16,16 @@ const recomendados = [
 ];
 
 const novedades = [
-    "Pijama",
+    "NO TE VA GUSTAR",
+    "Juanes",
+    "Concierto sergio dalma",
+    "QUEENS OF THE STONE AGE",
+    "Concierto Rozalén en Málaga",
+    "India Martínez",
+];
+
+const masPopulares = [
+    "Juanes",
     "Bamba Club",
     "Burbujas",
     "Puerto Diablos",
@@ -23,10 +33,12 @@ const novedades = [
     "Coltán Fuengirola",
 ];
 
-const masPopulares = [];
-
 const Index = () => {
-  (localStorage.getItem("idUsr") == null || localStorage.getItem("idUsr") == "")? (document.getElementById("perfil"))? location.reload() :"" :"";
+    localStorage.getItem("idUsr") == null || localStorage.getItem("idUsr") == ""
+        ? document.getElementById("perfil")
+            ? location.reload()
+            : ""
+        : "";
     return (
         <>
             <VideoIndex />
@@ -40,9 +52,7 @@ const Index = () => {
                 >
                     Recomendados
                 </Text>
-                <SwiperComponent
-                    eventosMostrar={recomendados}
-                ></SwiperComponent>
+                <SwiperComponent eventosMostrar={novedades} />
                 <Text
                     textAlign={"left"}
                     fontWeight={"bold"}
@@ -51,7 +61,7 @@ const Index = () => {
                 >
                     Novedades
                 </Text>
-                {/* <CarrouselComponent /> */}
+                <SwiperComponent eventosMostrar={masPopulares} />
                 <Text
                     textAlign={"left"}
                     fontWeight={"bold"}
@@ -60,8 +70,9 @@ const Index = () => {
                 >
                     Más populares
                 </Text>
-                {/* <CarrouselComponent /> */}
+                <SwiperComponent eventosMostrar={recomendados} />
             </Box>
+            <CarrouselComponent />
         </>
     );
 };

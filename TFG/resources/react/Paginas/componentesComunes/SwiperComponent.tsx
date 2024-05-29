@@ -51,24 +51,25 @@ const SwiperComponent = ({ eventosMostrar }) => {
                 }}
                 spaceBetween={1}
                 slidesPerView={3}
-                onSlideChange={() => console.log("slide change")}
                 onSwiper={(swiper) => console.log(swiper)}
             >
                 {eventos?.map((evento) => {
-                    if(eventosMostrar.includes(evento.titulo))
-                    return (
-
-                    <SwiperSlide
-                        style={{ justifyContent: "center", display: "flex" }}
-                    >
-                        <CarrouselCardsComponent
-                            src={evento.foto}
-                            texto={''}
-                            puntuacion={evento.valoracion+'/5'}
-                            place={evento.titulo}
-                        ></CarrouselCardsComponent>
-                    </SwiperSlide>
-                    )
+                    if (eventosMostrar.includes(evento.titulo))
+                        return (
+                            <SwiperSlide
+                                style={{
+                                    justifyContent: "center",
+                                    display: "flex",
+                                }}
+                            >
+                                <CarrouselCardsComponent
+                                    src={evento.foto}
+                                    texto={"No te lo puedes perder"}
+                                    puntuacion={evento.valoracion + "/5"}
+                                    place={evento.titulo}
+                                ></CarrouselCardsComponent>
+                            </SwiperSlide>
+                        );
                 })}
                 {/* <SwiperSlide
                     style={{ justifyContent: "center", display: "flex" }}
