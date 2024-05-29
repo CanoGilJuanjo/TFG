@@ -52,8 +52,6 @@ class ContactController extends Controller
     public function contactMail(Request $request)
     {
         /* REQUEST: MAIL, NAME, MENSAJE */
-
-
         $name = $request->name;
         $email = $request->email;
         $mensaje = $request->mensaje;

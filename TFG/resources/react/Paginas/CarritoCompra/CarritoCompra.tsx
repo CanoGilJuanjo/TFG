@@ -70,7 +70,7 @@ export default function CarritoCompra() {
             }) 
             return respuesta;
         }).then((respuesta)=>{
-            setEntradas(respuesta)
+            setEntradas(respuesta) 
             setLoading(false)
         })
         .catch(error=>setError(error))

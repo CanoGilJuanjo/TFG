@@ -49,7 +49,9 @@ export default function Contactos() {
         console.log(formData);
         await axios
             .post("http://127.0.0.1:8000/contactos/mail",formData)
-            .then((res) => console.log(res));
+            .then((res) => console.log(res))
+            .catch(error=>console.log(error)
+            )
     };
 
     return (
@@ -129,7 +131,7 @@ export default function Contactos() {
                                                         />
                                                     }
                                                 >
-                                                    hello@abc.com
+                                                    techxperiencecreators@gmail.com
                                                 </Button>
                                                 <Button
                                                     size="md"

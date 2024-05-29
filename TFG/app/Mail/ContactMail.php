@@ -28,6 +28,13 @@ class ContactMail extends Mailable
         $this->mensaje = $mensaje;
     }
 
+    public function build($name, $email, $mensaje){
+        $this->name = $name;
+        $this->email = $email;
+        $this->mensaje = $mensaje;
+        return view("mail.hello",["nombre"=>$name,"email"=>$email,"mensaje"=>$mensaje]);
+    }
+
     /**
      * Get the message envelope.
      */

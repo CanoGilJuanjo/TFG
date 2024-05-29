@@ -1,5 +1,6 @@
 <?php
 
+
 use App\Http\Controllers\ContactController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ControllerEvento;
@@ -7,6 +8,7 @@ use App\Http\Controllers\ControllerEntrada;
 use App\Http\Controllers\ControllerUsuario;
 use App\Http\Controllers\ControllerPrecio;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use App\Http\Controllers\SchemaController;
 use App\Http\Controllers\GenericCollectionController;
 
@@ -57,6 +59,10 @@ Route::get('/evento/{id}',function(){return view("evento");});
 
 Route::get("/temp", function () {
     return view("temp");   
+});
+
+Route::get("/suscripciones", function () {
+    return view("subscripciones");   
 });
 
 Route::get("/temp2", function () {

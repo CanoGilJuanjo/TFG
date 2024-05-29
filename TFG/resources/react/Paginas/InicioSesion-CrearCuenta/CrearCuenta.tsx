@@ -148,7 +148,6 @@ export const CrearCuenta = () => {
                                         type={
                                             showPassword ? "text" : "password"
                                         }
-                                        onChange={showPasswordS}
                                         name="contrasena"
                                     />
 
@@ -156,10 +155,9 @@ export const CrearCuenta = () => {
                                         <Button
                                             variant={"ghost"}
                                             onClick={() =>
-                                                setShowPassword(
-                                                    (showPassword) =>
-                                                        !showPassword
-                                                )
+                                                {setShowPassword(
+                                                    !showPassword
+                                                )}
                                             }
                                         >
                                             {showPassword ? (
@@ -181,6 +179,7 @@ export const CrearCuenta = () => {
                                     _hover={{
                                         bg: "blue.500",
                                     }}
+                                    onClick={(e)=>{(error=="")?e.preventDefault():console.log("correcto")}}
                                     value={"Crear cuenta"}
                                 ></Input>
                             </Stack>

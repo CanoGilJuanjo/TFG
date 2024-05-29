@@ -134,7 +134,7 @@ class PrecioSeeder extends Seeder
                 "tipo_precio" => 'General', 
                 "id_evento" => 10
             ],
-            [
+            /* [
                 "precio" => 40.00, 
                 "descripcion" => 'Acceso VIP a todas las zonas, pulsera, y 2 consumiciones', 
                 "tipo_precio" => 'VIP', 
@@ -145,7 +145,7 @@ class PrecioSeeder extends Seeder
                 "descripcion" => 'Acceso general, sin consumición', 
                 "tipo_precio" => 'General', 
                 "id_evento" => 11
-            ],
+            ] ,*/
             [
                 "precio" => 50.00, 
                 "descripcion" => 'Acceso VIP a todas las zonas, pulsera, y 1 consumición', 

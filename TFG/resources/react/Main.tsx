@@ -15,6 +15,7 @@ import { CreadorPlanes } from "./Paginas/Planes/CreadorPlanes";
 import CarritoCompra from "./Paginas/CarritoCompra/CarritoCompra";
 import FooterComponent from './Paginas/componentesComunes/FooterComponente';
 import Index from "./Paginas/Indice";
+import { Suscripciones } from "./Paginas/Suscripciones/Suscripciones";
 
 
 function Main() {
@@ -41,6 +42,7 @@ function Main() {
                                     <Route path="/evento/:id" element={<Evento/>} />
                                     <Route path="/carritocompra" element={<CarritoCompra></CarritoCompra>}></Route>
                                     <Route path="/perfil" element={<PerfilUsuario></PerfilUsuario>}></Route>
+                                    <Route path="/suscripciones" element={<Suscripciones></Suscripciones>}></Route>
                                     <Route path="/planes" element={<CreadorPlanes/>} />
                                 </Routes>
                             </div>
