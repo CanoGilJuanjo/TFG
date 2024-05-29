@@ -13,18 +13,18 @@ return new class extends Migration
     {
         Schema::create('eventos', function (Blueprint $table) {
             $table->id();
-            $table->string("titulo");
-            $table->string("descripcion");
-            $table->string("qr");
+            $table->string("titulo", 500);
+            $table->string("descripcion", 500);
+            $table->string("qr", 500);
             $table->decimal("precio");
             $table->date("fecha_inicio");
             $table->date("fecha_fin");
-            $table->string("foto");
-            $table->string("localizacion");
+            $table->string("foto", 500);
+            $table->string("localizacion", 500);
             $table->decimal("latitud");
             $table->decimal("longitud");
             $table->integer("valoracion");
-            $table->string("boost");
+            $table->string("boost", 500);
             $table->timestamps();
         });
     }
