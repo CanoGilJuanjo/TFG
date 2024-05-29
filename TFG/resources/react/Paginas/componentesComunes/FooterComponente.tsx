@@ -110,13 +110,13 @@ import {
             </Stack>
             <Stack align={'flex-start'}>
               <ListHeader>Contacto</ListHeader>
-              <Box as="a" href={'#'}>
+              <Box as="a" href={'http://localhost:8000/terminosServicio'}>
                 Terminos del servicio
               </Box>
-              <Box as="a" href={'#'}>
+              <Box as="a" href={'http://localhost:8000/legal'}>
                 Legal
               </Box>
-              <Box as="a" href={'#'}>
+              <Box as="a" href={'http://localhost:8000/politicasPrivacidad'}>
                 Politicas de privacidad
               </Box>
             </Stack>
