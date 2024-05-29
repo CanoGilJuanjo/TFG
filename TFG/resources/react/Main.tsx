@@ -39,7 +39,7 @@ function Main() {
                                     <Route path="/contactos" element={<Contactos/>} />
                                     <Route path="/eventos" element={<BuscadorEventos/>} />
                                     <Route path="/evento/:id" element={<Evento/>} />
-                                    <Route path="/carritoCompra" element={<CarritoCompra></CarritoCompra>}></Route>
+                                    <Route path="/carritocompra" element={<CarritoCompra></CarritoCompra>}></Route>
                                     <Route path="/perfil" element={<PerfilUsuario></PerfilUsuario>}></Route>
                                     <Route path="/planes" element={<CreadorPlanes/>} />
                                 </Routes>
