@@ -28,7 +28,10 @@ const Links = [['Eventos',"eventos"], ['Planes',"planes"], ['Contacto',"contacto
 const Navbar = () => {
     const { colorMode, toggleColorMode } = useColorMode();
     const { isOpen, onOpen, onClose } = useDisclosure();
-    const usuario = (localStorage.getItem("idUsr") == null || localStorage.getItem("idUsr") == "")? false: localStorage.getItem("idUsr");
+    const [usuario,setUsuario] = useState<any>();
+    useEffect(()=>{
+        setUsuario((localStorage.getItem("idUsr") == null || localStorage.getItem("idUsr") == "")? false: localStorage.getItem("idUsr"))
+    }) 
     return (
         <>
             <Box bg={useColorModeValue('gray.100', 'gray.900')} px={4} top={0} position={'fixed'} width={'100%'} zIndex={2}>
@@ -41,7 +44,7 @@ const Navbar = () => {
                         onClick={isOpen ? onClose : onOpen}
                     />
                     <HStack spacing={8} alignItems={'center'}>
-                        <NavLink to={"/"}>Logo</NavLink>
+                        <NavLink to={"/"} style={{fontSize:"xxx-large",paddingBottom:"2vh"}}>⌂</NavLink>
                         <HStack as={'nav'} spacing={4} display={{ base: 'none', md: 'flex' }}>
                             {Links.map((link) => (
                                 <NavLink key={link[1]} to={link[1]}>{link[0]}</NavLink>
@@ -96,7 +99,7 @@ const Navbar = () => {
                                     <MenuList>
                                         <NavLink to={"/perfil"}><MenuItem id='perfil'>Perfil</MenuItem></NavLink>
                                         <MenuDivider/>
-                                        <NavLink to={"/"} onClick={()=>{localStorage.clear();usuario = false}}><MenuItem>Cerrar Sesion</MenuItem></NavLink>
+                                        <NavLink to={"/"} onClick={()=>{localStorage.clear();setUsuario(false)}}><MenuItem>Cerrar Sesion</MenuItem></NavLink>
                                     </MenuList>
                                 </>
                             }

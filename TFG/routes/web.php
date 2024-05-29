@@ -66,3 +66,4 @@ Route::get('/api/entradas/{id_usuario}',[ControllerEntrada::class, 'show']);
 
 Route::get('/api/precios',[ControllerPrecio::class, 'get_all']);
 
+Route::get("/api/usuario/{id_usuario}",[ControllerUsuario::class,"find"]);

@@ -2,32 +2,27 @@ import { CheckIcon, CloseIcon, EditIcon, EmailIcon, StarIcon } from '@chakra-ui/
 import { Button, Card, CardBody, CardFooter, Center, Heading, Stack, Text, Image, useEditableControls, ButtonGroup, IconButton, Flex, Editable, EditablePreview, EditableInput, Input, useColorModeValue } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 
+export interface Usuario{
+  id:number,
+  nombre:string,
+  apellidos:string,
+  edad:number,
+  localizacion:string,
+  email:string,
+  nivel:number
+}
+
 export const PerfilUsuario = () => {
   //Estos datos tienen que ser traidos de la BBDD
   const idUsuario = (localStorage.getItem("idUsr") == "" || localStorage.getItem("idUsr") == null)? "" : localStorage.getItem("idUsr");
-  const consulta =
-  {
-    nombre: "Pedro",
-    apellido: "Pruebas",
-    ubicacion: "Malaga,España",
-    mail: "pedropruebas@gmail.com",
-    historial: [
-      {
-        evento: "Rosse",
-        imagen: "media/evento.png",
-        precio: "12,60",
-        fechaCompra: "28/04/2024",
-        descripcion: "Evento invernal en la discoteca Rosse"
-      },
-      {
-        evento: "Laguna Seca",
-        imagen: "media/evento.png",
-        precio: "70,40",
-        fechaCompra: "12/01/2024",
-        descripcion: "3 tandas completas al circuito Laguna Seca"
-      }
-    ]
-  }
+  const [datosUser,setUser] = useState<Usuario>()
+  useEffect(()=>{
+      fetch(`/api/usuario/${idUsuario}`)
+      .then(respuesta=>respuesta.json())
+      .then((respuesta)=>{
+        setUser(respuesta)
+      })
+  })
   const [anchoInner,setAncho] = useState(window.innerWidth);
   const anchoInnerS = ()=>{
     setAncho(window.innerWidth);
@@ -66,12 +61,12 @@ export const PerfilUsuario = () => {
   const [mail, setMail] = useState("")
 
   //Primera carga de los datos del usuario
-  useEffect(() => {
+ /*  useEffect(() => {
     setNombre(consulta.nombre)
     setApellido(consulta.apellido)
     setMail(consulta.mail)
     setUbicacion(consulta.ubicacion)
-  }, [])
+  }, []) */
 
   function EditableControls(){
     const {
@@ -94,6 +89,8 @@ export const PerfilUsuario = () => {
 
   //Control para el ancho
   window.onresize = anchoInnerS;
+
+  if(datosUser)
   return (
     <>
       <div style={{ maxWidth: "600px", margin: "20px auto", padding: "20px", border: "1px solid #ccc", borderRadius: "10px", boxShadow: "1px 1px 8px black" ,marginTop:"10vh"}}>
@@ -105,24 +102,24 @@ export const PerfilUsuario = () => {
           display: "flex",
           flexFlow: "column"
         }}>
-          <Editable textAlign={"center"} defaultValue={consulta.nombre+" "+consulta.apellido} fontSize={"2x1"} isPreviewFocusable={false}>
+          <Editable textAlign={"center"} defaultValue={datosUser.nombre+" "+datosUser.apellidos} fontSize={"2x1"} isPreviewFocusable={false}>
             <EditablePreview></EditablePreview>
             <Input as={EditableInput}></Input>
             <EditableControls></EditableControls>
           </Editable>
-          <p id='mail' style={{ margin: "5px 0" }}><EmailIcon></EmailIcon> : {mail}</p>
-          <p style={{ margin: "5px 0" }}><StarIcon></StarIcon> : {ubicacion}</p>
+          <p id='mail' style={{ margin: "5px 0" }}><EmailIcon></EmailIcon> : {datosUser.email}</p>
+          <p style={{ margin: "5px 0" }}><StarIcon></StarIcon> : {datosUser.localizacion}</p>
         </div>
       </div>
       <Center>
         <h2 style={{ fontSize: "xx-large" }}>Historial de compras</h2>
       </Center>
       <Center>
-        <div style={{ display: "flex",flexFlow: "column wrap" }}>
+        {/* <div style={{ display: "flex",flexFlow: "column wrap" }}>
           {consulta.historial.map(respuesta => {
             return (<Carta historial={respuesta} ancho={anchoInner} />)
           })}
-        </div>
+        </div> */}
       </Center>
     </>
   )
