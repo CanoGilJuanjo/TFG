@@ -148,7 +148,6 @@ export const CrearCuenta = () => {
                                         type={
                                             showPassword ? "text" : "password"
                                         }
-                                        onChange={showPasswordS}
                                         name="contrasena"
                                     />
 
@@ -156,10 +155,9 @@ export const CrearCuenta = () => {
                                         <Button
                                             variant={"ghost"}
                                             onClick={() =>
-                                                setShowPassword(
-                                                    (showPassword) =>
-                                                        !showPassword
-                                                )
+                                                {setShowPassword(
+                                                    !showPassword
+                                                )}
                                             }
                                         >
                                             {showPassword ? (
