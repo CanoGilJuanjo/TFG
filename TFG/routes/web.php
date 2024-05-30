@@ -24,7 +24,6 @@ Route::get('/contactos', function () {
     return view('Contactos');
 });
 
-
 Route::get('/crearcuenta', function () {
     return view('CrearCuenta');
 });
@@ -36,6 +35,18 @@ Route::get('/perfil', function () {
 });
 Route::get("/planes",function(){
     return view("Planes");
+});
+
+Route::get("/terminosServicio",function(){
+    return view("TerminosServicio");
+});
+
+Route::get("/politicasPrivacidad",function(){
+    return view("PoliticasPrivacidad");
+});
+
+Route::get("/legal",function(){
+    return view("Legal");
 });
 
 Route::get("/api/lista", [ControllerEvento::class, 'get_all']);
