@@ -124,7 +124,7 @@ export const BuscadorEventos = () => {
                             Esta a {(distancia)?(Math.round(distancia / 1000))==0? distancia / 1000:Math.round(distancia / 1000):"-"} km
                         </Box>
                         <Box as='span' color='green.500' fontSize='sm'>
-                            Precio: {punto.precio?punto.precio+" €":"GRATIS"} 
+                            Precio: {(punto.precio!=0)?punto.precio+" €":"GRATIS"} 
                         </Box>
                         <Box display='flex' mt='2' alignItems='center'>
                             Valoración:{Array(5)
@@ -192,9 +192,7 @@ export const BuscadorEventos = () => {
             if(precioMin>0){
                 for(let i of cartaLista){
                     if( 
-                        (parseFloat(i.children[0].children[1].children[3].innerHTML.split(" ")[1]) < precioMin && i.classList[i.classList.length-1] !== "escondido") ||
-                        (i.children[0].children[1].children[3].innerHTML.split(" ")[1] == "GRATIS" && precioMin>0)
-                    ){   
+                        (parseFloat(i.children[0].children[1].children[3].innerHTML.split(" ")[1]) < precioMin && i.classList[i.classList.length-1] !== "escondido") ){   
                         i.className = i.className+" escondido";
                         i.style.display = "none";
                     }
@@ -203,6 +201,14 @@ export const BuscadorEventos = () => {
             if(precioMax>0){
                 for(let i of cartaLista){
                     if(parseFloat(i.children[0].children[1].children[3].innerHTML.split(" ")[1])>precioMax && i.classList[i.classList.length-1] !== "escondido"){
+                        i.className = i.className+" escondido";
+                        i.style.display = "none";
+                    }
+                }
+            }
+            if(precioMax==0){
+                for(let i of cartaLista){
+                    if(i.children[0].children[1].children[3].innerHTML.split(" ")[1] != "GRATIS" && precioMin==0){
                         i.className = i.className+" escondido";
                         i.style.display = "none";
                     }
@@ -239,15 +245,16 @@ export const BuscadorEventos = () => {
             <Center display={"flex"} flexFlow={"row wrap"} marginTop={"10vh"} borderWidth={"1px"} borderRadius={"10px"} boxShadow={"0px 0px 1px black"} zIndex={2}>
                 <form style={{marginRight:"3vw"}}>
                     <label htmlFor="nombre">Nombre: </label>
-                    <Input type="text" name="nombre" id="" bg={useColorModeValue("gray.600","gray.200")} color={useColorModeValue("white","black")} style={{fontSize:"2vh",width:"11vw",textAlign:"center",marginRight:"1vw"}} onChange={nombreS} />
+                    <Input type="text" name="nombre" id="" bg={"transparent"}  color={useColorModeValue("black","white")} style={{fontSize:"2vh",width:"11vw",textAlign:"center",marginRight:"1vw",border:`1px solid ${useColorModeValue("black","white")}`}} onChange={nombreS} />
                     <label htmlFor="precio">Precios: </label>
-                    Min <Input type='number' name='precioMin' bg={useColorModeValue("gray.600","gray.200")} color={useColorModeValue("white","black")} style={{fontSize:"2vh",width:"11vw",textAlign:"center",marginRight:"1vw"}} onChange={precioMinS}></Input>
-                    Max <Input type='number' name='precioMin' bg={useColorModeValue("gray.600","gray.200")} color={useColorModeValue("white","black")} style={{fontSize:"2vh",width:"11vw",textAlign:"center",marginRight:"1vw"}} onChange={precioMaxS}></Input>
+                    Min <Input type='number' name='precioMin' bg={"transparent"}  color={useColorModeValue("black","white")} style={{fontSize:"2vh",width:"11vw",textAlign:"center",marginRight:"1vw",border:`1px solid ${useColorModeValue("black","white")}`}} onChange={precioMinS}></Input>
+                    Max <Input type='number' name='precioMin'  bg={"transparent"}  color={useColorModeValue("black","white")} style={{fontSize:"2vh",width:"11vw",textAlign:"center",marginRight:"1vw",border:`1px solid ${useColorModeValue("black","white")}`}} onChange={precioMaxS}></Input>
                 </form>
                 <Select style={{
                         border: "1px solid black",
                         alignItems: "center",
                         textAlign: "center",
+                        borderColor:`${useColorModeValue("black","white")}`
                     }} width={"12vw"} fontSize={"2vh"} marginRight={"10px"}>
                     <option value={"-"}>Todo</option>
                     <option value='5'>5</option>
@@ -275,7 +282,7 @@ export const BuscadorEventos = () => {
                             })
                         }
                     </Center>
-                    <Text id='mas' _hover={{color:"white"}} style={{color:useColorModeValue("darkblue","lightblue"),cursor:"pointer",margin:"5vh"}} onClick={()=>{(maxViews+6 <= eventos.length)?
+                    <Text id='mas' style={{color:useColorModeValue("darkblue","lightblue"),cursor:"pointer",margin:"5vh"}} onClick={()=>{(maxViews+6 <= eventos.length)?
                                                                                                         (()=>{
                                                                                                             setMaxvies(maxViews+6) 
                                                                                                             setLoading(true)

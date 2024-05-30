@@ -76,10 +76,14 @@ const Navbar = () => {
                                 </>   
                             :
                                 <>
+                                    <NavLink to={"/suscripciones"}>
+                                        <Button m="3">
+                                            <p style={{marginBottom:"0"}}>Suscripciones</p>
+                                        </Button>
+                                    </NavLink>
                                     <NavLink to={"/carritocompra"}>
-                                        <Button m="3" ml={"-2"}>
-                                            
-                                                <p style={{width: "24px"}}>🛒</p>
+                                        <Button m="3">
+                                                <p style={{width: "24px", marginBottom:"0"}}>🛒</p>
                                         </Button>
                                     </NavLink>
                                     <MenuButton

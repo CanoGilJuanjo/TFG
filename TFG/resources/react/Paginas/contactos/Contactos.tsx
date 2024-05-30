@@ -26,9 +26,10 @@ import {
     MdOutlineEmail,
 } from "react-icons/md";
 import { BsGithub, BsDiscord, BsPerson } from "react-icons/bs";
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import MapaContactos from "./MapaContactos";
 import axios from "axios";
+import emailjs from '@emailjs/browser';
 
 export default function Contactos() {
     const [formData, setFormData] = useState({
@@ -45,14 +46,33 @@ export default function Contactos() {
         });
     };
 
-    const handleSubmit = async () => {
+    const form = useRef();
+
+    const sendEmail = (e) => {
+        e.preventDefault();
+
+        emailjs
+            .sendForm('service_yck90nn', 'template_wru1uk8', form.current, {
+                publicKey: 'SfnHSZBJq2pSG-cGJ',
+            })
+            .then(
+                () => {
+                    console.log('SUCCESS!');
+                },
+                (error) => {
+                    console.log('FAILED...', error.text);
+                },
+            );
+    };
+
+    /* const handleSubmit = async () => {
         console.log(formData);
         await axios
             .post("http://127.0.0.1:8000/contactos/mail",formData)
             .then((res) => console.log(res))
             .catch(error=>console.log(error)
             )
-    };
+    }; */
 
     return (
         <>
@@ -118,7 +138,7 @@ export default function Contactos() {
                                                 <Button
                                                     size="md"
                                                     height="48px"
-                                                    width="200px"
+                                                    width="fit-content"
                                                     variant="ghost"
                                                     color="#DCE2FF"
                                                     _hover={{
@@ -207,85 +227,84 @@ export default function Contactos() {
                                             )}
                                         >
                                             <VStack spacing={5}>
-                                                <FormControl id="name">
-                                                    <FormLabel>
-                                                        Nombre
-                                                    </FormLabel>
-                                                    <InputGroup borderColor="#E0E1E7">
-                                                        <InputLeftElement
-                                                            pointerEvents="none"
-                                                            children={
-                                                                <BsPerson color="gray.800" />
-                                                            }
+                                                <form ref={form} onSubmit={sendEmail}>
+
+                                                    <FormControl id="name">
+                                                        <FormLabel>
+                                                            Nombre
+                                                        </FormLabel>
+                                                        <InputGroup borderColor="#E0E1E7">
+                                                            <InputLeftElement
+                                                                pointerEvents="none"
+                                                                children={
+                                                                    <BsPerson color="gray.800" />
+                                                                }
+                                                            />
+                                                            <Input
+                                                                type="text"
+                                                                size="md"
+                                                                name="name"
+                                                                onChange={
+                                                                    handleChange
+                                                                }
+                                                            />
+                                                        </InputGroup>
+                                                    </FormControl>
+                                                    <FormControl id="name">
+                                                        <FormLabel>
+                                                            Correo
+                                                        </FormLabel>
+                                                        <InputGroup borderColor="#E0E1E7">
+                                                            <InputLeftElement
+                                                                pointerEvents="none"
+                                                                children={
+                                                                    <MdOutlineEmail color="gray.800" />
+                                                                }
+                                                            />
+                                                            <Input
+                                                                type="text"
+                                                                size="md"
+                                                                name="email"
+                                                                onChange={
+                                                                    handleChange
+                                                                }
+                                                            />
+                                                        </InputGroup>
+                                                    </FormControl>
+                                                    <FormControl id="name">
+                                                        <FormLabel>
+                                                            Mensaje
+                                                        </FormLabel>
+                                                        <Textarea
+                                                            borderColor="gray.300"
+                                                            _hover={{
+                                                                borderRadius:
+                                                                    "gray.300",
+                                                            }}
+                                                            placeholder="mensaje"
+                                                            name="mensaje"
+                                                            onChange={handleChange}
                                                         />
-                                                        <Input
-                                                            type="text"
-                                                            size="md"
-                                                            name="name"
-                                                            onChange={
-                                                                handleChange
-                                                            }
-                                                        />
-                                                    </InputGroup>
-                                                </FormControl>
-                                                <FormControl id="name">
-                                                    <FormLabel>
-                                                        Correo
-                                                    </FormLabel>
-                                                    <InputGroup borderColor="#E0E1E7">
-                                                        <InputLeftElement
-                                                            pointerEvents="none"
-                                                            children={
-                                                                <MdOutlineEmail color="gray.800" />
-                                                            }
-                                                        />
-                                                        <Input
-                                                            type="text"
-                                                            size="md"
-                                                            name="email"
-                                                            onChange={
-                                                                handleChange
-                                                            }
-                                                        />
-                                                    </InputGroup>
-                                                </FormControl>
-                                                <FormControl id="name">
-                                                    <FormLabel>
-                                                        Mensaje
-                                                    </FormLabel>
-                                                    <Textarea
-                                                        borderColor="gray.300"
-                                                        _hover={{
-                                                            borderRadius:
-                                                                "gray.300",
-                                                        }}
-                                                        placeholder="mensaje"
-                                                        name="mensaje"
-                                                        onChange={handleChange}
-                                                    />
-                                                </FormControl>
-                                                <FormControl
-                                                    id="name"
-                                                    float="right"
-                                                >
-                                                    <Button
-                                                        variant="solid"
-                                                        bg={useColorModeValue(
-                                                            "#1A202C",
-                                                            "#EDF2F7"
-                                                        )}
-                                                        color={useColorModeValue(
-                                                            "#FFF",
-                                                            "#000"
-                                                        )}
-                                                        _hover={{}}
-                                                        onClick={() =>
-                                                            handleSubmit()
-                                                        }
+                                                    </FormControl>
+                                                    <FormControl
+                                                        id="name"
+                                                        float="right"
                                                     >
-                                                        Enviar
-                                                    </Button>
-                                                </FormControl>
+                                                        <Input
+                                                            variant="solid"
+                                                            type={"submit"}
+                                                            bg={useColorModeValue(
+                                                                "#1A202C",
+                                                                "#EDF2F7"
+                                                            )}
+                                                            color={useColorModeValue(
+                                                                "#FFF",
+                                                                "#000"
+                                                            )}
+                                                            value={"Enviar"}
+                                                        />
+                                                    </FormControl>
+                                                </form>
                                             </VStack>
                                         </Box>
                                     </Box>

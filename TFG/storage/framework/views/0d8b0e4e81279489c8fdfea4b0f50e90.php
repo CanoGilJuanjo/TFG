@@ -18,6 +18,10 @@
 </head>
 
 <body>
+    <?php
+        session_start()
+    ?>
+    
     <div id="app" data-projects=""></div>
 </body>
 

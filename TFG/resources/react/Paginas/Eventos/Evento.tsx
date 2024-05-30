@@ -90,12 +90,13 @@ export const Evento = () => {
 
     const Carta = ({ precio, fecha_inicio, fecha_fin,descripcion }) => {
         return (
-            <form action="/temp3" method="GET" onSubmit={(e) => { if(idUsuario == null) e.preventDefault() }}>
-                <GridItem>
-                    <Center py={6} pt={"120px"} minH={"50vh"}>
+            <form action="/temp3" method="GET" style={{height:"fit-content"}} onSubmit={(e) => { if(idUsuario == null) e.preventDefault() }}>
+                <GridItem maxH={"30vh"}>
+                    <Center py={6} pt={"120px"}>
                         <Box
-                            maxW={"330px"}
+                            maxW={"300px"}
                             w={"full"}
+                            maxH={"47vh"}
                             bg={useColorModeValue("white", "gray.800")}
                             boxShadow={"2xl"}
                             rounded={"md"}
@@ -123,8 +124,9 @@ export const Evento = () => {
                                 bg={useColorModeValue("gray.50", "gray.900")}
                                 px={6}
                                 py={10}
+                                maxH={"30vh"}
                             >
-                                <Text>
+                                <Text fontSize={"15px"} height={"10px"}>
                                     {descripcion}
                                 </Text>
 

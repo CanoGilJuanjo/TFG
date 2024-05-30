@@ -179,7 +179,7 @@ export const CrearCuenta = () => {
                                     _hover={{
                                         bg: "blue.500",
                                     }}
-                                    onClick={(e)=>{(error=="")?e.preventDefault():console.log("correcto")}}
+                                    onClick={(e)=>{(error!="")?e.preventDefault():console.log("correcto")}}
                                     value={"Crear cuenta"}
                                 ></Input>
                             </Stack>
