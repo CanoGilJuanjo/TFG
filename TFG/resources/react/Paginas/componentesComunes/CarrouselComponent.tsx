@@ -1,5 +1,5 @@
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Image, Box, useColorModeValue } from "@chakra-ui/react";
+import { Image, Box, useColorModeValue, Link } from "@chakra-ui/react";
 import { Pagination, Scrollbar, Autoplay } from "swiper/modules";
 
 import "swiper/css";
@@ -12,7 +12,7 @@ export default () => {
             paddingTop={"50px"}
             width={"100%"}
             height={"20%"}
-            fontWeight={'bold'}
+            fontWeight={"bold"}
         >
             Colaboradores
             <Swiper
@@ -37,45 +37,65 @@ export default () => {
                     }}
                 >
                     {" "}
-                    <Image
-                        background={useColorModeValue("white", "white")}
+                    <Link href="https://oleoronda.com/" isExternal>
+                        <Image
+                            background={useColorModeValue("white", "white")}
+                            style={{
+                                justifyContent: "center",
+                                display: "flex",
+                                verticalAlign: "middle",
+                                width: "8vw",
+                                height: "100%",
+                                borderRadius: "5px",
+                            }}
+                            src="../../media/OleoRonda.png"
+                            alt="Oleo Ronda"
+                        />{" "}
+                    </Link>
+                </SwiperSlide>
+                <SwiperSlide
+                    style={{
+                        justifyContent: "center",
+                        display: "flex",
+                        verticalAlign: "middle",
+                    }}
+                >
+                    {" "}
+                    <Link href="https://www.ardoyabogados.com/" isExternal>
+                        <Image
+                            src="../../media/ArdoyAbogados.png"
+                            alt="Ardoy Abogados"
+                        />
+                    </Link>
+                </SwiperSlide>
+                <SwiperSlide
+                    style={{
+                        justifyContent: "center",
+                        display: "flex",
+                        verticalAlign: "middle",
+                        height: "100%",
+                        width: "20vw",
+                        borderRadius: "5px",
+                    }}
+                >
+                    {" "}
+                    <Link
                         style={{
                             justifyContent: "center",
                             display: "flex",
                             verticalAlign: "middle",
-                            width:"10vw",
-                            height:"100%",
-                            borderRadius: "5px"
+                            height: "100%",
+                            width: "20vw",
+                            borderRadius: "5px",
                         }}
-                        src="../../media/OleoRonda.png"
-                        alt="Oleo Ronda"
-                    />{" "}
-                </SwiperSlide>
-                <SwiperSlide
-                    style={{
-                        justifyContent: "center",
-                        display: "flex",
-                        verticalAlign: "middle",
-                    }}
-                >
-                    {" "}
-                    <Image
-                        src="../../media/ArdoyAbogados.png"
-                        alt="Ardoy Abogados"
-                    />
-                </SwiperSlide>
-                <SwiperSlide
-                    style={{
-                        justifyContent: "center",
-                        display: "flex",
-                        verticalAlign: "middle",
-                        height:"100%",
-                        width:"20vw",
-                        borderRadius: "5px"
-                    }}
-                >
-                    {" "}
-                    <Image src="../../media/logoGoldKobra.png" alt="Gold Kobra" />
+                        href="https://www.instagram.com/goldkobra.ttt/tagged/"
+                        isExternal
+                    >
+                        <Image
+                            src="../../media/logoGoldKobra.png"
+                            alt="Gold Kobra"
+                        />
+                    </Link>
                 </SwiperSlide>
             </Swiper>
         </Box>
