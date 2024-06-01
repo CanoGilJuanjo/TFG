@@ -13,14 +13,12 @@ import {
 } from '@chakra-ui/react'
 import React, { useState } from 'react'
 import { NavLink, redirect } from 'react-router-dom';
-import { type } from './../Planes/CreadorPlanes';
 
 export default function IniciarSesion() {
   const [email, setEmail] = useState("");
   const [contrasena, setContrasena] = useState("");
-  const [emailError, setEmailError] = useState(false);
-  const [contrasenaError, setContrasenaError] = useState(false);
-
+  const error = localStorage.getItem("error")
+  localStorage.removeItem("error")
 
   const emailS = (e) => setEmail(e.target.value);
   const contrasenaS = (e) => setContrasena(e.target.value);
@@ -62,11 +60,13 @@ export default function IniciarSesion() {
                   name="contrasena"
                   onChange={contrasenaS}
                 />
-                {contrasenaError && (
-                  <Text color="red.500" mt={2}>
-                    La contraseña es incorrecta.
-                  </Text>
-                )}
+                {
+                  (error!="" && error!=null) &&(
+                    <Text color={"red"} mt={2}>
+                      {error}
+                    </Text>
+                  )
+                }
               </FormControl>
               <Stack spacing={10}>
                 <Stack

@@ -27,7 +27,7 @@
         $passwordVerify = password_verify($contrasena, $contrasena_tipada);
         if (!$passwordVerify) { ?>
             <script>
-                location.href = "/inciarsesion";
+                location.href = "/iniciarsesion";
             </script>
             <?php
         } else {
@@ -56,6 +56,13 @@
     <?php
             }
         }
+    }else{
+        ?>
+        <script>
+            location.href = "/iniciarsesion"
+            localStorage.setItem("error","Error no existe el usuario o la contraseña está mal")
+        </script>
+        <?php
     } ?>
 
 </body>

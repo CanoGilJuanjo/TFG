@@ -34,8 +34,9 @@
             <?php
             }
         }else{
+            $hash = password_hash($contrasena, PASSWORD_DEFAULT);
             $sql = "INSERT INTO usuarios(id, nombre, apellidos, contrasena, edad, localizacion, email, nivel, telefono)
-            Values(null, '$nombre', '$apellido', '$contrasena', '$edad', 'Espana', '$mail', 0, '666 66 66 66')";
+            Values(null, '$nombre', '$apellido', '$hash', '$edad', 'Espana', '$mail', 0, '666 66 66 66')";
             
             $conexion -> query($sql);
 
@@ -65,14 +66,14 @@
             <?php
             }
 
-            $sql = "SELECT id, email, contrasena FROM usuarios WHERE email = '$mail' AND contrasena = '$contrasena'";
+            $sql = "SELECT id, email, contrasena FROM usuarios WHERE email = '$mail' AND contrasena = '$hash'";
 
             $result = $conexion->query($sql);
             if ($row = $result->fetch_assoc()) { ?>
                 <script>
                     localStorage.setItem("idUsr", "<?php echo $row["id"]; ?>");
                     localStorage.setItem("emailUsr", "<?php echo $mail; ?>");
-                    localStorage.setItem("contrasenaUsr", "<?php echo $contrasena; ?>");
+                    localStorage.setItem("contrasenaUsr", "<?php echo $hash; ?>");
                     location.href = "/";
                 </script>
             <?php
