@@ -293,6 +293,9 @@ export default function Contactos() {
                                                         <Input
                                                             variant="solid"
                                                             type={"submit"}
+                                                            width={'50%'}
+                                                            top={'15px'}
+                                                            left={'-60px'}
                                                             bg={useColorModeValue(
                                                                 "#1A202C",
                                                                 "#EDF2F7"
