@@ -7,6 +7,7 @@
     <title>{{ config('app.name') }}</title>
     <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+    <link rel="shortcut icon" href="media/BLANCO_FIT.png" type="image/x-icon">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <!-- Estilos de Mapas #SE TIENE QUE ELIMINAR DE ESTA PAGINA, SOLO SE USA EN LAS PAGINAS QUE LO NECESITEN# -->
     <!-- <link href='https://api.mapbox.com/mapbox-gl-js/v2.8.1/mapbox-gl.css' rel='stylesheet' /> -->
@@ -19,9 +20,9 @@
 
 <body>
     <?php
-        session_start()
+    session_start();
     ?>
-    
+
     <div id="app" data-projects=""></div>
 </body>
 
