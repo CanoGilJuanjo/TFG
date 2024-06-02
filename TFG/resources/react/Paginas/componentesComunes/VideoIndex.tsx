@@ -43,7 +43,7 @@ const VideoIndex = () => {
                         textColor={useColorModeValue("white", "#A9A9A9")}
                         style={{ textShadow: "5px 5px 20px #e0e0e0" }}
                     >
-                        Encuentra tu fiesta
+                        Encuentra tu evento
                     </Text>
                     {/* <ChevronRightIcon position="absolute"
             top="50%"

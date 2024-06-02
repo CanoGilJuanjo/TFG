@@ -47,11 +47,6 @@ export default function IniciarSesion() {
                   name="mail"
                   onChange={emailS}
                 />
-                {emailError && (
-                  <Text color="red.500" mt={2}>
-                    El correo electrónico es incorrecto.
-                  </Text>
-                )}
               </FormControl>
               <FormControl id="password">
                 <FormLabel>Contraseña</FormLabel>
