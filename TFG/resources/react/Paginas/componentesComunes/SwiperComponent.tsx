@@ -73,9 +73,9 @@ const SwiperComponent = ({ eventosMostrar }) => {
                                 }}
                             >
                                 <CarrouselCardsComponent
-                                onClick={() => handleOnClick(evento.id)}
+                                    onClick={() => handleOnClick(evento.id)}
                                     src={evento.foto}
-                                    texto={"No te lo puedes perder"}
+                                    texto={evento.localizacion}
                                     puntuacion={evento.valoracion + "/5"}
                                     place={evento.titulo}
                                 ></CarrouselCardsComponent>
