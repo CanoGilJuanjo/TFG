@@ -166,7 +166,7 @@ export const BuscadorEventos = () => {
     }
     //Busca los precios y los filtra
     const [precioMin,setPrecioMin] = useState(0.0);
-    const [precioMax,setPrecioMax] = useState(0.0);
+    const [precioMax,setPrecioMax] = useState(200000);
     const precioMaxS = (e) =>{
         setPrecioMax(e.target.value)
         
