@@ -9,8 +9,7 @@ ejecutar en un cmd o en un terminal de VS code el comando
 
 -"npm install" 
 
-para actualizar las carpetasde todas maneras esta carpeta la voy a pasar con 
-todos los node modules para que esten actualizados.
+para actualizar los node_modules de todas maneras esta carpeta.
 
 --------------------------------------------------------------------------------
 Dentro del proyecto nosotros trabajamos con la carpeta 
