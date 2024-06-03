@@ -164,7 +164,7 @@ const Navbar = () => {
                                                 setUsuario(false);
                                             }}
                                         >
-                                            <MenuItem>Cerrar Sesion</MenuItem>
+                                            <MenuItem>Cerrar Sesión</MenuItem>
                                         </NavLink>
                                     </MenuList>
                                 </>
