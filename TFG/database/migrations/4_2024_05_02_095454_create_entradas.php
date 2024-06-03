@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('entradas', function (Blueprint $table) {
             $table->id();
+            $table->string("titulo_evento");
+            $table->string("foto_evento");
             $table->decimal("cantidad");
             $table->decimal("precio_total");
             $table->string("qr");

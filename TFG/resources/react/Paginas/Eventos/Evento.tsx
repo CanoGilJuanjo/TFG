@@ -88,7 +88,7 @@ export const Evento = () => {
             });
     }, []);
 
-    const Carta = ({ precio, fecha_inicio, fecha_fin,descripcion }) => {
+    const Carta = ({ precio, fecha_inicio, fecha_fin, descripcion, titulo_evento, foto_evento }) => {
         return (
             <form action="/temp3" method="GET" style={{height:"fit-content"}} onSubmit={(e) => { if(idUsuario == null) e.preventDefault() }}>
                 <GridItem maxH={"30vh"}>
@@ -163,6 +163,19 @@ export const Evento = () => {
                                     name="precio"
                                     value={precio}
                                 ></Input>
+
+                                <Input
+                                    type="hidden"
+                                    name="titulo_evento"
+                                    value={titulo_evento}
+                                ></Input>
+
+                                <Input
+                                    type="hidden"
+                                    name="foto_evento"
+                                    value={foto_evento}
+                                ></Input>
+
 
                                 <Button mt={10}
                                 w={"full"}
@@ -314,6 +327,8 @@ export const Evento = () => {
                                                     fecha_inicio={eventos.fecha_inicio}
                                                     fecha_fin={eventos.fecha_fin}
                                                     descripcion={data.descripcion}
+                                                    titulo_evento={eventos.titulo}
+                                                    foto_evento={eventos.foto}
                                                     ></Carta>
                                                 </>
                                             );
