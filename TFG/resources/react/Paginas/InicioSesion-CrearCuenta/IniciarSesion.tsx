@@ -79,7 +79,7 @@ export default function IniciarSesion() {
                   _hover={{
                     bg: 'blue.500',
                   }}
-                  value={"Iniciar sesion"}>
+                  value={"Iniciar sesión"}>
                 </Input>
                 <NavLink style={{ color: "#80DAEB" }} to={"/crearcuenta"}>Crear cuenta</NavLink>
               </Stack>
