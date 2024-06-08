@@ -48,7 +48,10 @@ function Main() {
                             </div>
                         </main>
                         <footer>
-                            <FooterComponent></FooterComponent>
+                            <Routes>
+                                <Route path="/contactos" element={""}></Route>
+                                <Route path="*" element={<FooterComponent></FooterComponent>}></Route>
+                            </Routes>
                         </footer>
                     </>}>
                 </Route>
