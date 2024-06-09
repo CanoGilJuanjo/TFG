@@ -12,6 +12,7 @@ import {
     Heading,
     Text,
     useColorModeValue,
+    Center,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
@@ -19,6 +20,8 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 
 export const CrearCuenta = () => {
+    const error1 = (localStorage.getItem("error") == ""||localStorage.getItem("error") == null)? null:localStorage.getItem("error");
+    localStorage.removeItem("error");
     const [showPassword, setShowPassword] = useState(false);
     const [nombre, setNombre] = useState("");
     const [apellido, setApellido] = useState("");
@@ -184,6 +187,12 @@ export const CrearCuenta = () => {
                                 ></Input>
                             </Stack>
                             <Stack pt={6}>
+                                {
+                                    (error1)?
+                                        <Center style={{color:"red"}}>{error1}</Center>
+                                        :
+                                        ""
+                                }
                                 <Text align={"center"}>
                                     Ya registrado?{" "}
                                     <NavLink

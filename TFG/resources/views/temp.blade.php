@@ -6,7 +6,7 @@
         <?php
             $_servidor = "localhost";
             $_usuario = "root";
-            $_contrasena = "123456";
+            $_contrasena = "1234";
             $_base_de_datos = "tfg";
 
             $conexion = new Mysqli($_servidor, $_usuario, $_contrasena, $_base_de_datos) 
@@ -20,67 +20,83 @@
         $edad = $_GET["edad"];
         $mail = $_GET["mail"];
         $contrasena = $_GET["contrasena"];
-
-        $sql = "SELECT email FROM usuarios WHERE email = '$mail'";
         
-        $result = $conexion->query($sql);
-
-        if ($result->num_rows > 0) {
-            $row = $result->fetch_assoc();
-            if ($row['email'] == $mail) { ?>
+        //Comprobaciones previas
+        if($edad<18){
+            ?>
                 <script>
+                    localStorage.setItem("error","Usuario menor de edad")
                     location.href = "/crearcuenta";
                 </script>
             <?php
-            }
+        }else if(preg_match("/[0-9]/",$nombre) || preg_match("/[0-9]/",$apellido)){
+            ?>
+            <script>
+                localStorage.setItem("error","Nombre y Apellido no pueden tener numeros.")
+                location.href = "/crearcuenta";
+            </script>
+            <?php
         }else{
-            $hash = password_hash($contrasena, PASSWORD_DEFAULT);
-            $sql = "INSERT INTO usuarios(id, nombre, apellidos, contrasena, edad, localizacion, email, nivel, telefono)
-            Values(null, '$nombre', '$apellido', '$hash', '$edad', 'Espana', '$mail', 0, '666 66 66 66')";
+            $sql = "SELECT email FROM usuarios WHERE email = '$mail'";
             
-            $conexion -> query($sql);
-
-            $sql = "SELECT id FROM usuarios WHERE email = '$mail'";
-
             $result = $conexion->query($sql);
 
             if ($result->num_rows > 0) {
                 $row = $result->fetch_assoc();
-                $id_usuario = $row['id'];
-            }
+                if ($row['email'] == $mail) { ?>
+                    <script>
+                        localStorage.setItem("error","Ya existe el usuario.")
+                        location.href = "/crearcuenta";
+                    </script>
+                <?php
+                }
+            }else{
+                $hash = password_hash($contrasena, PASSWORD_DEFAULT);
+                $sql = "INSERT INTO usuarios(id, nombre, apellidos, contrasena, edad, localizacion, email, nivel, telefono)
+                Values(null, '$nombre', '$apellido', '$hash', '$edad', 'Espana', '$mail', 0, '666 66 66 66')";
+                
+                $conexion -> query($sql);
 
-            $sql = "INSERT INTO carrito(id, precio_total, id_usuario)
-                Values(null, 0, '$id_usuario')";
-            
-            $conexion -> query($sql);
+                $sql = "SELECT id FROM usuarios WHERE email = '$mail'";
 
-            $sql = "SELECT id FROM carrito WHERE id_usuario = '$id_usuario'";
-            
-            $result = $conexion -> query($sql);
-            
+                $result = $conexion->query($sql);
 
-            if ($row = $result->fetch_assoc()) { ?>
-                <script>
-                    localStorage.setItem("idCarrito", <?php echo $row['id'] ?>);
-                </script>
-            <?php
-            }
+                if ($result->num_rows > 0) {
+                    $row = $result->fetch_assoc();
+                    $id_usuario = $row['id'];
+                }
 
-            $sql = "SELECT id, email, contrasena FROM usuarios WHERE email = '$mail' AND contrasena = '$hash'";
+                $sql = "INSERT INTO carrito(id, precio_total, id_usuario)
+                    Values(null, 0, '$id_usuario')";
+                
+                $conexion -> query($sql);
 
-            $result = $conexion->query($sql);
-            if ($row = $result->fetch_assoc()) { ?>
-                <script>
-                    localStorage.setItem("idUsr", "<?php echo $row["id"]; ?>");
-                    localStorage.setItem("emailUsr", "<?php echo $mail; ?>");
-                    localStorage.setItem("contrasenaUsr", "<?php echo $hash; ?>");
-                    location.href = "/";
-                </script>
-            <?php
+                $sql = "SELECT id FROM carrito WHERE id_usuario = '$id_usuario'";
+                
+                $result = $conexion -> query($sql);
+                
+
+                if ($row = $result->fetch_assoc()) { ?>
+                    <script>
+                        localStorage.setItem("idCarrito", <?php echo $row['id'] ?>);
+                    </script>
+                <?php
+                }
+
+                $sql = "SELECT id, email, contrasena FROM usuarios WHERE email = '$mail' AND contrasena = '$hash'";
+
+                $result = $conexion->query($sql);
+                if ($row = $result->fetch_assoc()) { ?>
+                    <script>
+                        localStorage.setItem("idUsr", "<?php echo $row["id"]; ?>");
+                        localStorage.setItem("emailUsr", "<?php echo $mail; ?>");
+                        localStorage.setItem("contrasenaUsr", "<?php echo $hash; ?>");
+                        location.href = "/";
+                    </script>
+                <?php
+                }
             }
         }
-
-        
         ?>
     </body>
 </html>

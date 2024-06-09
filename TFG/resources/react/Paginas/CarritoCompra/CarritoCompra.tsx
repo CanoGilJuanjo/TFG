@@ -95,7 +95,7 @@ export default function CarritoCompra() {
                             src={foto_evento}
                             style={{
                                 height: "30vh",
-                                width: "30vw",
+                                width: "20vw",
                                 maxHeight: "30vh",
                                 maxWidth: "30vw",
                                 borderRadius: "20px",
@@ -134,7 +134,7 @@ export default function CarritoCompra() {
                     </Thead>
                     <Tbody style={{width: anchoInner-1}}>
                         {entradas.map((data) => {
-                            setPrecioTotal(precioTotal + (data.precio_total * data.cantidad));
+                            //setPrecioTotal(precioTotal + (data.precio_total * data.cantidad));
                             return (
                                 <ContenidoCarrito
                                     fecha_inicio={data.fecha_inicio}

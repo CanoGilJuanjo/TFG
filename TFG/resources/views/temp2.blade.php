@@ -7,7 +7,7 @@
     <?php
     $_servidor = "localhost";
     $_usuario = "root";
-    $_contrasena = "123456";
+    $_contrasena = "1234";
     $_base_de_datos = "tfg";
 
     $conexion = new Mysqli($_servidor, $_usuario, $_contrasena, $_base_de_datos)
@@ -27,6 +27,7 @@
         $passwordVerify = password_verify($contrasena, $contrasena_tipada);
         if (!$passwordVerify) { ?>
             <script>
+                localStorage.setItem("error","Error contraseña incorrecta")
                 location.href = "/iniciarsesion";
             </script>
             <?php
@@ -60,7 +61,7 @@
         ?>
         <script>
             location.href = "/iniciarsesion"
-            localStorage.setItem("error","Error no existe el usuario o la contraseña está mal")
+            localStorage.setItem("error","Error no existe el usuario")
         </script>
         <?php
     } ?>
