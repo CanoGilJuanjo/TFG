@@ -63,6 +63,10 @@ Route::get("/temp3", function () {
     return view("temp3");   
 });
 
+Route::get('/tempPlan', function () {
+    return view('tempPlan');
+});
+
 Route::get("/carritocompra", function () {
     return view("carrito");   
 });
