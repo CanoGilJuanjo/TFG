@@ -7,10 +7,6 @@ use App\Http\Controllers\ControllerEvento;
 use App\Http\Controllers\ControllerEntrada;
 use App\Http\Controllers\ControllerUsuario;
 use App\Http\Controllers\ControllerPrecio;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Mail;
-use App\Http\Controllers\SchemaController;
-use App\Http\Controllers\GenericCollectionController;
 
 Route::get('/', function () {
     return view('index');
@@ -49,12 +45,6 @@ Route::get("/legal",function(){
     return view("Legal");
 });
 
-Route::get("/api/lista", [ControllerEvento::class, 'get_all']);
-
-Route::post("/contactos/mail", [ContactController::class, 'contactMail']);
-
-Route::get('/api/evento/{id}', [ControllerEvento::class, 'show']);
-
 Route::get('/evento/{id}',function(){return view("evento");});
 
 Route::get("/temp", function () {
@@ -77,6 +67,12 @@ Route::get("/carritocompra", function () {
     return view("carrito");   
 });
 
+Route::get("/api/lista", [ControllerEvento::class, 'get_all']);
+
+Route::post("/contactos/mail", [ContactController::class, 'contactMail']);
+
+Route::get('/api/evento/{id}', [ControllerEvento::class, 'show']);
+
 Route::get('/api/entradas',[ControllerEntrada::class, 'get_all']);
 
 Route::get('/api/entradas/{id_usuario}',[ControllerEntrada::class, 'show']);
@@ -84,3 +80,5 @@ Route::get('/api/entradas/{id_usuario}',[ControllerEntrada::class, 'show']);
 Route::get('/api/precios',[ControllerPrecio::class, 'get_all']);
 
 Route::get("/api/usuario/{id_usuario}",[ControllerUsuario::class,"find"]);
+
+Route::get("/api/entrada/{titulo_evento}",[ControllerEntrada::class,"delete"]);
