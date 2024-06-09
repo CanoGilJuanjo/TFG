@@ -7,7 +7,7 @@
     <?php
     $_servidor = "localhost";
     $_usuario = "root";
-    $_contrasena = "1234";
+    $_contrasena = "123456";
     $_base_de_datos = "tfg";
 
     $conexion = new Mysqli($_servidor, $_usuario, $_contrasena, $_base_de_datos)

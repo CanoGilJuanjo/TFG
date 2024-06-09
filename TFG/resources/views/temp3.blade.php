@@ -6,7 +6,7 @@
         <?php
             $_servidor = "localhost";
             $_usuario = "root";
-            $_contrasena = "";
+            $_contrasena = "123456";
             $_base_de_datos = "tfg";
 
             $conexion = new Mysqli($_servidor, $_usuario, $_contrasena, $_base_de_datos) 
@@ -26,7 +26,7 @@
 
 
         $sql = "INSERT INTO entradas(id, titulo_evento, foto_evento, cantidad, precio_total, qr, fecha_inicio, fecha_fin, id_usuario, id_evento, id_carrito)
-            VALUES(null, '1', '$titulo_evento', '$foto_evento', '$precio_total', 'qr', '$fecha_inicio', '$fecha_fin', '$id_usuario', '$id_evento', '$id_carrito')";
+            VALUES(null, '$titulo_evento', '$foto_evento',1, '$precio_total', 'qr', '$fecha_inicio', '$fecha_fin', '$id_usuario', '$id_evento', '$id_carrito')";
         
         $conexion -> query($sql);
         

@@ -13,10 +13,9 @@ import { Evento } from "./Paginas/Eventos/Evento";
 
 import { CreadorPlanes } from "./Paginas/Planes/CreadorPlanes";
 import CarritoCompra from "./Paginas/CarritoCompra/CarritoCompra";
-import FooterComponent from './Paginas/componentesComunes/FooterComponente';
+import FooterComponent from "./Paginas/componentesComunes/FooterComponente";
 import Index from "./Paginas/Indice";
 import { Suscripciones } from "./Paginas/Suscripciones/Suscripciones";
-
 
 function Main() {
     return (
@@ -48,10 +47,7 @@ function Main() {
                             </div>
                         </main>
                         <footer>
-                            <Routes>
-                                <Route path="/contactos" element={""}></Route>
-                                <Route path="*" element={<FooterComponent></FooterComponent>}></Route>
-                            </Routes>
+                            <FooterComponent></FooterComponent>
                         </footer>
                     </>}>
                 </Route>
