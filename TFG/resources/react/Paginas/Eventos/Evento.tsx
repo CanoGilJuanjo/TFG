@@ -16,6 +16,7 @@ import {
     FormHelperText,
     Input,
     Spinner,
+    border,
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
@@ -88,6 +89,8 @@ export const Evento = () => {
             });
     }, []);
 
+    
+
     const Carta = ({ precio, fecha_inicio, fecha_fin, descripcion, titulo_evento, foto_evento }) => {
         return (
             <form action="/temp3" method="GET" style={{height:"fit-content"}} onSubmit={(e) => { if(idUsuario == null) e.preventDefault() }}>
@@ -123,10 +126,18 @@ export const Evento = () => {
                             <Box
                                 bg={useColorModeValue("gray.50", "gray.900")}
                                 px={6}
-                                py={10}
+                                py={5}
                                 maxH={"30vh"}
                             >
-                                <Text fontSize={"15px"} height={"10px"}>
+                                <select name="cantidad" style={{backgroundColor: "#E0E0E0", padding: "5px", paddingLeft: "7px", borderRadius: "20px"}}>
+                                    <option value="1" selected hidden>Elija el número de entradas</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                </select>
+                                
+                                <Text fontSize={"15px"} height={"10px"} paddingTop={"20px"} paddingBottom={"15px"}>
                                     {descripcion}
                                 </Text>
 
@@ -206,6 +217,7 @@ export const Evento = () => {
             
         );
     };
+
     //Calculo ancho
     const [anchoInner,setAncho] = useState(window.innerWidth);
     const anchoInnerS = ()=>{
@@ -264,7 +276,6 @@ export const Evento = () => {
                                     </Text>
                                     <Text
                                         fontSize={"30px"}
-                                        pl={"60"}
                                     >
                                         {eventos?.boost}
                                     </Text>

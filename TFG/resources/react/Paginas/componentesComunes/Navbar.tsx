@@ -147,7 +147,7 @@ const Navbar = () => {
                                     >
                                         <Avatar
                                             size={"sm"}
-                                            src={"media/user.png"}
+                                            src={"../media/user.png"}
                                         />
                                     </MenuButton>
                                     <MenuList>

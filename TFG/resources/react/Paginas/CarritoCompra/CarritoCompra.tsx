@@ -1,3 +1,4 @@
+import { DeleteIcon } from "@chakra-ui/icons";
 import {
     Table,
     Thead,
@@ -13,13 +14,15 @@ import {
     useColorModeValue,
     Input,
     Spinner,
+    Button,
 } from "@chakra-ui/react";
 import React, { lazy, useEffect, useState } from "react";
-
 
 export interface Entradas {
     id: number;
     cantidad: number;
+    foto_evento: string;
+    titulo_evento: string;
     precio_total: number;
     qr: string;
     fecha_inicio: string;
@@ -29,72 +32,91 @@ export interface Entradas {
     id_carrito: number;
 }
 
-export interface Evento {
-    id: number;
-    titulo: string;
-    descripcion: string;
-    qr: string;
-    fecha_inicio: string;
-    fecha_fin: string;
-    foto: string;
-    precio: number;
-    localizacion: string;
-    boost: string;
-    created_at: string;
-    updated_at: string;
-}
-
 export default function CarritoCompra() {
-    const idUsuario = (localStorage.getItem("idUsr") == "" || localStorage.getItem("idUsr") == null)? "" : localStorage.getItem("idUsr");
-    const [entradas,setEntradas] = useState<Entradas[]>([])
-    const [evento,setEvento] = useState<Evento[]>([])
-    const [error,setError] = useState<any>(null)
-    const [loading,setLoading] = useState(true)
-    const [precioTotal,setPrecioTotal] = useState(0)
-    const apiEntradas = `http://localhost:8000/api/entradas/${idUsuario}`
-    const [ids,setIds] = useState<number[]>([])
-    useEffect(()=>{
-        fetch(apiEntradas)
-        .then(respuesta => respuesta.json())
-        .then((respuesta)=>{  
-            respuesta.map((eventoR)=>{
-                if(!ids.includes(eventoR.id_evento)){
-                    setIds([...ids,eventoR.id_evento])
-                    const apiEvento = `http://localhost:8000/api/evento/${eventoR.id_evento}`;
-                    fetch(apiEvento)
-                    .then(resquest => resquest.json())
-                    .then((resquest)=>{
-                        setEvento([...evento,resquest])
-                    }) 
-                }
-            }) 
-            return respuesta;
-        }).then((respuesta)=>{
-            setEntradas(respuesta) 
-            setLoading(false)
-        })
-        .catch(error=>setError(error))
-    },[evento])
+    const idUsuario =
+        localStorage.getItem("idUsr") == "" ||
+        localStorage.getItem("idUsr") == null
+            ? ""
+            : localStorage.getItem("idUsr");
+    const [entradas, setEntradas] = useState<Entradas[]>([]);
+    const [error, setError] = useState<any>(null);
+    const [loading, setLoading] = useState(true);
+    const [precioTotal, setPrecioTotal] = useState(0);
+    const apiEntradas = `http://localhost:8000/api/entradas/${idUsuario}`;
 
-    const ContenidoCarrito = ({ precio_total, fecha_inicio, fecha_fin, cantidad, foto,titulo }) => {
+    useEffect(() => {
+        fetch(apiEntradas)
+            .then((respuesta) => respuesta.json())
+            .then((data) => {
+                setEntradas(data);
+                setLoading(false);
+            })
+            .catch((error) => {
+                setError(error);
+            });
+    }, []);
+
+    const [anchoInner, setAncho] = useState(window.innerWidth);
+    const anchoInnerS = () => {
+        setAncho(window.innerWidth);
+    }
+    //Control para el ancho
+    window.onresize = anchoInnerS;
+
+    const borrarEntradas = (titulo) =>{  
+        for(let i = 0;i<entradas.length;i++){
+          if(entradas[i].titulo_evento == titulo){
+            if(i == 0){
+                entradas.shift();
+            }else if(i < entradas.length - 1){
+                entradas.splice(i,1);
+            }else if(i == entradas.length-1){
+                entradas.pop()
+            }
+          }
+        }
+        setAncho(anchoInner-1)
+        setAncho(anchoInner+1);
+
+        const apiDelete = `http://localhost:8000/api/entrada/${titulo}`;
+            fetch(apiDelete)
+                .catch((error) => {
+                    setError(error);
+                });
+      }
+     
+    const ContenidoCarrito = ({ precio_total, fecha_inicio, fecha_fin, cantidad, foto_evento, titulo_evento}) => {
         const fecha = fecha_inicio === fecha_fin ? fecha_inicio : `${fecha_inicio} - ${fecha_fin}`;
         return (
             <>
                 <Tr>
-                    <Td><img src={foto} style={{height:"30vh",width:"30vw",maxHeight:"30vh",maxWidth:"30vw",borderRadius:"20px"}} loading={"lazy"} alt={titulo} /></Td>
-                    <Td>{titulo}</Td>
+                    <Td>
+                        <img
+                            src={foto_evento}
+                            style={{
+                                height: "30vh",
+                                width: "30vw",
+                                maxHeight: "30vh",
+                                maxWidth: "30vw",
+                                borderRadius: "20px",
+                            }}
+                            loading={"lazy"}
+                            alt={titulo_evento}
+                        />
+                    </Td>
+                    <Td>{titulo_evento}</Td>
+                    <Td>{cantidad}</Td>
                     <Td>{fecha}</Td>
-                    <Td>{precio_total}</Td>
-                    <Td>{cantidad * precio_total}</Td>
+                    <Td>{precio_total}€</Td>
+                    <Td>{cantidad * precio_total}€</Td>
+                    <Td><Button justifySelf={"left"} className='eliminar' onClick={()=>{borrarEntradas(titulo_evento)}}><DeleteIcon></DeleteIcon></Button></Td>
                 </Tr>
             </>
         );
     };
 
-    if(error) return("error")
-    return (
-    (loading)? <Spinner color={useColorModeValue("black","blue.100")} marginTop={"10vh"} marginBottom={"50px"} />:
-    
+    if (error) return "error";
+    return loading ? ( <Spinner color={useColorModeValue("black", "blue.100")} marginTop={"10vh"} marginBottom={"50px"} />) : (
         <>
             <Heading mt={"13vh"}>Carrito</Heading>
             <TableContainer>
@@ -103,29 +125,26 @@ export default function CarritoCompra() {
                         <Tr>
                             <Th>Imagen</Th>
                             <Th>Título</Th>
+                            <Th>Cantidad</Th>
                             <Th>Fecha</Th>
                             <Th>Precio</Th>
                             <Th>Precio Total</Th>
+                            <Th></Th>
                         </Tr>
                     </Thead>
-                    <Tbody>
+                    <Tbody style={{width: anchoInner-1}}>
                         {entradas.map((data) => {
-                            return(
-                                evento.map((evento)=>{
-                                    if(evento.id == data.id_evento){   
-                                        return (
-                                            <ContenidoCarrito 
-                                                fecha_inicio={data.fecha_inicio} 
-                                                fecha_fin={data.fecha_fin} 
-                                                precio_total={data.precio_total}
-                                                cantidad={data.cantidad}
-                                                foto={evento.foto}
-                                                titulo={evento.titulo}
-                                            ></ContenidoCarrito>
-                                        );     
-                                    }
-                                })
-                            )
+                            setPrecioTotal(precioTotal + (data.precio_total * data.cantidad));
+                            return (
+                                <ContenidoCarrito
+                                    fecha_inicio={data.fecha_inicio}
+                                    fecha_fin={data.fecha_fin}
+                                    precio_total={data.precio_total}
+                                    cantidad={data.cantidad}
+                                    foto_evento={data.foto_evento}
+                                    titulo_evento={data.titulo_evento}
+                                ></ContenidoCarrito>
+                            );
                         })}
                     </Tbody>
                     <Tfoot>
@@ -134,7 +153,8 @@ export default function CarritoCompra() {
                             <Th></Th>
                             <Th></Th>
                             <Th></Th>
-                            <Th>{precioTotal}</Th>
+                            <Th></Th>
+                            <Th>{precioTotal}€</Th>
                         </Tr>
                     </Tfoot>
                 </Table>

@@ -26,4 +26,10 @@ class ControllerEntrada extends Controller
         $entradas = DB::select('select id_evento from entradas where id_usuario = ?', [$id_usuario]);
         return response()->json($entradas);
     }
+
+    public function delete(string $titulo) 
+    {
+        $entradas = DB::delete('delete from entradas where titulo_evento = ?', [$titulo]);
+        return response()->json($entradas);
+    }
 }
