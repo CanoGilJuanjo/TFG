@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use DB;
+
 class EntradasSeeder extends Seeder
 {
     /**
@@ -57,6 +58,36 @@ class EntradasSeeder extends Seeder
                 "id_usuario" => 1,
                 "id_evento" => 9,
                 "id_carrito" => 1,
+                "created_at" => NULL,
+                "updated_at" => NULL,
+            ],
+            [
+                "id" => 4,
+                "titulo_evento" => 'Jaleo',
+                "foto_evento" => 'https://www.malagasesale.com/wp-content/uploads/118829019_1161885664194724_8206743658028533995_n.jpg',
+                "cantidad" => 1.00,
+                "precio_total" => 30.00,
+                "qr" => 'qr',
+                "fecha_inicio" => '2024-08-20',
+                "fecha_fin" => '2024-08-25',
+                "id_usuario" => 1,
+                "id_evento" => 3,
+                "id_carrito" => 2,
+                "created_at" => NULL,
+                "updated_at" => NULL,
+            ],
+            [
+                "id" => 3,
+                "titulo_evento" => 'Rosse',
+                "foto_evento" => 'https://festgra.com/wp-content/uploads/2019/11/rosse-vip-club-malaga-discoteca-fiesta-grande-.jpg',
+                "cantidad" => 1.00,
+                "precio_total" => 35.00,
+                "qr" => 'qr',
+                "fecha_inicio" => '2024-06-01',
+                "fecha_fin" => '2024-06-01',
+                "id_usuario" => 1,
+                "id_evento" => 1,
+                "id_carrito" => 2,
                 "created_at" => NULL,
                 "updated_at" => NULL,
             ],
