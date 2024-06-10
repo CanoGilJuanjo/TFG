@@ -17,6 +17,7 @@ import {
     Button,
 } from "@chakra-ui/react";
 import React, { lazy, useEffect, useState } from "react";
+import App from "../componentesComunes/PaypalComponent";
 
 export interface Entradas {
     id: number;
@@ -49,6 +50,11 @@ export default function CarritoCompra() {
             .then((respuesta) => respuesta.json())
             .then((data) => {
                 setEntradas(data);
+                let precio = 0;
+                for(let i of data){
+                    precio += parseFloat(i.precio_total)
+                }
+                setPrecioTotal(precio)
                 setLoading(false);
             })
             .catch((error) => {
@@ -149,16 +155,19 @@ export default function CarritoCompra() {
                     </Tbody>
                     <Tfoot>
                         <Tr>
-                            <Th>Precio Total</Th>
+                            <Th style={{fontSize: "25px"}}>Precio Total</Th>
                             <Th></Th>
                             <Th></Th>
                             <Th></Th>
                             <Th></Th>
-                            <Th>{precioTotal}€</Th>
+                            <Th style={{fontSize: "25px"}}>{precioTotal}€</Th>
                         </Tr>
                     </Tfoot>
                 </Table>
             </TableContainer>
+            <div style={{width: "100%", fontSize: "22px", marginBottom: "25px", backgroundColor: useColorModeValue("#E0E0E0", ""), justifyContent: "center", display: "flex"}}>
+                <App></App>
+            </div>
         </>
     );
 }
