@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use DB;
 
 class UsuarioSeeder extends Seeder
 {
@@ -20,7 +21,7 @@ class UsuarioSeeder extends Seeder
                 "contrasena" => '$2y$10$rggeQ9a6s.bZh8QYyXElA.X.gLkRyQn4JWWoNVw.iI5wqTM1lqn5e',
                 "edad" => 68,
                 "localizacion" => 'Espana',
-                "email" => 'AdministradorDellSystem@gmail.com',
+                "email" => 'techxperiencecreators@gmail.com',
                 "nivel" => 0,
                 "telefono" => 123456789,
                 "created_at" => null,

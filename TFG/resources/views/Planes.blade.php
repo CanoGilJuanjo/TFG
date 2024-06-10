@@ -19,6 +19,10 @@
 </head>
 
 <body>
+    <script>
+        (localStorage.getItem("idUsr") == null || localStorage.getItem("idUsr") == "") ? location.href = "/iniciarsesion":
+            "";
+    </script>
     <div id="app" data-projects=""></div>
 </body>
 

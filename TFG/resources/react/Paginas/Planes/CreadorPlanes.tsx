@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination, Scrollbar, Autoplay } from 'swiper/modules';
-import { Button, Divider, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, useDisclosure, Text, Input, Heading } from '@chakra-ui/react'
+import { Button, Divider, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, useDisclosure, Text, Input, Heading, Center } from '@chakra-ui/react'
 import { DeleteIcon, InfoIcon, Search2Icon } from '@chakra-ui/icons'
 import DatePicker from "react-datepicker"
 import "react-datepicker/dist/react-datepicker.css"
@@ -42,11 +42,12 @@ export type Eventos = Evento[]
 export type Precios = Precio[]
 
 export const CreadorPlanes = () => {
+  const [error,setError] = useState<any>("");
   const idUsuario = (localStorage.getItem("idUsr") == "" || localStorage.getItem("idUsr") == null)? "" : localStorage.getItem("idUsr");
   const idCarrito = (localStorage.getItem("idCarrito") == "" || localStorage.getItem("idCarrito") == null)? "": localStorage.getItem("idCarrito");
-  const apiURL = "http://localhost:8000/api/lista"
   const [eventos, setEventos] = useState<Eventos>([]);
   const { isOpen, onOpen, onClose } = useDisclosure()
+  
   const OverlayOne = () => (
     <ModalOverlay
       bg='blackAlpha.100'
@@ -63,14 +64,14 @@ export const CreadorPlanes = () => {
       .then((respuesta) => {
         setPrecios(respuesta)
       })
-  })
+    setError((localStorage.getItem("error") == ""||localStorage.getItem("error") == null)? null:localStorage.getItem("error"))
+  },[])
 
   //Loading
   const [isLoading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
   //Extraer datos de la BBDD
   useEffect(() => {
-    fetch(apiURL)
+    fetch("/api/lista")
       .then((response) => response.json())
       .then((data) => {
         setEventos(data);
@@ -79,7 +80,6 @@ export const CreadorPlanes = () => {
         setLoading(false)
       })
       .catch((error) => {
-        setError(error);
         setLoading(false);
       });
   }, []);
@@ -145,8 +145,6 @@ export const CreadorPlanes = () => {
     setAncho(anchoInner - 1)
     setAncho(anchoInner + 1)
   }
-
-  if (error) return (<div>Error inesperado</div>)
   return (
     <div style={{ marginTop: "12vh" }}>
       <Heading style={{ fontSize: "200%" }}>Eventos disponibles <InfoIcon style={{ fontSize: "50%" }} _hover={{ cursor: "pointer" }} onClick={() => {
@@ -161,7 +159,6 @@ export const CreadorPlanes = () => {
           <ModalBody>
             <Text>
               En esta pagina puede crear un plan personalizado para realizar a medida.<br />Para añadir un evento al plan que este realizando, puede darle click al evento y se añadira automaticamente a su plan.<br />
-              <img src='../media/evento.png' style={{ borderRadius: "20px" }} loading='lazy'></img>
               Una vez el evento haya sido añadido aparecera información referente a este evento. Tiene que tener en cuenta la fecha en la que comienza cada evento para organizar su plan de la mejor manera posible.
             </Text>
           </ModalBody>
@@ -196,7 +193,20 @@ export const CreadorPlanes = () => {
       </Swiper>
       <Divider margin={"5vh"} width={"auto"} borderColor={useColorModeValue("black", "white")}></Divider>
       <h2 style={{ fontSize: "200%" }}>Plan actual</h2>
-      <form method='GET' action='/tempPlan'>
+      {(error != "" || error != null)?<Center style={{color:"red"}}>{error}</Center>:""}
+      <form method='GET' action='/tempPlan' onSubmit={(e)=>{
+        let selec = document.querySelectorAll("select");
+        for(let i = 0; i<selec.length;i++){
+          if(selec[i].value == "vacio"){
+            e.preventDefault()
+            setError("Precio no seleccionado")
+          }
+        }
+        if(document.querySelectorAll("input[name='nombre']")[0].value == ""){
+          e.preventDefault();
+          setError("Nombre esta vacio")
+        }
+      }}>
         {(planes.length > 0) ?
           planes.map(evento => {
             if(evento.fecha_inicio != "" && evento.fecha_inicio<fechaInicio){
@@ -214,7 +224,7 @@ export const CreadorPlanes = () => {
                       <p>Nombre del evento <strong style={{ fontSize: "large" }}>{evento.titulo}</strong></p>
                       {/* Hay que hacer un map de los precios correspondientes ha este evento, para retornar los option */}
                       <Select name='precio' onChange={global}>
-                        <option value="0" selected>Seleccione precio</option>
+                        <option value="vacio" hidden selected>Seleccione precio</option>
                         {
                           precios?.map((precio) => {
                             let salida: any = []

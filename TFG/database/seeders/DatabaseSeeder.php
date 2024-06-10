@@ -17,7 +17,10 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             EventosSeeder::class,
-            PrecioSeeder::class
+            PrecioSeeder::class,
+            UsuarioSeeder::class,
+            CarritoSeeder::class,
+            EntradasSeeder::class
         ]);
     }
 }

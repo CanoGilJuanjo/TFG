@@ -23,14 +23,15 @@
         $fechaF = $_GET["fechaFin"];
         $usuario = $_GET["idUser"];
         $carrito = $_GET["carrito"];
-        $sql = "INSERT INTO entradas(id,titulo_evento,foto_evento,cantidad,precio_total,qr,fecha_inicio,fecha_fin,id_usuario,id_evento,id_carrito) VALUES(null,'$nombre','$foto',1,$precio,qr,'$fechaI','$fechaF',$usuario,1,$carrito)";
-        $conexion -> query($sql);
-        ?>
-        <script>
-            location.href = "/carritocompra"    
-        </script>
-    <?php
 
+          
+            $sql = "INSERT INTO entradas(id,titulo_evento,foto_evento,cantidad,precio_total,qr,fecha_inicio,fecha_fin,id_usuario,id_evento,id_carrito) VALUES(null,'$nombre','$foto',1,$precio,qr,'$fechaI','$fechaF',$usuario,1,$carrito)";
+            $conexion -> query($sql);
+            ?>
+            <script>
+                location.href = "/carritocompra"    
+            </script>
+        <?php
     ?>
 </body>
 </html>

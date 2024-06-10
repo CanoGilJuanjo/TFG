@@ -24,24 +24,26 @@ interface Props {
     children: React.ReactNode;
 }
 
-const Links = [
-    ["Eventos", "eventos"],
-    ["Planes", "planes"],
-    ["Contacto", "contactos"],
-];
-
 const Navbar = () => {
     const { colorMode, toggleColorMode } = useColorMode();
     const { isOpen, onOpen, onClose } = useDisclosure();
-    const [usuario, setUsuario] = useState<any>();
-    useEffect(() => {
-        setUsuario(
-            localStorage.getItem("idUsr") == null ||
-                localStorage.getItem("idUsr") == ""
-                ? false
-                : localStorage.getItem("idUsr")
-        );
-    });
+    const usuario = localStorage.getItem("idUsr") == null ||
+        localStorage.getItem("idUsr") == ""
+        ? false
+        : localStorage.getItem("idUsr")
+
+    const Links = 
+        (usuario)?
+        [
+            ["Eventos", "eventos"],
+            ["Planes", "planes"],
+            ["Contacto", "contactos"]
+        ]
+        :
+        [
+            ["Eventos", "eventos"],
+            ["Contacto", "contactos"]
+        ]
     return (
         <>
             <Box
