@@ -219,13 +219,13 @@ class PrecioSeeder extends Seeder
                 "id_evento" => 17
             ],
             [
-                "precio" => 50.00, 
+                "precio" => 0.00, 
                 "descripcion" => 'Acceso VIP a todas las zonas, pulsera, y 2 consumiciones', 
                 "tipo_precio" => 'VIP', 
                 "id_evento" => 18
             ],
             [
-                "precio" => 30.00, 
+                "precio" => 5.00, 
                 "descripcion" => 'Acceso general, una consumición incluida', 
                 "tipo_precio" => 'General', 
                 "id_evento" => 18
@@ -386,6 +386,42 @@ class PrecioSeeder extends Seeder
                 "descripcion" => 'Acceso general, una consumición incluida', 
                 "tipo_precio" => 'General', 
                 "id_evento" => 31
+            ],
+            [
+                "precio" => 50.00, 
+                "descripcion" => 'Acceso VIP a todas las zonas, pulsera, y 2 consumiciones', 
+                "tipo_precio" => 'VIP', 
+                "id_evento" => 31
+            ],
+            [
+                "precio" => 30.00, 
+                "descripcion" => 'Acceso general, una consumición incluida', 
+                "tipo_precio" => 'General', 
+                "id_evento" => 31
+            ],
+            [
+                "precio" => 50.00, 
+                "descripcion" => 'Acceso VIP a todas las zonas, pulsera, y 2 consumiciones', 
+                "tipo_precio" => 'VIP', 
+                "id_evento" => 32
+            ],
+            [
+                "precio" => 30.00, 
+                "descripcion" => 'Acceso general, una consumición incluida', 
+                "tipo_precio" => 'General', 
+                "id_evento" => 32
+            ],
+            [
+                "precio" => 50.00, 
+                "descripcion" => 'Acceso VIP a todas las zonas, pulsera, y 2 consumiciones', 
+                "tipo_precio" => 'VIP', 
+                "id_evento" => 33
+            ],
+            [
+                "precio" => 30.00, 
+                "descripcion" => 'Acceso general, una consumición incluida', 
+                "tipo_precio" => 'General', 
+                "id_evento" => 33
             ]
         ]);
     }
